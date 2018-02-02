@@ -31,7 +31,7 @@ final class NF_MergeTags_WP extends NF_Abstracts_MergeTags
 
         /**
          * Replace Custom Post Meta
-         * {post_meta:_meta_title} --> meta key is 'foo'
+         * {post_meta:foo} --> meta key is 'foo'
          */
         preg_match_all( "/{post_meta:(.*?)}/", $subject, $post_meta_matches );
         if( ! empty( $post_meta_matches[0] ) ) {
