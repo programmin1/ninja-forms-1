@@ -188,6 +188,7 @@ final class NF_Actions_Email extends NF_Abstracts_Action
 
         $headers[] = 'Content-Type: text/' . $settings[ 'email_format' ];
         $headers[] = 'charset=UTF-8';
+        $headers[] = 'X-Ninja-Forms:ninja-forms'; // Flag for transactional email.
 
         $headers[] = $this->_format_from( $settings );
 
