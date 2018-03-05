@@ -84,8 +84,21 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
         }
 
         // Build our new views.
-        $views[ 'all' ] = '<a href="' . admin_url( 'edit.php?post_status=all&post_type=nf_sub'  ) . $form_id . '">' . __( 'Completed Submissions', 'ninja-forms' ) . '</a>';
-        $views[ 'trash' ] = '<a href="' . admin_url( 'edit.php?post_status=trash&post_type=nf_sub' ) . $form_id . '">' .__( 'Trashed Submissions', 'ninja-forms' ) . '</a>';
+        $views[ 'all' ] = '<a href="' . admin_url( 'edit.php?post_status=all&post_type=nf_sub'  ) . $form_id . '">'
+                        . __( 'Completed Submissions', 'ninja-forms' ) . '</a>';
+
+        $views[ 'trash' ] = '<a href="' . admin_url( 'edit.php?post_status=trash&post_type=nf_sub' ) . $form_id . '">'
+                            . __( 'Trashed Submissions', 'ninja-forms' ) . '</a>';
+
+        // Checks to make sure we have a post status.
+        if( ! empty( $_GET[ 'post_status' ] ) ) {
+            // Depending on the domain set the value to plain text.
+            if ( 'all' == $_GET[ 'post_status' ] ) {
+                $views[ 'all' ] = __( 'Completed Submissions', 'ninja-forms' );
+            } else if ( 'trash' == $_GET[ 'post_status' ] ) {
+                $views[ 'trash' ] = __( 'Trashed Submissions', 'ninja-forms' );
+            }
+        }
 
         return $views;
     }
