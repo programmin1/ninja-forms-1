@@ -43,7 +43,7 @@ final class NF_MergeTags_WP extends NF_Abstracts_MergeTags
                 $meta_key   = $post_meta_matches[1][$i];
                 $meta_value = get_post_meta( $this->post_id(), $meta_key, true  );
 
-                if ( $meta_value ) {
+                if ( '' != $meta_value ) {
                     $subject = str_replace( $search, $meta_value, $subject );
                 } else {
                     $subject = str_replace( $search, '', $subject );
