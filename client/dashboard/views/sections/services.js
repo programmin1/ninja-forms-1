@@ -1,16 +1,22 @@
-define( [ 'views/service', 'models/serviceCollection' ], function( ServiceView, ServiceCollection ) {
-    var view = Marionette.CollectionView.extend( {
+/**
+ * @package Ninja Forms
+ * @subpackage Dashboard
+ * @copyright (c) 2017 WP Ninjas
+ * @since 3.2
+ */
+define( [ 'views/services/oauth', 'views/services/services' ], function( OAuthView, ServicesView ) {
+    var view = Marionette.View.extend( {
+        template: '#tmpl-nf-services',
 
-      collection: new ServiceCollection(),
+        regions: {
+            oauth: '.oauth',
+            services: '.services'
+        },
 
-      className: 'wrap apps-container', /* Reusing "App" section styles. */
-
-      childView: ServiceView,
-
-      initialize: function() {
-        this.collection.fetch();
-      }
-
+        onRender: function() {
+            this.showChildView( 'oauth', new OAuthView() );
+            this.showChildView( 'services', new ServicesView() );
+        }
     } );
     return view;
 } );

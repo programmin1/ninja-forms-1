@@ -32,6 +32,15 @@
 
 <!-- Section: Services -->
 <script id="tmpl-nf-services" type="text/template">
+  <div class="oauth"></div>
+  <div class="services"></div>
+</script>
+<script id="tmpl-nf-services-oauth" type="text/template">
+  <div style="padding:20px;background-color:#1EA9EA;color:white;">
+    [CONNECT TO MY.NINJAFORMS.COM]
+  </div>
+</script>
+<script id="tmpl-nf-service" type="text/template">
   <div class="nf-box-inside">
     <img src="{{{ data.image }}}">
     <h2>{{{ data.name }}}</h2>
