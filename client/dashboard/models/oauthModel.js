@@ -1,7 +1,7 @@
 define( [], function() {
   var model = Backbone.Model.extend( {
     defaults: {
-      connected: true,
+      connected: null,
       connect_url: '',
     },
 

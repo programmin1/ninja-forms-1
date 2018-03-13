@@ -36,10 +36,16 @@
   <div class="services"></div>
 </script>
 <script id="tmpl-nf-services-oauth" type="text/template">
-  <# if( ! data.connected ){ #>
-  <a href="{{{ data.connect_url }}}" style="display:block;padding:20px;background-color:#1EA9EA;color:white;text-decoration:none;">
-    [CONNECT TO MY.NINJAFORMS.COM]
-  </a>
+  <# if( null !== data.connected ) { #>
+    <# if( ! data.connected ){ #>
+    <a href="{{{ data.connect_url }}}" style="display:block;padding:20px;background-color:#1EA9EA;color:white;text-decoration:none;text-align:center;">
+      Connect to My.NinjaForms.com
+    </a>
+    <# } else { #>
+    <div style="background-color:#84CC1E;color:white;text-align:center;">
+      Connected to My.NinjaForms.com
+    </div>
+    <# } #>
   <# } #>
 </script>
 <script id="tmpl-nf-service" type="text/template">
@@ -47,7 +53,7 @@
     <img src="{{{ data.image }}}">
     <h2>{{{ data.name }}}</h2>
     <div class="nf-extend-content">
-      <p>{{{ data.name }}}</p>
+      <p>{{{ data.description }}}</p>
       <div class="nf-extend-buttons">
         <# if( ! data.enabled ){ #>
         <a href="#" class="primary nf-button">Enable</a>

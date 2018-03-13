@@ -18,6 +18,7 @@ add_action( 'wp_ajax_nf_services', function(){
     [
       'name' => 'Transactional Email',
       'enabled' => false,
+      'description' => 'Increase Email Deliverability with a dedicated email service by Ninja Forms.',
       'image' => 'https://placehold.it/400x163&text=Transactional%20Email',
     ],
   ];

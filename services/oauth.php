@@ -60,7 +60,7 @@ class OAuth
     $client_id = sanitize_text_field( $_GET[ 'client_id' ] );
     update_option( 'ninja_forms_oauth_client_id', $client_id );
 
-    wp_safe_redirect( admin_url() );
+    wp_safe_redirect( admin_url( 'admin.php?page=ninja-forms#services' ) );
     exit;
   }
 

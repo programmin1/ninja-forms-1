@@ -3,6 +3,7 @@ define( [], function() {
     defaults: {
       objectType: 'service',
       name: '',
+      description: '',
       enabled: false,
     },
 
