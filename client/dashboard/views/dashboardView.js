@@ -6,10 +6,10 @@
  * @copyright (c) 2017 WP Ninjas
  * @since 3.2
  */
-define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections/memberships.js' ], function( WidgetView, AppsView, MembershipsView ) {
+define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sections/apps.js', 'views/sections/memberships.js' ], function( WidgetView, ServicesView, AppsView, MembershipsView ) {
     var view = Marionette.View.extend( {
         template: "#tmpl-nf-dashboard",
-        
+
         currentView: 'widgets',
 
         regions: {
@@ -22,6 +22,12 @@ define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections
                 jQuery( '.' + this.currentView).find( 'a' ).removeClass( 'active' );
                 e.target.classList.add( 'active' );
                 this.currentView = 'widgets';
+            },
+            'click .services a': function(e){
+                this.showChildView( 'content', new ServicesView() );
+                jQuery( '.' + this.currentView).find( 'a' ).removeClass( 'active' );
+                e.target.classList.add( 'active' );
+                this.currentView = 'services';
             },
             'click .apps a': function(e){
                 this.showChildView( 'content', new AppsView() );
@@ -42,6 +48,9 @@ define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections
                 case '#apps':
                     this.currentView = 'apps';
                     break;
+                case '#services':
+                    this.currentView = 'services';
+                    break;
                 case '#memberships':
                     this.currentView = 'memberships';
                     break;
@@ -60,6 +69,12 @@ define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections
                 jQuery( 'nav.sections .widgets a' ).addClass( 'active' );
                 this.currentView = 'widgets';
             }, this );
+            nfRadio.channel( 'dashboard' ).reply( 'show:services', function(){
+                this.showChildView('content', new ServicesView() );
+                jQuery( 'nav.sections a.active' ).removeClass( 'active' );
+                jQuery( 'nav.sections .services a' ).addClass( 'active' );
+                this.currentView = 'services';
+            }, this );
             nfRadio.channel( 'dashboard' ).reply( 'show:apps', function(){
                 this.showChildView('content', new AppsView() );
                 jQuery( 'nav.sections a.active' ).removeClass( 'active' );
@@ -76,13 +91,16 @@ define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections
                 case '#memberships':
                     var childView = new MembershipsView();
                     break;
+                case '#services':
+                    var childView = new ServicesView();
+                    break;
                 case '#widgets':
                 default:
                     var childView = new WidgetView();
             }
             this.showChildView('content', childView );
         },
-        
+
         templateContext: function() {
             var that = this;
             return {

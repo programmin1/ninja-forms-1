@@ -19,6 +19,8 @@ require_once dirname( __FILE__ ) . '/lib/NF_ExceptionHandlerJS.php';
 require_once dirname( __FILE__ ) . '/lib/Conversion/Calculations.php';
 require_once dirname( __FILE__ ) . '/lib/NF_UpgradeThrottle.php';
 
+include_once dirname( __FILE__ ) . '/services/bootstrap.php';
+
 function ninja_forms_three_table_exists(){
     global $wpdb;
     $table_name = $wpdb->prefix . 'nf3_forms';

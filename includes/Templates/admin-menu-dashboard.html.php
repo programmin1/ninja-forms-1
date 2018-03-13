@@ -30,6 +30,24 @@
     <div class="widget widget-forms"></div>
 </script>
 
+<!-- Section: Services -->
+<script id="tmpl-nf-services" type="text/template">
+  <div class="nf-box-inside">
+    <img src="{{{ data.image }}}">
+    <h2>{{{ data.name }}}</h2>
+    <div class="nf-extend-content">
+      <p>{{{ data.name }}}</p>
+      <div class="nf-extend-buttons">
+        <# if( ! data.enabled ){ #>
+        <a href="#" class="primary nf-button">Enable</a>
+        <# } else { #>
+        <a href="#" class="secondary nf-button">Disable</a>
+        <# } #>
+      </div>
+    </div>
+  </div>
+</script>
+
 <!-- Section: Apps -->
 <script id="tmpl-nf-apps" type="text/template">
     <!-- TODO: Create static template -->
