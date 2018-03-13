@@ -24,11 +24,14 @@ class OAuth
 
   public function setup() {
 
-    if( ! $this->client_id ){
-      add_action( 'admin_notices', function() {
-        echo 'Connect to my.ninjaforms.com - ' . $this->connect_url();
-      });
-    }
+    add_action( 'wp_ajax_nf_oauth', function(){
+      wp_die( json_encode( [
+        'data' => [
+          'connected' => ( $this->client_id ),
+          'connect_url' => $this->connect_url(),
+        ]
+      ] ) );
+    });
 
     add_action( 'wp_ajax_nf_oauth_connect', [ $this, 'connect' ] );
     add_action( 'wp_ajax_nf_oauth_disconnect', [ $this, 'disconnect' ] );
@@ -63,7 +66,13 @@ class OAuth
 
   public function disconnect() {
 
-    wp_remote_post( $this->base_url . '/disconnect' );
+    delete_option( 'ninja_forms_oauth_client_id' );
+    delete_option( 'ninja_forms_oauth_client_secret' );
+
+    wp_remote_request( $this->base_url . '/disconnect', [
+      'blocking' => false,
+      'method' => 'DELETE'
+    ] );
 
     wp_safe_redirect( admin_url() );
     exit;

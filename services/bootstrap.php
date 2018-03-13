@@ -9,6 +9,10 @@ if( version_compare( PHP_VERSION, '5.6', '<' ) ) return;
 include_once plugin_dir_path( __FILE__ ) . 'oauth.php';
 (new OAuth('https://my.ninjaforms.com/oauth'))->setup();
 
+add_action( 'wp_ajax_nf_oauth', function(){
+
+});
+
 add_action( 'wp_ajax_nf_services', function(){
   $services = [
     [

@@ -36,9 +36,11 @@
   <div class="services"></div>
 </script>
 <script id="tmpl-nf-services-oauth" type="text/template">
-  <div style="padding:20px;background-color:#1EA9EA;color:white;">
+  <# if( ! data.connected ){ #>
+  <a href="{{{ data.connect_url }}}" style="display:block;padding:20px;background-color:#1EA9EA;color:white;text-decoration:none;">
     [CONNECT TO MY.NINJAFORMS.COM]
-  </div>
+  </a>
+  <# } #>
 </script>
 <script id="tmpl-nf-service" type="text/template">
   <div class="nf-box-inside">
