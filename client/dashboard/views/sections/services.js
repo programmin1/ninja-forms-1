@@ -4,17 +4,15 @@
  * @copyright (c) 2017 WP Ninjas
  * @since 3.2
  */
-define( [ 'views/services/oauth', 'views/services/services' ], function( OAuthView, ServicesView ) {
+define( [ 'views/services/services' ], function( ServicesView ) {
     var view = Marionette.View.extend( {
         template: '#tmpl-nf-services',
 
         regions: {
-            oauth: '.oauth',
             services: '.services'
         },
 
         onRender: function() {
-            this.showChildView( 'oauth', new OAuthView() );
             this.showChildView( 'services', new ServicesView() );
         }
     } );

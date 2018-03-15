@@ -1,1 +1,23 @@
-/* This section intentionally left blank. */
+.nf-notices--oauth {
+  margin-top: -40px; // Account for the bottom margin on the topbar.
+  margin-bottom: 40px;
+  text-align:center;
+}
+
+.nf-oauth--checking {
+  padding: 5px;
+}
+
+.nf-oauth--connect {
+  display:block;
+  background-color:#1EA9EA;
+  color:white;
+  padding: 5px;
+  text-decoration:none;
+}
+
+.nf-oauth--connected {
+  color:white;
+  padding: 5px;
+  background-color:#84CC1E;
+}

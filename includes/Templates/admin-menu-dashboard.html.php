@@ -19,10 +19,23 @@
     <main class="content"></main>
 </script>
 
-<!-- Auth Notice -->
-<script id="tmpl-nf-auth-notice" type="text/template">
-    [AUTH GOES HERE]
-    <div id="auth-notice"></div>
+<!-- OAuth -->
+<script id="tmpl-nf-notices-oauth" type="text/template">
+  <# if( null !== data.connected ) { #>
+    <# if( ! data.connected ){ #>
+    <a href="{{{ data.connect_url }}}" class="nf-oauth--connect">
+      Connect to My.NinjaForms.com
+    </a>
+    <# } else { #>
+    <div class="nf-oauth--connected">
+      Connected to My.NinjaForms.com
+    </div>
+    <# } #>
+  <# } else { #>
+    <div class="nf-oauth--checking">
+      Checking connection...
+    </div>
+  <# } #>
 </script>
 
 <!-- Section: Widgets -->
@@ -32,34 +45,18 @@
 
 <!-- Section: Services -->
 <script id="tmpl-nf-services" type="text/template">
-  <div class="oauth"></div>
   <div class="services"></div>
-</script>
-<script id="tmpl-nf-services-oauth" type="text/template">
-  <# if( null !== data.connected ) { #>
-    <# if( ! data.connected ){ #>
-    <a href="{{{ data.connect_url }}}" style="display:block;padding:20px;background-color:#1EA9EA;color:white;text-decoration:none;text-align:center;">
-      Connect to My.NinjaForms.com
-    </a>
-    <# } else { #>
-    <div style="background-color:#84CC1E;color:white;text-align:center;">
-      Connected to My.NinjaForms.com
-    </div>
-    <# } #>
-  <# } #>
 </script>
 <script id="tmpl-nf-service" type="text/template">
   <div class="nf-box-inside">
-    <img src="{{{ data.image }}}">
     <h2>{{{ data.name }}}</h2>
     <div class="nf-extend-content">
       <p>{{{ data.description }}}</p>
       <div class="nf-extend-buttons">
-        <# if( ! data.enabled ){ #>
-        <a href="#" class="primary nf-button">Enable</a>
-        <# } else { #>
-        <a href="#" class="secondary nf-button">Disable</a>
-        <# } #>
+        <div style="float:right;">
+          <input id="nfServiceTransactionalEmail" class="nf-toggle setting" checked="{{{ ( data.enabled ) ? 'checked' : '' }}}" type="checkbox">
+          <label for="nfServiceTransactionalEmail"></label>
+        </div>
       </div>
     </div>
   </div>
