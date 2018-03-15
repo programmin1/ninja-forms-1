@@ -12,7 +12,11 @@ class Transactional_Email
   }
 
   public function setup() {
-    add_action( 'phpmailer_init', 'maybe_override_phpmailer' );
+
+    if( get_option( 'ninja_forms_transactional_email_enabled' ) ){
+      add_action( 'phpmailer_init', 'maybe_override_phpmailer' );
+    }
+
     add_action( 'wp_ajax_nf_service_transactional_email', function(){
       if( 'true' == $_POST[ 'enabled' ] ){
         update_option( 'ninja_forms_transactional_email_enabled', true );
@@ -24,12 +28,13 @@ class Transactional_Email
   }
 
   public function maybe_override_phpmailer( &$phpmailer ) {
+
     $headers = $phpmailer->getCustomHeaders();
 
     // Check for Ninja Forms headers. If not there, move along.
     if( ! in_array( 'X-Ninja-Forms', $headers[0] ) ) return;
 
-    if( ! get_option( 'ninja_forms_transactional_email_enabled' ) ) return;
+
 
     // $oauth = new OAuth();
     //
