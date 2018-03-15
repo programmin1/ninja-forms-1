@@ -54,7 +54,7 @@
       <p>{{{ data.description }}}</p>
       <div class="nf-extend-buttons">
         <div style="float:right;">
-          <input id="nfServiceTransactionalEmail" class="nf-toggle setting" checked="{{{ ( data.enabled ) ? 'checked' : '' }}}" type="checkbox">
+          <input id="nfServiceTransactionalEmail" class="nf-toggle setting" {{{ ( data.enabled ) ? 'checked="checked"' : '' }}} {{{ ( data.isUpdating ) ? 'disabled="disabled"' : '' }}} type="checkbox">
           <label for="nfServiceTransactionalEmail"></label>
         </div>
       </div>
