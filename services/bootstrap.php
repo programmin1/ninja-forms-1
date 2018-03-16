@@ -9,6 +9,7 @@ if( version_compare( PHP_VERSION, '5.6', '<' ) ) return;
 include_once plugin_dir_path( __FILE__ ) . 'oauth.php';
 (new OAuth('https://my.ninjaforms.com/oauth'))->setup();
 
+include_once plugin_dir_path( __FILE__ ) . 'transactional-email/fake-mailer.php';
 include_once plugin_dir_path( __FILE__ ) . 'transactional-email/transactional-email.php';
 (new Transactional_Email())->setup();
 
