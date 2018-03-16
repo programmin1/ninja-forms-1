@@ -14,7 +14,7 @@ class Transactional_Email
   public function setup() {
 
     if( get_option( 'ninja_forms_transactional_email_enabled' ) ){
-      add_action( 'phpmailer_init', 'maybe_override_phpmailer' );
+      add_action( 'phpmailer_init', [ $this, 'maybe_override_phpmailer' ] );
     }
 
     add_action( 'wp_ajax_nf_service_transactional_email', function(){
@@ -34,17 +34,20 @@ class Transactional_Email
     // Check for Ninja Forms headers. If not there, move along.
     if( ! in_array( 'X-Ninja-Forms', $headers[0] ) ) return;
 
+    $oauth = new OAuth('test');
 
+    if( ! $oauth->is_connected() ) return;
 
-    // $oauth = new OAuth();
-    //
-    // if( ! $oauth->is_connected() ) return;
+    // @TODO Temp Fix: Flatten all recipients to send individual emails.
+    $email_addresses = array_map( function( $address ){
+      return reset( $address );
+    }, array_merge( $phpmailer->getToAddresses(), $phpmailer->getCcAddresses(), $phpmailer->getBccAddresses() ) );
 
     $args = [
       'blocking' => false,
       'body' => [
-        'client_id' => $oauth->client_id,
-        'email' => $phpmailer->getToAddresses()[0][0], // @TODO handle multiple recipients.
+        'client_id' => $oauth->get_client_id(),
+        'email' => $email_addresses,
         'from' => $phpmailer->From,
         'subject' => $phpmailer->Subject,
         'message' => $phpmailer->Body,
