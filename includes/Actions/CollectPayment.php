@@ -41,11 +41,17 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
     {
         parent::__construct();
 
+        // Set the nice name to what we passed in. 'Collect Payment' is default
         $this->_nicename = __( $cp_nice_name, 'ninja-forms' );
+        // Set name to what we passed in. 'collectpayment' is default
         $this->_name = strtolower( $cp_name );
 
         $settings = Ninja_Forms::config( 'ActionCollectPaymentSettings' );
 
+        /**
+         * if we pass in something other than 'collectpayment', set the value
+         * of the gateway drop-down
+         **/
         if ( 'collectpayment' != $this->_name ) {
         	$settings[ 'payment_gateways' ][ 'value' ] = $this->_name;
         }
