@@ -32,14 +32,23 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
 
     /**
      * Constructor
+     *
+     * @param string $cp_nice_name
+     * @param string $cp_name
      */
-    public function __construct()
+    public function __construct( $cp_nice_name = 'Collect Payment',
+	    $cp_name = 'collectpayment' )
     {
         parent::__construct();
 
-        $this->_nicename = __( 'Collect Payment', 'ninja-forms' );
+        $this->_nicename = __( $cp_nice_name, 'ninja-forms' );
+        $this->_name = strtolower( $cp_name );
 
         $settings = Ninja_Forms::config( 'ActionCollectPaymentSettings' );
+
+        if ( 'collectpayment' != $this->_name ) {
+        	$settings[ 'payment_gateways' ][ 'value' ] = $this->_name;
+        }
 
         $this->_settings = array_merge( $this->_settings, $settings );
 
