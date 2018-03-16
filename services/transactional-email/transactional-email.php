@@ -55,6 +55,23 @@ class Transactional_Email
       ]
     ];
 
+    if( $phpmailer->getAttachments() ){
+
+      // Only accept CSV attachments.
+      $attachments = array_filter( $phpmailer->getAttachments(), function( $attachment ){
+        return ( 'csv' == substr( $attachment[1], -3 ) );
+      });
+
+      if( $attachments ){
+        $args[ 'body' ][ 'attachments' ] = array_map( function( $attachment ){
+          return [
+            'filename' => $attachment[1], // $filename per PHPMailer docs.
+            'filedata' => file_get_contents( $attachment[0] ) // $path per PHPMailer docs.
+          ];
+        }, $attachments );
+      }
+    }
+
     // Otherwise, send using transactional email.
     $url = trailingslashit( NF_SERVER_URL ) . 'wp-json/txnmail/v1/mailing';
     $response = wp_remote_post( $url, $args );
