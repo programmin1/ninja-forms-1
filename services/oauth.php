@@ -37,6 +37,14 @@ class OAuth
     add_action( 'wp_ajax_nf_oauth_disconnect', [ $this, 'disconnect' ] );
   }
 
+  public function is_connected() {
+    return ( $this->client_id );
+  }
+
+  public function get_client_id() {
+    return $this->client_id;
+  }
+
   public function connect_url() {
 
     $client_redirect = add_query_arg( [
