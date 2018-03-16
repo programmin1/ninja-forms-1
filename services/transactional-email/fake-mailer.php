@@ -1,6 +1,6 @@
 <?php
 
-namespace NinjaFormsTxnMail\Services\Transactional_Email;
+namespace NinjaForms\Services\Transactional_Email;
 
 class Fake_Mailer
 {
