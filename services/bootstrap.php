@@ -1,9 +1,6 @@
 <?php
 
-namespace NinjaForms\Services;
-
-// Services require PHP v5.6+
-if( version_compare( PHP_VERSION, '5.6', '<' ) ) return;
+namespace NinjaForms;
 
 // Setup OAuth as a prerequisite for services.
 include_once plugin_dir_path( __FILE__ ) . 'oauth.php';

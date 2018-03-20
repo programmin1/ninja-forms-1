@@ -19,7 +19,10 @@ require_once dirname( __FILE__ ) . '/lib/NF_ExceptionHandlerJS.php';
 require_once dirname( __FILE__ ) . '/lib/Conversion/Calculations.php';
 require_once dirname( __FILE__ ) . '/lib/NF_UpgradeThrottle.php';
 
-include_once dirname( __FILE__ ) . '/services/bootstrap.php';
+// Services require PHP v5.6+
+if( version_compare( PHP_VERSION, '5.6', '<' ) ) {
+  include_once dirname( __FILE__ ) . '/services/bootstrap.php';
+}
 
 function ninja_forms_three_table_exists(){
     global $wpdb;

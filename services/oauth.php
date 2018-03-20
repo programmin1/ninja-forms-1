@@ -1,6 +1,6 @@
 <?php
 
-namespace NinjaForms\Services;
+namespace NinjaForms;
 
 class OAuth
 {
