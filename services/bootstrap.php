@@ -6,10 +6,6 @@ namespace NinjaForms;
 include_once plugin_dir_path( __FILE__ ) . 'oauth.php';
 (new OAuth('https://my.ninjaforms.com/oauth'))->setup();
 
-add_action( 'wp_ajax_nf_oauth', function(){
-
-});
-
 add_action( 'wp_ajax_nf_services', function(){
   $services = apply_filters( 'ninja_forms_services', [
     'addon-manager' => [
