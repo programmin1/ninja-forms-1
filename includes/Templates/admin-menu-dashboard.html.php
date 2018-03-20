@@ -48,15 +48,19 @@
   <div class="services"></div>
 </script>
 <script id="tmpl-nf-service" type="text/template">
-  <div class="nf-box-inside">
+  <div class="nf-box-inside" style="padding:10px 20px;">
     <h2>{{{ data.name }}}</h2>
     <div class="nf-extend-content">
       <p>{{{ data.description }}}</p>
       <div class="nf-extend-buttons">
-        <div style="float:right;">
+        <# if( null !== data.enabled ){ #>
+        <div style="float: right;">
           <input id="nfServiceTransactionalEmail" class="nf-toggle setting" {{{ ( data.enabled ) ? 'checked="checked"' : '' }}} {{{ ( data.isUpdating ) ? 'disabled="disabled"' : '' }}} type="checkbox">
           <label for="nfServiceTransactionalEmail"></label>
         </div>
+        <# } else { #>
+        <a target="_blank" href="{{{ data.link }}}" class="nf-button primary" style="margin-bottom: 10px;">Learn More</a>
+        <# } #>
       </div>
     </div>
   </div>

@@ -11,6 +11,12 @@ define( [], function() {
       },
       events: {
           'click @ui.toggleEnable': function() {
+              if( null == this.model.get( 'enabled' ) ){
+                if( this.model.get( 'link' ) ){
+                  window.location = this.model.get( 'link' );
+                  return this.render();
+                }
+              }
               this.model.set( 'enabled', ! this.model.get( 'enabled' ) );
               this.model.save("enabled");
               this.render();
