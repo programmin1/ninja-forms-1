@@ -29,7 +29,9 @@
     <# } else { #>
     <div class="nf-oauth--connected">
       Connected to My.NinjaForms.com
-      <span class="js--disconnect" style="float:right;">X</span>
+      <span class="js--disconnect" style="float:right;cursor:pointer;">
+        <span class="dashicons dashicons-no"></span>
+      </span>
     </div>
     <# } #>
   <# } else { #>

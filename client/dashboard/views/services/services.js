@@ -8,7 +8,13 @@ define( [ 'views/services/service', 'models/serviceCollection' ], function( Serv
       childView: ServiceView,
 
       initialize: function() {
-        this.collection.fetch();
+        this.updateCollection();
+        this.listenTo( nfRadio.channel( 'dashboard' ), 'fetch:services', this.updateCollection );
+      },
+
+      updateCollection: function() {
+        this.collection = nfRadio.channel( 'dashboard' ).request( 'get:services' );
+        this.render();
       }
 
     } );

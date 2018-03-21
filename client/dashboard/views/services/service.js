@@ -25,11 +25,14 @@ define( [], function() {
       },
 
       initialize: function( oauthModel ) {
-        this.listenTo( nfRadio.channel( 'dashboard' ), 'fetch:oauth', function(){
-          var oauth = nfRadio.channel( 'dashboard' ).request( 'get:oauth' );
-          this.connected = oauth.get( 'connected' );
-          this.render();
-        } );
+        this.updateOAuth();
+        this.listenTo( nfRadio.channel( 'dashboard' ), 'fetch:oauth', this.updateOAuth );
+      },
+
+      updateOAuth: function() {
+        var oauth = nfRadio.channel( 'dashboard' ).request( 'get:oauth' );
+        this.connected = oauth.get( 'connected' );
+        this.render();
       },
 
       templateContext: function() {
