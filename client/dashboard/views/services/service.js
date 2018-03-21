@@ -9,6 +9,7 @@ define( [], function() {
           enabled: '.nf-toggle.setting',
           toggleEnable: '.nf-toggle + label',
       },
+
       events: {
           'click @ui.toggleEnable': function() {
               if( null == this.model.get( 'enabled' ) ){
@@ -20,9 +21,22 @@ define( [], function() {
               this.model.set( 'enabled', ! this.model.get( 'enabled' ) );
               this.model.save("enabled");
               this.render();
-              // nfRadio.channel( 'dashboard' ).trigger( 'forms:delete', this );
           },
       },
+
+      initialize: function( oauthModel ) {
+        this.listenTo( nfRadio.channel( 'dashboard' ), 'fetch:oauth', function(){
+          var oauth = nfRadio.channel( 'dashboard' ).request( 'get:oauth' );
+          this.connected = oauth.get( 'connected' );
+          this.render();
+        } );
+      },
+
+      templateContext: function() {
+        return {
+          is_connected: this.connected,
+        }
+      }
 
     } );
     return view;

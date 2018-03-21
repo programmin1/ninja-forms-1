@@ -15,7 +15,7 @@ define( [], function() {
 
     parse: function( response, options ){
         return response.data;
-    },
+    }
 
   } );
 

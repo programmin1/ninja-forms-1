@@ -4,14 +4,25 @@ namespace NinjaForms;
 
 class OAuth
 {
+  protected static $instance;
+
   protected $base_url;
 
   protected $client_id,
             $client_secret;
 
-  public function __construct( $base_url ) {
+  public static function getInstance() {
+      if ( null == self::$instance ) {
+          self::$instance = new static();
+      }
+      return self::$instance;
+  }
 
-    $this->base_url = trailingslashit( $base_url );
+  public static function set_base_url( $base_url ) {
+    self::getInstance()->base_url = trailingslashit( $base_url );
+  }
+
+  protected function __construct() {
 
     $this->client_id = get_option( 'ninja_forms_oauth_client_id' );
 
@@ -23,7 +34,6 @@ class OAuth
   }
 
   public function setup() {
-
     add_action( 'wp_ajax_nf_oauth', function(){
       wp_die( json_encode( [
         'data' => [
@@ -37,12 +47,12 @@ class OAuth
     add_action( 'wp_ajax_nf_oauth_disconnect', [ $this, 'disconnect' ] );
   }
 
-  public function is_connected() {
-    return ( $this->client_id );
+  public static function is_connected() {
+    return ( self::getInstance()->client_id );
   }
 
-  public function get_client_id() {
-    return $this->client_id;
+  public static function get_client_id() {
+    return self::getInstance()->client_id;
   }
 
   public function connect_url() {
@@ -82,8 +92,7 @@ class OAuth
       'method' => 'DELETE'
     ] );
 
-    wp_safe_redirect( admin_url() );
-    exit;
+    wp_die( 1 );
   }
 
   public static function generate_secret( $length = 40 ) {

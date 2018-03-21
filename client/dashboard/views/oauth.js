@@ -7,6 +7,10 @@ define( [ 'models/oauthModel' ], function( OAuthModel ) {
 
       className: 'nf-notices--oauth',
 
+      ui: {
+          disconnect: '.js--disconnect',
+      },
+
       initialize: function( oauthModel ) {
         this.listenTo( nfRadio.channel( 'dashboard' ), 'fetch:oauth', this.updateModel );
       },
@@ -14,6 +18,12 @@ define( [ 'models/oauthModel' ], function( OAuthModel ) {
       updateModel: function() {
         this.model = nfRadio.channel( 'dashboard' ).request( 'get:oauth' );
         this.render();
+      },
+
+      events: {
+          'click @ui.disconnect': function() {
+            nfRadio.channel( 'dashboard' ).request( 'disconnect:oauth' );
+          },
       }
 
     } );

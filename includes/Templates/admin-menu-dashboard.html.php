@@ -29,6 +29,7 @@
     <# } else { #>
     <div class="nf-oauth--connected">
       Connected to My.NinjaForms.com
+      <span class="js--disconnect" style="float:right;">X</span>
     </div>
     <# } #>
   <# } else { #>
@@ -53,7 +54,7 @@
     <div class="nf-extend-content">
       <p>{{{ data.description }}}</p>
       <div class="nf-extend-buttons">
-        <# if( null !== data.enabled ){ #>
+        <# if( null !== data.enabled && data.is_connected ){ #>
         <div style="float: right;">
           <input id="nfServiceTransactionalEmail" class="nf-toggle setting" {{{ ( data.enabled ) ? 'checked="checked"' : '' }}} {{{ ( data.isUpdating ) ? 'disabled="disabled"' : '' }}} type="checkbox">
           <label for="nfServiceTransactionalEmail"></label>

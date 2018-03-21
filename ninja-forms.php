@@ -20,7 +20,7 @@ require_once dirname( __FILE__ ) . '/lib/Conversion/Calculations.php';
 require_once dirname( __FILE__ ) . '/lib/NF_UpgradeThrottle.php';
 
 // Services require PHP v5.6+
-if( version_compare( PHP_VERSION, '5.6', '<' ) ) {
+if( version_compare( PHP_VERSION, '5.6', '>=' ) ) {
   include_once dirname( __FILE__ ) . '/services/bootstrap.php';
 }
 

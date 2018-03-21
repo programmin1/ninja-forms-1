@@ -2,9 +2,13 @@
 
 namespace NinjaForms;
 
+if( ! defined( 'NF_SERVER_URL' ) )
+  define( NF_SERVER_URL, 'http://my.ninjaforms.com' );
+
 // Setup OAuth as a prerequisite for services.
 include_once plugin_dir_path( __FILE__ ) . 'oauth.php';
-(new OAuth('https://my.ninjaforms.com/oauth'))->setup();
+OAuth::set_base_url( NF_SERVER_URL . '/oauth' );
+OAuth::getInstance()->setup();
 
 add_action( 'wp_ajax_nf_services', function(){
   $services = apply_filters( 'ninja_forms_services', [
