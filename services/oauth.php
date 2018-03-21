@@ -84,14 +84,19 @@ class OAuth
 
   public function disconnect() {
 
+    $url = trailingslashit( $this->base_url ) . 'disconnect';
+    $args = [
+      'blocking' => false,
+      'method' => 'DELETE',
+      'body' => [
+        'client_id' => get_option( 'ninja_forms_oauth_client_id' ),
+        'client_secret' => get_option( 'ninja_forms_oauth_client_secret' )
+      ]
+    ];
+    $response = wp_remote_request( $url, $args );
+
     delete_option( 'ninja_forms_oauth_client_id' );
     delete_option( 'ninja_forms_oauth_client_secret' );
-
-    wp_remote_request( $this->base_url . '/disconnect', [
-      'blocking' => false,
-      'method' => 'DELETE'
-    ] );
-
     wp_die( 1 );
   }
 
