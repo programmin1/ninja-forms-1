@@ -110,6 +110,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             if( $is_conversion ) {
                 $field_id = $settings[ 'id' ];
                 $field = Ninja_Forms()->form($form_id)->field( $field_id )->get();
+                $field->save();
             } else {
                 unset( $settings[ 'id' ] );
                 $settings[ 'created_at' ] = current_time( 'mysql' );
