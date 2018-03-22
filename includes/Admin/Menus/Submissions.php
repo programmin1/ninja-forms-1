@@ -94,9 +94,9 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
         if( ! empty( $_GET[ 'post_status' ] ) ) {
             // Depending on the domain set the value to plain text.
             if ( 'all' == $_GET[ 'post_status' ] ) {
-                $views[ 'all' ] = __( 'Completed Submissions', 'ninja-forms' );
+                $views[ 'all' ] = __( 'Completed', 'ninja-forms' );
             } else if ( 'trash' == $_GET[ 'post_status' ] ) {
-                $views[ 'trash' ] = __( 'Trashed Submissions', 'ninja-forms' );
+                $views[ 'trash' ] = __( 'Trashed', 'ninja-forms' );
             }
         }
 
