@@ -42,7 +42,10 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
         parent::__construct();
 
         // Set the nice name to what we passed in. 'Collect Payment' is default
-        $this->_nicename = __( $cp_nice_name, 'ninja-forms' );
+	    if( 'Collect Payment' == $cp_nice_name ) {
+	    	$cp_nice_name = __( 'Collect Payment', 'ninja-forms' );
+	    }
+        $this->_nicename = $cp_nice_name;
         // Set name to what we passed in. 'collectpayment' is default
         $this->_name = strtolower( $cp_name );
 
