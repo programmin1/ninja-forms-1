@@ -1,7 +1,7 @@
 define([], function() {
 	var radioChannel = nfRadio.channel( 'email' );
 	// var emailReg = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-	var emailReg = /^.+@.+\..+/i;
+	var emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	var errorID = 'invalid-email';
 
 	var controller = Marionette.Object.extend( {
@@ -69,8 +69,6 @@ define([], function() {
 			/*
 			 * Check our value to see if it is a valid email.
 			 */
-		
-			
 			if ( 0 == value.length ) {
 				nfRadio.channel( 'fields' ).request( 'remove:error', fieldID, errorID );
 			} else if ( ! emailReg.test( value ) && ! model.get( 'clean' ) ) {
