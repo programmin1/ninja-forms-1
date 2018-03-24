@@ -55,6 +55,10 @@ class OAuth
     return self::getInstance()->client_id;
   }
 
+  public static function get_client_secret() {
+    return self::getInstance()->client_secret;
+  }
+
   public function connect_url() {
 
     $client_redirect = add_query_arg( [

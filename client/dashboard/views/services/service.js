@@ -27,6 +27,7 @@ define( [], function() {
       initialize: function( oauthModel ) {
         this.updateOAuth();
         this.listenTo( nfRadio.channel( 'dashboard' ), 'fetch:oauth', this.updateOAuth );
+        this.listenTo( nfRadio.channel( 'dashboard' ), 'save:service-' + this.model.get( 'slug' ), this.render );
       },
 
       updateOAuth: function() {

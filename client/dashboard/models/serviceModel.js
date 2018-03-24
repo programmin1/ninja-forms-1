@@ -23,6 +23,12 @@ define( [], function() {
           type: "POST",
           url: this.url(),
           data: this.toJSON()
+      }).done( function( response ){
+        if( '200' !== response ) {
+          alert( 'Unable to update the service.' );
+          that.set( 'enabled', ! that.get( 'enabled' ) );
+        }
+        nfRadio.channel( 'dashboard').trigger( 'save:service-' + that.get( 'slug' )  );
       });
     }
 
