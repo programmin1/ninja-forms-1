@@ -45,7 +45,7 @@ class NF_Admin_Processes_ChunkPublish extends NF_Abstracts_BatchProcess
     public function process()
     {
         // If we were told this is a new publish...
-        if ( $this->$data[ 'new_publish' ] ) {
+        if ( $this->data[ 'new_publish' ] === 'true' ) {
             // Delete our option to reset the process.
             $this->remove_option();
         }
@@ -282,6 +282,7 @@ class NF_Admin_Processes_ChunkPublish extends NF_Abstracts_BatchProcess
             $sql = "DELETE FROM `" . $wpdb->prefix . "options` WHERE option_name LIKE 'nf_form_" . $this->form_id . "_publishing_%'";
             $wpdb->query( $sql );
         }
+        $this->data[ 'new_publish' ] = 'false';
     }
 
 }
