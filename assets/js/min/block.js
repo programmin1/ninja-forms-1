@@ -65,6 +65,8 @@
 				var elID = event.target.parentNode.parentNode;
 				var idArray = elID.getAttribute( 'id' ).split( '-' );
 				var nfOptions = document.getElementById( 'nf-filter-container-' + idArray[ idArray.length -1 ] );
+				var inputEl = document.getElementById( 'formFilter-sidebar' );
+				inputEl.value = '';
 				nfOptions.style.display = 'none';
 			}
 
