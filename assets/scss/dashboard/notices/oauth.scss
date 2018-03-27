@@ -5,11 +5,11 @@
    }
    50% {
       box-shadow: 0 0 2px #84cc1e,
-            inset 100vw 0 2px rgba(255, 255, 255, .3);
+            inset 100vw 0 2px rgba(255, 255, 255, .2);
    }
    100% {
       box-shadow: 0 0 2px rgba(255, 255, 255, 0),
-            inset 50vw 0 2px rgba(255, 255, 255, 0);
+            inset 100vw 0 2px rgba(255, 255, 255, 0);
    }
 }
 
@@ -39,7 +39,7 @@
   background-color:#84CC1E;
 }
 .nf-oauth--connected:not(:hover) {
-  animation: nf-connected 5s ease infinite;
+  animation: nf-connected 8s ease infinite;
   animation-delay: 2s;
 }
 .nf-notices--oauth:hover .nf-oauth--connected {
