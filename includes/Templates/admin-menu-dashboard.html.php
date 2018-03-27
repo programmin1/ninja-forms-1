@@ -72,7 +72,7 @@
           <label for="nfServiceTransactionalEmail"></label>
         </div>
           <# if( data.serviceLink ){ #>
-            <a target="_blank" href="{{{ data.serviceLink.href }}}" class="{{{data.serviceLink.classes}}}" style="float:right;">{{{data.serviceLink.text}}}</a>
+            <a href="{{{ data.serviceLink.href }}}" class="{{{data.serviceLink.classes}}}" style="float:right;">{{{data.serviceLink.text}}}</a>
           <# } #>
         <# } else { #>
           <# if( data.infoLink ){ #>
