@@ -67,12 +67,17 @@
       <p>{{{ data.description }}}</p>
       <div class="nf-extend-buttons">
         <# if( null !== data.enabled && data.is_connected ){ #>
-        <div style="float: right;">
+        <div style="float: left;">
           <input id="nfServiceTransactionalEmail" class="nf-toggle setting" {{{ ( data.enabled ) ? 'checked="checked"' : '' }}} {{{ ( data.isUpdating ) ? 'disabled="disabled"' : '' }}} type="checkbox">
           <label for="nfServiceTransactionalEmail"></label>
         </div>
+          <# if( data.serviceLink ){ #>
+            <a target="_blank" href="{{{ data.serviceLink.href }}}" class="{{{data.serviceLink.classes}}}" style="float:right;">{{{data.serviceLink.text}}}</a>
+          <# } #>
         <# } else { #>
-        <a target="_blank" href="{{{ data.link }}}" class="nf-button primary" style="margin-bottom: 10px;">Learn More</a>
+          <# if( data.infoLink ){ #>
+          <a target="_blank" href="{{{ data.infoLink.href }}}" class="{{{data.infoLink.classes}}}">{{{data.infoLink.text}}}</a>
+          <# } #>
         <# } #>
       </div>
     </div>

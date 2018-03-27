@@ -6,7 +6,8 @@ define( [], function() {
       slug: '',
       description: '',
       enabled: null,
-      link: '',
+      infoLink: null,
+      serviceLink: null
     },
 
     url: function() {

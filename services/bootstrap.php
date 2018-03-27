@@ -17,14 +17,22 @@ add_action( 'wp_ajax_nf_services', function(){
       'slug' => 'addon-manager',
       'enabled' => null,
       'description' => 'Manage Addons for Ninja Forms',
-      'link' => 'https://ninjaforms.com/services/addon-manager'
+      'infoLink' => [
+        'text' => 'Learn More',
+        'href' => 'https://ninjaforms.com/services/addon-manager',
+        'classes' => 'nf-button primary'
+      ]
     ],
     'transactional-email' => [
       'name' => __( 'Transactional Email', 'ninja-mail' ),
       'slug' => 'transactional-email',
       'description' => 'Increase Email Deliverability with a dedicated email service by Ninja Forms.',
       'enabled' => null,
-      'link' => 'https://ninjaforms.com/services/transactional-email'
+      'infoLink' => [
+        'text' => 'Learn More',
+        'href' => 'https://ninjaforms.com/services/transactional-email',
+        'classes' => 'nf-button primary'
+      ]
     ],
   ] );
   wp_die( json_encode( [ 'data' => array_values( $services ) ] ) );
