@@ -16,6 +16,10 @@ a {
   outline: none !important;
   border: 0;
 }
+a:focus {
+  outline: none !important;
+  box-shadow: unset; // Override WP focus state.
+}
 
 #wpwrap,
 #wpcontent {
@@ -191,6 +195,7 @@ Sections
 @import 'sections/widgets';
 @import 'sections/apps';
 @import 'sections/memberships';
+@import 'sections/promotions';
 
 /*
 Widgets
@@ -318,4 +323,3 @@ Loading Spinner
   }
 
 }
-

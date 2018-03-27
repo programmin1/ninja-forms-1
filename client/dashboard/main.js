@@ -63,18 +63,20 @@ jQuery( document ).ready( function( $ ) {
     } );
 } );
 
+
+
 /**
  * Submenu Routing
  */
 
-jQuery( 'a[href="admin.php?page=ninja-forms#new-form"]' ).on( 'click', function(){
+jQuery( 'a[href="admin.php?page=ninja-forms#new-form"]' ).on( 'click', function( event ){
     event.preventDefault();
     window.location.hash = 'new-form';
     nfRadio.channel( 'dashboard' ).request( 'show:widgets' );
     nfRadio.channel( 'widget-forms' ).request( 'show:newFormsGrid' );
 } );
 
-jQuery( 'a[href="admin.php?page=ninja-forms#apps"]' ).on( 'click', function(){
+jQuery( 'a[href="admin.php?page=ninja-forms#apps"]' ).on( 'click', function( event ){
     event.preventDefault();
     window.location.hash = 'apps';
     nfRadio.channel( 'dashboard' ).request( 'show:apps' );
@@ -87,3 +89,12 @@ jQuery( 'a[href="admin.php?page=ninja-forms"]' ).on( 'click', function( event ){
     nfRadio.channel( 'dashboard' ).request( 'show:widgets' );
     nfRadio.channel( 'widget-forms' ).request( 'show:formsTable' );
 } );
+
+/**
+ * Hash Change Routing Fallback
+ * To avoid the need to manually add listeners to views, this is a generic hash change listener.
+ */
+jQuery(window).on('hashchange', function() {
+  var hash = window.location.hash.substr(1);
+  nfRadio.channel( 'dashboard' ).request( 'show:' + hash );
+});

@@ -29,3 +29,7 @@ add_action( 'wp_ajax_nf_services', function(){
   ] );
   wp_die( json_encode( [ 'data' => array_values( $services ) ] ) );
 });
+
+add_action( 'admin_enqueue_scripts', function() {
+  wp_localize_script( 'nf-dashboard', 'nfPromotions', 'YOLO' );
+});

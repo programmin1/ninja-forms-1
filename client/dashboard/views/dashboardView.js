@@ -6,7 +6,7 @@
  * @copyright (c) 2017 WP Ninjas
  * @since 3.2
  */
-define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sections/apps.js', 'views/sections/memberships.js', 'views/oauth.js' ], function( WidgetView, ServicesView, AppsView, MembershipsView, OAuthView ) {
+define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sections/apps.js', 'views/sections/memberships.js', 'views/oauth.js', 'views/promotion.js' ], function( WidgetView, ServicesView, AppsView, MembershipsView, OAuthView, PromotionView ) {
     var view = Marionette.View.extend( {
         template: "#tmpl-nf-dashboard",
 
@@ -14,6 +14,7 @@ define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sect
 
         regions: {
             notices: '.notices',
+            promotions: '.promotions',
             content: '.content'
         },
 
@@ -88,6 +89,7 @@ define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sect
         onRender: function() {
 
           this.showChildView( 'notices', new OAuthView() );
+          this.showChildView( 'promotions', new PromotionView() );
 
             switch( window.location.hash ) {
                 case '#apps':

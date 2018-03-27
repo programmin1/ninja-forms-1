@@ -11,6 +11,7 @@
         </div>
     </header>
     <div class="notices"></div>
+    <div class="promotions"></div>
     <nav class="sections">
         <ul>
             {{{ data.renderNav() }}}
@@ -39,6 +40,15 @@
       Checking connection...
     </div>
   <# } #>
+</script>
+
+<!-- Promotion -->
+<script id="tmpl-nf-promotion" type="text/template">
+    <div class="promotion--wrapper">
+      <div class="promotion--{{{ data.id }}}">
+        {{{ data.content }}}
+      </div>
+    </div>
 </script>
 
 <!-- Section: Widgets -->

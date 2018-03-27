@@ -128,6 +128,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             wp_enqueue_script( 'nf-dashboard', Ninja_Forms::$url . 'assets/js/min/dashboard.min.js', array( 'backbone-radio', 'backbone-marionette-3' ) );
 
             wp_localize_script( 'nf-dashboard', 'nfi18n', Ninja_Forms::config( 'i18nDashboard' ) );
+            wp_localize_script( 'nf-dashboard', 'nfPromotions', array_values( Ninja_Forms::config( 'DashboardPromotions' ) ) );
 
             wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
             wp_enqueue_style( 'nf-dashboard', Ninja_Forms::$url . 'assets/css/dashboard.min.css' );
@@ -568,7 +569,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         foreach( Ninja_Forms()->merge_tags as $key => $group ){
             /*
              * If the merge tag group doesn't have a title, don't localise it.
-             * 
+             *
              * This convention is used to allow merge tags to continue to function,
              * even though they can't be added to new forms.
              */
