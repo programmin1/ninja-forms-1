@@ -25,8 +25,9 @@ define( [], function() {
           url: this.url(),
           data: this.toJSON()
       }).done( function( response ){
-        if( '200' !== response ) {
-          alert( 'Unable to update the service.' );
+        var data = JSON.parse( response );
+        if( 'undefined' !== typeof data.error ) {
+          alert( 'Unable to update the service. ' + data.error );
           that.set( 'enabled', ! that.get( 'enabled' ) );
         }
         nfRadio.channel( 'dashboard').trigger( 'save:service-' + that.get( 'slug' )  );
