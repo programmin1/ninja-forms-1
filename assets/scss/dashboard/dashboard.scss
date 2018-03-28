@@ -324,3 +324,34 @@ Loading Spinner
   }
 
 }
+
+/*
+Promotions
+---------------------------------------------*/
+
+.promotion--wrapper {
+  > div {
+    a {
+        position: relative;
+        display: block;
+        background: #f1f1f1;
+        padding: 16px 80px;
+        text-align: center;
+        border-radius: 4px;
+        font-size: 16px;
+        color: #ef4748 !important;
+        overflow: hidden;
+        line-height: 24px;
+      > .cta {
+          font-size: 22px;
+      }
+      > .dashicons, .dashicons-before::before {
+          position: absolute;
+          left: 0;
+          top: -20px;
+          font-size: 90px;
+          transform: rotate(20deg);
+      }
+    }
+  }
+}
