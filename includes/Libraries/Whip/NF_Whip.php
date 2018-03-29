@@ -2,11 +2,19 @@
 
 class NF_Whip
 {
+    /**
+     * NF_Whip constructor.
+     * Hooks into the WordPress admin notice system and calls our whip_message.
+     */
     public function __construct()
     {
         add_action( 'admin_notices', array( $this, 'whip_message' ) );
     }
 
+    /**
+     * Whip Message
+     * Builds and outputs our message.
+     */
     public function whip_message()
     {
         $message = array();
@@ -27,8 +35,9 @@ class NF_Whip
 					sprintf( '<a href="%1$s" target="_blank">', esc_url( 'https://wordpress.org/hosting/' ) )
 			);
 
+        // Change our array to string to be displayed.
         $message = implode( $message, "\n" );
 
-        echo '<div class="notice notice-error">' . $message  . '</div>';
+        echo '<div class="notice notice-error">' . $message . '</div>';
     }
 }
