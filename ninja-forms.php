@@ -367,6 +367,10 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             add_action( 'init', array( self::$instance, 'init' ), 5 );
             add_action( 'admin_init', array( self::$instance, 'admin_init' ), 5 );
 
+            if( PHP_VERSION < 7.0 ) {
+                add_action( 'admin_init', array( self::$instance, 'nf_whip_notice' ) );
+            }
+
             return self::$instance;
         }
 
@@ -383,6 +387,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             }
 
             add_filter( 'ninja_forms_dashboard_menu_items', array( $this, 'maybe_hide_dashboard_items' ) );
+        }
+
+        public function nf_whip_notice()
+        {
+            require_once self::$dir . '/includes/Libraries/Whip/NF_Whip.php';
+            return new NF_Whip();
         }
 
         public function maybe_hide_dashboard_items( $items )
