@@ -38,6 +38,6 @@ class NF_Whip
         // Change our array to string to be displayed.
         $message = implode( $message, "\n" );
 
-        echo '<div class="notice notice-error">' . $message . '</div>';
+        echo '<div class="notice notice-error" style="padding: 20px">' . $message . '</div>';
     }
 }
