@@ -367,7 +367,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             add_action( 'init', array( self::$instance, 'init' ), 5 );
             add_action( 'admin_init', array( self::$instance, 'admin_init' ), 5 );
 
-            if( PHP_VERSION < 7.0 ) {
+            if( PHP_VERSION < 5.6 ) {
                 add_action( 'admin_init', array( self::$instance, 'nf_whip_notice' ) );
             }
 
