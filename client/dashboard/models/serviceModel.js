@@ -4,10 +4,12 @@ define( [], function() {
       objectType: 'service',
       name: '',
       slug: '',
+      installPath: '',
       description: '',
       enabled: null,
       infoLink: null,
-      serviceLink: null
+      serviceLink: null,
+      is_installing: false,
     },
 
     url: function() {

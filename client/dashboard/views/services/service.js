@@ -6,11 +6,16 @@ define( [], function() {
       className: 'nf-extend nf-box',
 
       ui: {
+          install: '.js--install',
           enabled: '.nf-toggle.setting',
           toggleEnable: '.nf-toggle + label',
       },
 
       events: {
+          'click @ui.install': function() {
+            this.model.set( 'is_installing', true );
+            nfRadio.channel( 'dashboard' ).request( 'install:service', this.model.get( 'slug' ), this.model.get( 'installPath' ) );
+          },
           'click @ui.toggleEnable': function() {
               if( null == this.model.get( 'enabled' ) ){
                 if( this.model.get( 'link' ) ){

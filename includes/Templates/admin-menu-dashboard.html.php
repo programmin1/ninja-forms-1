@@ -76,7 +76,17 @@
           <# } #>
         <# } else { #>
           <# if( data.infoLink ){ #>
-          <a target="_blank" href="{{{ data.infoLink.href }}}" class="{{{data.infoLink.classes}}}">{{{data.infoLink.text}}}</a>
+          <a target="_blank" href="{{{ data.infoLink.href }}}" class="{{{data.infoLink.classes}}}" style="float:left;">{{{data.infoLink.text}}}</a>
+          <# } #>
+
+          <# if( data.slug && data.installPath ){ #>
+            <# if( ! data.is_installing ){ #>
+              <a href="#services" class="nf-button primary js--install" style="float:right;">Install</a>
+            <# } else { #>
+              <a href="#services" class="nf-button primary" style="float:right;" disabled>
+                <span class="dashicons dashicons-update dashicons-update-spin"></span>
+              </a>
+            <# } #>
           <# } #>
         <# } #>
       </div>
