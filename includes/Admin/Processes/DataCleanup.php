@@ -5,7 +5,6 @@
  */
 class NF_Admin_DataCleanup extends NF_Abstracts_BatchProcess
 {
-    private $data = array();
     private $response = array(
         'batch_complete' => false
     );
@@ -65,9 +64,13 @@ class NF_Admin_DataCleanup extends NF_Abstracts_BatchProcess
         // If our array isn't empty...
         if ( ! empty( $this->delete ) ) {
             update_option( 'nf_data_cleanup_ids', implode( ',', $this->delete ) );
+            echo wp_json_encode( $this->response );
+            wp_die();
         }
         // Run our cleanup process.
         $this->cleanup();
+        echo wp_json_encode( $this->response );
+        wp_die();
     }
 
 
@@ -103,6 +106,10 @@ class NF_Admin_DataCleanup extends NF_Abstracts_BatchProcess
         // Delete our options.
         delete_option( 'nf_data_cleanup_ids' );
         delete_option( 'nf_doing_data_cleanup' );
+        // Add our "finished" option.
+        add_option( 'ninja_forms_data_is_clean', 'true' );
+        // Tell our JS that we're done.
+        $this->response[ 'batch_complete' ] = true;
     }
     
     /**
