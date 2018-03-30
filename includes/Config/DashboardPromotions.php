@@ -8,14 +8,11 @@ return apply_filters( 'ninja-forms-dashboard-promotions', [
   |--------------------------------------------------------------------------
   |
   */
+
   'ninja-mail' => [
     'id' => 'ninja-mail',
-    'content' => '
-      <a href="#services">
-        <p style="text-align:center;padding-top:50px;padding-bottom:50px;width:750px;background-color:lightgray;color:white;">
-          Increase Email Deliverability with a dedicated email service by Ninja Forms.
-        </p>
-      </a>',
+    'content' => '<a href="#services"><span class="dashicons dashicons-email-alt"></span>' . __( 'Want to improve the reliability of your submission emails?', 'ninja-forms' ) . '<br /><span class="cta">' . __( 'Try our new Ninja Mail service!', 'ninja-forms' ) . '</span></a>'
   ],
+
 
 ]);
