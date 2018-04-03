@@ -16,6 +16,7 @@ define( ['models/formModel'], function( FormModel ) {
 
 		initialize: function() {
 			this.newIDs = [];
+			this.baseUrl = window.location.href.split('?')[0];
             this.listenTo( nfRadio.channel( 'dashboard' ), 'forms:delete', this.modalConfirm );
             this.listenTo( nfRadio.channel( 'dashboard' ), 'forms:duplicate', this.duplicate );
             this.modal = new jBox( 'Modal', {
@@ -56,7 +57,7 @@ define( ['models/formModel'], function( FormModel ) {
 
 	        var exportFormLink = document.createElement( 'a' );
 	        // link to export page with this form selected
-	        exportFormLink.href = '/wp-admin/admin.php?page=nf-import-export&exportFormId='
+	        exportFormLink.href = this.baseUrl + '?page=nf-import-export&exportFormId='
                 + formID;
 	        exportFormLink.innerHTML = '<i class="fa fa-download"' +
 		        ' style="padding:5px;"></i>Export' +
@@ -68,7 +69,7 @@ define( ['models/formModel'], function( FormModel ) {
 	        var exportSubmissionLink = document.createElement( 'a' );
 
 	        // link to export submissions page
-	        exportSubmissionLink.href = '/wp-admin/admin.php?page=nf-processing&action=download_all_subs&form_id='
+	        exportSubmissionLink.href = this.baseUrl + '?page=nf-processing&action=download_all_subs&form_id='
 	            + formID + '&redirect=' + encodeURIComponent('/wp-admin/edit.php?post_status=all&post_type=nf_sub&form_id='
 	            + formID );
 	        exportSubmissionLink.target = '_blank';
