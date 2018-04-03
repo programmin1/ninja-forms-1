@@ -71,7 +71,7 @@ define( ['models/formModel'], function( FormModel ) {
 
 	        // link to export submissions page
 	        exportSubmissionLink.href = this.baseUrl + '?page=nf-processing&action=download_all_subs&form_id='
-	            + formID + '&redirect=' + encodeURIComponent('/wp-admin/edit.php?post_status=all&post_type=nf_sub&form_id='
+	            + formID + '&redirect=' + encodeURIComponent( this.baseUrl.replace( 'admin.php', 'edit.php' ) + '?post_status=all&post_type=nf_sub&form_id='
 	            + formID );
 	        exportSubmissionLink.target = '_blank';
 	        exportSubmissionLink.innerHTML = '<i class="fa fa-download" ' +
