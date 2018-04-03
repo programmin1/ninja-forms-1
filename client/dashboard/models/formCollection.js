@@ -49,10 +49,8 @@ define( ['models/formModel'], function( FormModel ) {
 
             container.classList.add( 'message' );
             title.innerHTML = formTitle;
-            messageBox.innerHTML += 'Once deleted, this form (<strong>'
-	            + formTitle + '</strong>), it\'s fields, and submissions' +
-	            ' cannot be recovered. Proceed with caution.';
-                ' recovered. This includes submission data for that form.';
+            messageBox.innerHTML += nfi18n.deleteWarningA + ' (<strong>'
+	            + formTitle + '</strong>). ' + nfi18n.deleteWarningB;
             messageBox.appendChild( document.createElement( 'br') );
             messageBox.appendChild( document.createElement( 'br') );
 
@@ -61,8 +59,7 @@ define( ['models/formModel'], function( FormModel ) {
 	        exportFormLink.href = this.baseUrl + '?page=nf-import-export&exportFormId='
                 + formID;
 	        exportFormLink.innerHTML = '<i class="fa fa-download"' +
-		        ' style="padding:5px;"></i>Export' +
-		        ' Form';
+		        ' style="padding:5px;"></i>' + nfi18n.deleteXForm;
 	        exportFormLink.target = '_blank'; // open in new tab
 	        messageBox.appendChild( exportFormLink );
 	        messageBox.appendChild( document.createElement( 'br') );
@@ -75,7 +72,7 @@ define( ['models/formModel'], function( FormModel ) {
 	            + formID );
 	        exportSubmissionLink.target = '_blank';
 	        exportSubmissionLink.innerHTML = '<i class="fa fa-download" ' +
-	            'style="padding:5px;"></i>Export Submissions';
+	            'style="padding:5px;"></i>' + nfi18n.deleteXSubs;
 
 	        messageBox.appendChild( exportSubmissionLink );
             messageBox.appendChild( document.createElement( 'br') );
@@ -84,8 +81,7 @@ define( ['models/formModel'], function( FormModel ) {
 
             var inputLabel = document.createElement( 'label' );
             inputLabel.for = 'confirmDeleteFormInput';
-            inputLabel.innerHTML = 'Type <span style="color:red;">DELETE</span>' +
-	            ' to confirm';
+            inputLabel.innerHTML = nfi18n.deleteConfirmA + ' <span style="color:red;">DELETE</span> ' + nfi18n.deleteConfirmB;
 
 	        var deleteInput = document.createElement( 'input' );
 	        deleteInput.type = 'text';
@@ -101,9 +97,9 @@ define( ['models/formModel'], function( FormModel ) {
 	        container.appendChild( document.createElement( 'br' ) );
 	        container.appendChild( document.createElement( 'br' ) );
 
-            confirm.innerHTML = 'Delete';
+            confirm.innerHTML = nfi18n.delete;
             confirm.classList.add( 'confirm', 'nf-button', 'primary', 'pull-right'  );
-            cancel.innerHTML = 'Cancel';
+            cancel.innerHTML = nfi18n.cancel;
             cancel.classList.add( 'cancel', 'nf-button', 'secondary' );
             buttons.appendChild( cancel );
 	        buttons.appendChild( confirm );
@@ -113,7 +109,7 @@ define( ['models/formModel'], function( FormModel ) {
             message.appendChild( container );
 
             this.modal.setContent( message.innerHTML );
-            this.modal.setTitle( 'Confirm Delete' );
+            this.modal.setTitle( nfi18n.deleteTitle );
 
             this.modal.open();
 
