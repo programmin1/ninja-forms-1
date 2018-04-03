@@ -17,6 +17,7 @@ define( ['models/formModel'], function( FormModel ) {
 		initialize: function() {
 			this.newIDs = [];
 			this.baseUrl = window.location.href.split('?')[0];
+			
             this.listenTo( nfRadio.channel( 'dashboard' ), 'forms:delete', this.modalConfirm );
             this.listenTo( nfRadio.channel( 'dashboard' ), 'forms:duplicate', this.duplicate );
             this.modal = new jBox( 'Modal', {
