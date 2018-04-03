@@ -3,7 +3,7 @@
 namespace NinjaForms;
 
 if( ! defined( 'NF_SERVER_URL' ) )
-  define( 'NF_SERVER_URL', 'http://my.ninjaforms.com' );
+  define( 'NF_SERVER_URL', 'https://my.ninjaforms.com' );
 
 // Setup OAuth as a prerequisite for services.
 include_once plugin_dir_path( __FILE__ ) . 'oauth.php';
