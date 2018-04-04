@@ -143,6 +143,7 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
 	/**
 	 * Let's generate a unique nonce for each form render so that we don't get
 	 * caught with an expiring nonce accidentally and fail to allow a submission
+	 * @since 3.2
 	 */
     public function get_new_nonce() {
     	// get a timestamp to append to nonce name

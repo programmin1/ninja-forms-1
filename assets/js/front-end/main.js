@@ -132,6 +132,7 @@ jQuery( document ).ready( function( $ ) {
 			 * This function retrieves a new, unique nonce so that we avoid
 			 * giving the user a nonce that could possibly expire before
 			 * they finish filling out the form.
+			 * @since 3.2
 			 */
 			getNonce: function() {
 				var data = {
