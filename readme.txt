@@ -111,7 +111,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.2.20 (5 April 2018) =
+= 3.2.20 (6 April 2018) =
 
 *Bugs:*
 
@@ -127,7 +127,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Changelog ==
 
-= 3.2.20 (5 April 2018) =
+= 3.2.20 (6 April 2018) =
 
 *Bugs:*
 
