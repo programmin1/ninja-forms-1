@@ -113,7 +113,6 @@ define([], function() {
 			var data = {
 				'action': 'nf_ajax_submit',
 				'security': nfFrontEnd.ajaxNonce,
-				'nonce_ts': nfFrontEnd.nonce_ts,
 				'formData': formData
 			}
 
