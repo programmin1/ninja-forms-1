@@ -116,6 +116,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 *Bugs:*
 
 * Resolved an issue that was causing the save progress table settings to not display properly in the form builder.
+* Resolved a long-standing bug that rarely caused form submissions to fail.
 * Resolved a bug that was sometimes causing form submission to fail.
 
 *Changes:*
