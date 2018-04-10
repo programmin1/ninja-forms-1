@@ -24,9 +24,9 @@
 <script id="tmpl-nf-notices-oauth" type="text/template">
   <# if( null !== data.connected ) { #>
     <# if( ! data.connected ){ #>
-    <a href="{{{ data.connect_url }}}" class="nf-oauth--connect">
+    <!-- <a href="{{{ data.connect_url }}}" class="nf-oauth--connect">
       Connect to My.NinjaForms.com
-    </a>
+    </a> -->
     <# } else { #>
     <div class="nf-oauth--connected">
       Connected to My.NinjaForms.com
@@ -81,7 +81,7 @@
 
           <# if( data.slug && data.installPath ){ #>
             <# if( ! data.is_installing ){ #>
-              <a href="#services" class="nf-button primary js--install" style="float:right;">Install</a>
+              <a href="#services" class="nf-button primary js--install" style="float:right;">Setup</a>
             <# } else { #>
               <a href="#services" class="nf-button primary" style="float:right;" disabled>
                 <span class="dashicons dashicons-update dashicons-update-spin"></span>

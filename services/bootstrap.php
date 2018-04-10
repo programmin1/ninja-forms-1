@@ -76,7 +76,7 @@ add_action( 'wp_ajax_nf_services_install', function() {
   }
 
   include_once plugin_dir_path( __FILE__ ) . 'remote-installer-skin.php';
-  // ob_start();
+  ob_start();
   $upgrader = new \Plugin_Upgrader( new Remote_Installer_Skin() );
 
   $install = $upgrader->install( $api->download_link );
@@ -86,11 +86,14 @@ add_action( 'wp_ajax_nf_services_install', function() {
   }
 
   $activated = activate_plugin( $install_path );
-  // ob_clean();
+  ob_clean();
   if( is_wp_error( $activated ) ){
     die( json_encode( [ 'error' => $activated->get_error_message() ] ) );
   }
 
+  $response = apply_filters( 'nf_services_installed_' . $plugin, '1' );
+
+  echo json_encode( $response );
   die( '1' );
 });
 
@@ -102,7 +105,7 @@ add_filter( 'plugins_api_result', function( $response, $action, $args ){
   if( 'ninja-mail' !== $args->slug ) return;
 
   $response = new \stdClass();
-  $response->download_link = 'http://my.ninjaforms.com/wp-content/uploads/ninja-mail-58647103195eb32b0ed455373c5bcd0ab7cf3fcb.zip';
+  $response->download_link = 'http://my.ninjaforms.com/wp-content/uploads/ninja-mail-4905a6af0c36e02c052f9c0456e1519ce075d3df.zip';
 
   return $response;
 }, 10, 3 );

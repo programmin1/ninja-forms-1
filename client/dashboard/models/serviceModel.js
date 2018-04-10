@@ -17,7 +17,22 @@ define( [], function() {
     },
 
     initialize: function() {
-    /* ... */
+      var that = this;
+
+      // Auto-redirect to the serviceLink on install.
+      nfRadio.channel( 'dashboard' ).reply( 'install:service:' + this.get( 'slug' ), function(){
+        if( ! that.get( 'serviceLink' ) ) return;
+        if( ! that.get( 'serviceLink' ).href ) return;
+
+        var redirect = that.get( 'serviceLink' ).href;
+
+        var oauth = nfRadio.channel( 'dashboard' ).request( 'get:oauth' );
+        if( ! oauth.get( 'connected' ) ){
+          window.location = oauth.get( 'connect_url' ) + '&redirect=' + redirect;
+        } else {
+          window.location = redirect;
+        }
+      } );
     },
 
     save: function() {

@@ -12,9 +12,10 @@ define([ 'models/serviceCollection' ], function( ServiceCollection ) {
 			return this.services;
 		},
 
-		fetchServices: function() {
+		fetchServices: function( callback ) {
 			this.services.fetch({
 				success: function( model ){
+						if( callback ) callback( model );
 						nfRadio.channel( 'dashboard' ).trigger( 'fetch:services' );
 				}
 			});
@@ -22,8 +23,12 @@ define([ 'models/serviceCollection' ], function( ServiceCollection ) {
 
 		installService: function( slug, installPath ) {
 			var that = this;
+
+			// Request to Install the service plugin.
 			jQuery.post( ajaxurl, { action: 'nf_services_install', plugin: slug, install_path: installPath }, function( response ){
-				that.fetchServices();
+				that.fetchServices(function(){
+					nfRadio.channel( 'dashboard' ).request( 'install:service:' + slug );
+				});
 			} );
 		}
 	});

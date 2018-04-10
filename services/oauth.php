@@ -82,6 +82,13 @@ class OAuth
     $client_id = sanitize_text_field( $_GET[ 'client_id' ] );
     update_option( 'ninja_forms_oauth_client_id', $client_id );
 
+    if( isset( $_GET[ 'redirect' ] ) ){
+      $redirect = sanitize_text_field( $_GET[ 'redirect' ] );
+      $redirect = add_query_arg( 'client_id', $client_id, $redirect );
+      wp_redirect( $redirect );
+      exit;
+    }
+
     wp_safe_redirect( admin_url( 'admin.php?page=ninja-forms#services' ) );
     exit;
   }
