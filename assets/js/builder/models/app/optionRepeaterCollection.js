@@ -22,7 +22,10 @@ define( ['models/app/optionRepeaterModel'], function( listOptionModel ) {
 		changeCollection: function() {
 			// Trigger a 'sort:options' event so that our field model can update
 			nfRadio.channel( 'option-repeater' ).trigger( 'sort:options', this );
-			nfRadio.channel( 'option-repeater-' + this.settingModel.get( 'name' ) ).trigger( 'sort:options', this );
+
+			if ('undefined' !== typeof this.settingModel ) {
+				nfRadio.channel('option-repeater-' + this.settingModel.get('name')).trigger('sort:options', this);
+			}
 		},
 
 		addOption: function( model, collection ) {

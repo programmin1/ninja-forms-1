@@ -93,17 +93,25 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 				new: true,
 				options: {}
 			};
-            var limit = collection.settingModel.get( 'max_options' );
-            if( 0 !== limit && collection.models.length >= limit ) {
-                return;
-            }
-			_.each( collection.settingModel.get( 'columns' ), function( col, key ) {
-				modelData[ key ] = col.default;
-
-				if( 'undefined' != typeof col.options ){
-					modelData.options[ key ] = col.options;
+			/**
+			 * If we don't actually have a 'settingModel' duplicated fields
+			 * can't add options until publish and the builder is reloaded.
+			 * If we ignore the code if we don't have settingsModel, then it
+			 * works.
+			 */
+			if  ( 'undefined' !== typeof collection.settingModel ) {
+				var limit = collection.settingModel.get( 'max_options' );
+				if ( 0 !== limit && collection.models.length >= limit ) {
+					return;
 				}
-			} );
+				_.each( collection.settingModel.get( 'columns' ), function ( col, key ) {
+					modelData[ key ] = col.default;
+
+					if ( 'undefined' != typeof col.options ) {
+						modelData.options[ key ] = col.options;
+					}
+				});
+			}
 			var model = new listOptionModel( modelData );
 			collection.add( model );
 
@@ -116,7 +124,10 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 			};
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'addListOption', model, null, label );
-			nfRadio.channel( 'option-repeater-' + collection.settingModel.get( 'name' ) ).trigger( 'add:option', model );
+
+			if ( 'undefined' !== typeof collection.settingModel ) {
+				nfRadio.channel('option-repeater-' + collection.settingModel.get('name')).trigger('add:option', model);
+			}
 			nfRadio.channel( 'option-repeater' ).trigger( 'add:option', model );
 			nfRadio.channel( 'option-repeater' ).trigger( 'added:option', collection );
 			this.triggerDataModel( model, dataModel );
