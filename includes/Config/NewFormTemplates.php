@@ -9,7 +9,7 @@
     ),
  */
 
-return apply_filters( 'ninja_forms_new_form_templates', array(
+$templates = array(
     /**
      * Regular old form templates
      */
@@ -43,9 +43,9 @@ return apply_filters( 'ninja_forms_new_form_templates', array(
         'title'                         => __( 'Collect feedback', 'ninja-forms' ),
         'template-desc'                 => __( 'Collect feedback for an event, blog post, or anything else. You can add and remove fields as needed.', 'ninja-forms' ),
     ),
+);
 
-
-
+$ads = array(
     /**
      * Ads
      */
@@ -73,7 +73,7 @@ return apply_filters( 'ninja_forms_new_form_templates', array(
         'modal-content'                 => '<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/WdFmgAffA50" allowfullscreen="" name="fitvid0" frameborder="0"></iframe></div>
                                             <p>In order to use this template, you need Stripe for Ninja Forms.</p>
                                             <div class="actions">
-                                                <a target="_blank" href="https://ninjaforms.com/extensions/stripe/?utm_medium=plugin&utm_source=new-form-templates&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Stripe" title="MailChimp" class="primary nf-button">Learn More</a>
+                                                <a target="_blank" href="https://ninjaforms.com/extensions/stripe/?utm_medium=plugin&utm_source=new-form-templates&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Stripe" title="Stripe" class="primary nf-button">Learn More</a>
                                             </div>',
     ),
 
@@ -86,7 +86,7 @@ return apply_filters( 'ninja_forms_new_form_templates', array(
         'modal-content'                 => '<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/Tl91cuFsnvM" allowfullscreen="" name="fitvid0" frameborder="0"></iframe></div>
                                             <p>In order to use this template, you need File Uploads for Ninja Forms.</p>
                                             <div class="actions">
-                                                <a target="_blank" href="https://ninjaforms.com/extensions/stripe/?utm_medium=plugin&utm_source=new-form-templates&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Stripe" title="MailChimp" class="primary nf-button">Learn More</a>
+                                                <a target="_blank" href="https://ninjaforms.com/extensions/stripe/?utm_medium=plugin&utm_source=new-form-templates&utm_campaign=Ninja+Forms+Addons+Page&utm_content=File+Uploads" title="File Uploads" class="primary nf-button">Learn More</a>
                                             </div>',
     ),
 
@@ -100,7 +100,7 @@ return apply_filters( 'ninja_forms_new_form_templates', array(
                                             <p>In order to use this template, you need PayPal Express for Ninja Forms.</p>
                                             <p>PayPal Express allows you to accept payments using Ninja Forms. It leverages the powerful processing engine that runs each Ninja Form to get a total, perform a checkout, and send your users to PayPal to complete their transaction.</p>
                                             <div class="actions">
-                                                <a target="_blank" href="https://ninjaforms.com/extensions/paypal-express/?utm_medium=plugin&utm_source=new-form-templates&utm_campaign=Ninja+Forms+Addons+Page&utm_content=PayPal+Express" title="MailChimp" class="primary nf-button">Learn More</a>
+                                                <a target="_blank" href="https://ninjaforms.com/extensions/paypal-express/?utm_medium=plugin&utm_source=new-form-templates&utm_campaign=Ninja+Forms+Addons+Page&utm_content=PayPal+Express" title="PayPal Express" class="primary nf-button">Learn More</a>
                                             </div>',
     ),
 
@@ -115,7 +115,7 @@ return apply_filters( 'ninja_forms_new_form_templates', array(
                                             <p>Create posts, pages, or any custom post type from the front-end.</p>
                                             <p>The Ninja Forms Front-end Posting extension gives you the power of the WordPress post editor on any publicly viewable page you choose.</p>
                                             <div class="actions">
-                                                <a target="_blank" href="https://ninjaforms.com/extensions/user-management/?utm_medium=plugin&utm_source=new-form-templates&utm_campaign=Ninja+Forms+Addons+Page&utm_content=User+Management" title="MailChimp" class="primary nf-button">Learn More</a>
+                                                <a target="_blank" href="https://ninjaforms.com/extensions/user-management/?utm_medium=plugin&utm_source=new-form-templates&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Frontend+Posting" title="Create Post" class="primary nf-button">Learn More</a>
                                             </div>',
     ),
 
@@ -129,7 +129,7 @@ return apply_filters( 'ninja_forms_new_form_templates', array(
                                             <p>In order to use this template, you need User Management for Ninja Forms.</p>
                                             <p>User Management brings you the remarkable flexibility to register new WordPress users and manage existing ones through your Ninja Forms!</p>
                                             <div class="actions">
-                                                <a target="_blank" href="https://ninjaforms.com/extensions/user-management/?utm_medium=plugin&utm_source=new-form-templates&utm_campaign=Ninja+Forms+Addons+Page&utm_content=User+Management" title="MailChimp" class="primary nf-button">Learn More</a>
+                                                <a target="_blank" href="https://ninjaforms.com/extensions/user-management/?utm_medium=plugin&utm_source=new-form-templates&utm_campaign=Ninja+Forms+Addons+Page&utm_content=User+Management" title="User Management" class="primary nf-button">Learn More</a>
                                             </div>',
     ),
 
@@ -143,7 +143,17 @@ return apply_filters( 'ninja_forms_new_form_templates', array(
                                             <p>In order to use this template, you need User Management for Ninja Forms.</p>
                                             <p>User Management brings you the remarkable flexibility to register new WordPress users and manage existing ones through your Ninja Forms!</p>
                                             <div class="actions">
-                                                <a target="_blank" href="https://ninjaforms.com/extensions/user-management/?utm_medium=plugin&utm_source=new-form-templates&utm_campaign=Ninja+Forms+Addons+Page&utm_content=User+Management" title="MailChimp" class="primary nf-button">Learn More</a>
+                                                <a target="_blank" href="https://ninjaforms.com/extensions/user-management/?utm_medium=plugin&utm_source=new-form-templates&utm_campaign=Ninja+Forms+Addons+Page&utm_content=User+Management" title="User Management" class="primary nf-button">Learn More</a>
                                             </div>',
     ),
-) );
+);
+
+/**
+ * If we've disabled marketing using our filter, don't merge in our ads.
+ */
+$disable_marketing = false;
+if ( ! apply_filters( 'ninja_forms_disable_marketing', $disable_marketing ) ) {
+    $templates = array_merge( $templates, $ads );
+}
+
+return apply_filters( 'ninja_forms_new_form_templates', $templates );
