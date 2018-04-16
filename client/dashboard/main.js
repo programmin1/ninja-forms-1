@@ -1,6 +1,12 @@
 var nfRadio = Backbone.Radio;
 var nfDebug = false;
 
+if( ! useServices ){
+  nfDashItems = nfDashItems.filter(function(item){
+    return 'services' !== item.slug;
+  });
+}
+
 jQuery( document ).ready( function( $ ) {
     require( [ 'controllers/formsController', 'controllers/oauthController', 'controllers/servicesController', 'views/dashboardView' ], function( FormsController, OAuthController, ServicesController, DashboardView ) {
 
@@ -32,7 +38,7 @@ jQuery( document ).ready( function( $ ) {
 
                 this.controllers.forms = new FormsController();
                 this.controllers.oauth = new OAuthController();
-                this.controllers.services = new ServicesController();
+                if( useServices ) this.controllers.services = new ServicesController();
 
                 //var data = {id: 1, title: 'Contact Me', created: '10-23-2016'};
                 //var form = new FormModel(data);

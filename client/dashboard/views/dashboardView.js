@@ -89,7 +89,7 @@ define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sect
         onRender: function() {
 
           this.showChildView( 'notices', new OAuthView() );
-          this.showChildView( 'promotions', new PromotionView() );
+          if( useServices ) this.showChildView( 'promotions', new PromotionView() );
 
             switch( window.location.hash ) {
                 case '#apps':

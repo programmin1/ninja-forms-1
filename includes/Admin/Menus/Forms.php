@@ -118,6 +118,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             ?>
             <script>
                 var nfDashItems = <?php echo( json_encode( array_values( $dash_items ) ) ); ?>;
+                var useServices = false;
             </script>
             <?php
 
