@@ -10,6 +10,7 @@ define( [], function() {
       infoLink: null,
       serviceLink: null,
       is_installing: false,
+      classes: ''
     },
 
     url: function() {

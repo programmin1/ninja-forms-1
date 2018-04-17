@@ -3,7 +3,9 @@ define( [], function() {
 
       template: '#tmpl-nf-service',
 
-      className: 'nf-extend nf-box',
+      className: function(){
+        return 'nf-extend nf-box ' + this.model.get( 'classes' );
+      },
 
       ui: {
           install: '.js--install',

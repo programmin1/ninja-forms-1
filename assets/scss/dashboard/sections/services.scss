@@ -5,6 +5,9 @@
 }
 
 .services {
+  .nf-extend.full {
+    flex-basis: 100%;
+  }
   .nf-extend-buttons a {
     margin-top: 20px;
   }

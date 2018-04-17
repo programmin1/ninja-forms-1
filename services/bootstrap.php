@@ -22,7 +22,8 @@ add_action( 'wp_ajax_nf_services', function(){
         'text' => 'Learn More',
         'href' => 'https://ninjaforms.com/services/transactional-email',
         'classes' => 'nf-button secondary'
-      ]
+      ],
+      'classes' => 'full'
     ],
   ] );
   wp_die( json_encode( [ 'data' => array_values( $services ) ] ) );
