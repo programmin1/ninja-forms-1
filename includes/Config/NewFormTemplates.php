@@ -32,16 +32,28 @@ $templates = array(
         'template-desc'                 => __( 'Allow user to register for your next event this easy to complete form. You can add and remove fields as needed.', 'ninja-forms' ),
     ),
 
-    'formtemplate-productorder'         => array(
-        'id'                            => 'formtemplate-productorder',
-        'title'                         => __( 'Product Order Form', 'ninja-forms' ),
-        'template-desc'                 => __( 'Collect user information so that you can send an invoice and product. You can add and remove fields as needed.', 'ninja-forms' ),
+    'formtemplate-enquiry'              => array(
+        'id'                            => 'formtemplate-enquiry',
+        'title'                         => __( 'General Enquiry', 'ninja-forms' ),
+        'template-desc'                 => __( 'Collect user enquiries with this simple, generic form. You can add and remove fields as needed.', 'ninja-forms' ),
     ),
 
-    'formtemplate-feedback'         => array(
+    'formtemplate-feedback'             => array(
         'id'                            => 'formtemplate-feedback',
         'title'                         => __( 'Collect feedback', 'ninja-forms' ),
         'template-desc'                 => __( 'Collect feedback for an event, blog post, or anything else. You can add and remove fields as needed.', 'ninja-forms' ),
+    ),
+
+    'formtemplate-questionnaire'        => array(
+        'id'                            => 'formtemplate-questionnaire',
+        'title'                         => __( 'Questionnaire', 'ninja-forms' ),
+        'template-desc'                 => __( 'Collect information about your users. You can add and remove fields as needed.', 'ninja-forms' ),
+    ),
+
+    'formtemplate-jobapplication'        => array(
+        'id'                            => 'formtemplate-jobapplication',
+        'title'                         => __( 'Job Application', 'ninja-forms' ),
+        'template-desc'                 => __( 'Allow users to apply for a job. You can add and remove fields as needed.', 'ninja-forms' ),
     ),
 );
 
@@ -135,7 +147,7 @@ $ads = array(
 
     'update-profile'                    => array(
         'id'                            => 'update-profile',
-        'title'                         => __( 'Update User Profile', 'ninja-forms' ),
+        'title'                         => __( 'Edit User Profile', 'ninja-forms' ),
         'template-desc'                 => __( 'Allow WordPress users to edit their profiles from the front-end, including custom user meta!', 'ninja-forms' ),
         'type'                          => 'ad',
         'modal-title'                   => 'Get User Management for Ninja Forms',
