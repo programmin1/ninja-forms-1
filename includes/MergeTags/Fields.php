@@ -208,7 +208,7 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
                     }
                 }
               // Otherwise if we are dealing with a single value, then...
-            } elseif( $options[ 'value' ] == $value ) {
+            } elseif( $field[ 'value' ] == $options[ 'value' ] ) {
                 // ...Set the label.
                 $labels = $options[ 'label' ];
             }
