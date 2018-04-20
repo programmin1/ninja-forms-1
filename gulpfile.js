@@ -36,7 +36,6 @@ function getPostCssProcessors() {
 
 gulp.task('js:builder', function(){
     gulp.src('assets/js/builder/main.js')
-    .pipe(sourcemaps.init())
     .pipe(requirejsOptimize(function(file) {
         return {
             name: '../lib/almond',
@@ -47,6 +46,7 @@ gulp.task('js:builder', function(){
             preserveLicenseComments: false
         };
     }))
+    .pipe(sourcemaps.init())
     .pipe(rename('builder.js'))
     .pipe(sourcemaps.write('/'))
     .pipe(gulp.dest('assets/js/min/'));
@@ -55,7 +55,6 @@ gulp.task('js:builder', function(){
 gulp.task('js:frontend', function(){
 
     gulp.src( 'assets/js/front-end/main.js' )
-    .pipe(sourcemaps.init())
     .pipe(requirejsOptimize(function(file) {
         return {
             name: '../lib/almond',
@@ -66,6 +65,7 @@ gulp.task('js:frontend', function(){
             preserveLicenseComments: false
         };
     }))
+    .pipe(sourcemaps.init())
     .pipe(rename('front-end.js'))
     .pipe(sourcemaps.write('/'))
     .pipe(gulp.dest('assets/js/min/'));
@@ -118,7 +118,6 @@ gulp.task('js:frontend', function(){
 
 gulp.task('js:dashboard', function(){
     gulp.src('client/dashboard/**/*.js')
-        .pipe(sourcemaps.init())
         .pipe(requirejsOptimize(function(file) {
             return {
                 name: '../../assets/js/lib/almond', // Path to AlmondJS, relative to baseUrl.
@@ -129,6 +128,7 @@ gulp.task('js:dashboard', function(){
                 preserveLicenseComments: false
             };
         }))
+        .pipe(sourcemaps.init())
         .pipe(rename('dashboard.min.js'))
         .pipe(sourcemaps.write('/'))
         .pipe(gulp.dest('assets/js/min'));
