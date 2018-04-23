@@ -20,8 +20,17 @@ add_action( 'wp_ajax_nf_services', function(){
       'enabled' => null,
       'infoLink' => [
         'text' => 'Learn More',
-        'href' => 'https://ninjaforms.com/services/transactional-email',
-        'classes' => 'nf-button secondary'
+        // 'href' => 'https://ninjaforms.com/services/transactional-email',
+        'classes' => 'nf-button secondary',
+        // 'script' => "
+        //   new jBox( 'Modal', {
+        //       width: 300,
+        //       addClass: 'dashboard-modal',
+        //       overlay: true,
+        //       closeOnClick: 'body',
+        //       content: '<div>INSIDE <strong>HTML</strong> GOES HERE.</div>'
+        //   } ).open();
+        // "
       ],
       'classes' => 'full'
     ],

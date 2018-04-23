@@ -44,7 +44,12 @@
 
 <!-- Promotion -->
 <script id="tmpl-nf-promotion" type="text/template">
-    <div class="promotion--wrapper">
+    <div
+      class="promotion--wrapper"
+      <# if( data.script ){ #>
+      onclick="{{{data.script}}}"
+      <# } #>
+      >
       <div class="promotion--{{{ data.id }}}">
         {{{ data.content }}}
       </div>
@@ -76,7 +81,22 @@
           <# } #>
         <# } else { #>
           <# if( data.infoLink ){ #>
-          <a target="_blank" href="{{{ data.infoLink.href }}}" class="{{{data.infoLink.classes}}}" style="float:left;">{{{data.infoLink.text}}}</a>
+          <a
+            target="_blank"
+
+            <# if( data.infoLink.href ){ #>
+            href="{{{ data.infoLink.href }}}"
+            <# } #>
+
+            class="{{{data.infoLink.classes}}}"
+            style="float:left;cursor:pointer;"
+
+            <# if( data.infoLink.script ){ #>
+            onclick="{{{data.infoLink.script}}}"
+            <# } #>
+            >
+            {{{data.infoLink.text}}}
+          </a>
           <# } #>
 
           <# if( data.slug && data.installPath ){ #>
