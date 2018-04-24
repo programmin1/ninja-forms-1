@@ -70,12 +70,12 @@ class OAuth
         'client_secret' => $this->client_secret,
         'client_redirect' => urlencode( $client_redirect ),
         'client_site_url' => urlencode( site_url() ),
-    ], $this->base_url . '/connect' );
+    ], $this->base_url . 'txnmail/app/' );
   }
 
   public function connect() {
 
-    wp_verify_nonce( $_REQUEST['nonce'], 'nf-oauth-connect' );
+    // wp_verify_nonce( $_REQUEST['nonce'], 'nf-oauth-connect' );
 
     if( ! isset( $_GET[ 'client_id' ] ) ) return;
 

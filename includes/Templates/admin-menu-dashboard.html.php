@@ -80,24 +80,7 @@
             <a href="{{{ data.serviceLink.href }}}" class="{{{data.serviceLink.classes}}}" style="float:right;">{{{data.serviceLink.text}}}</a>
           <# } #>
         <# } else { #>
-          <# if( data.infoLink ){ #>
-          <a
-            target="_blank"
-
-            <# if( data.infoLink.href ){ #>
-            href="{{{ data.infoLink.href }}}"
-            <# } #>
-
-            class="{{{data.infoLink.classes}}}"
-            style="float:left;cursor:pointer;"
-
-            <# if( data.infoLink.script ){ #>
-            onclick="{{{data.infoLink.script}}}"
-            <# } #>
-            >
-            {{{data.infoLink.text}}}
-          </a>
-          <# } #>
+          <a class="nf-button secondary js--learn-more" style="float:left;">Learn More</a>
 
           <# if( data.slug && data.installPath ){ #>
             <# if( ! data.is_installing ){ #>

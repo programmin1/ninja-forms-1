@@ -21,8 +21,13 @@ define([ 'models/serviceCollection' ], function( ServiceCollection ) {
 			});
 		},
 
-		installService: function( slug, installPath ) {
+		installService: function( serviceModel ) {
 			var that = this;
+			
+			serviceModel.set( 'is_installing', true );
+
+			var slug = serviceModel.get( 'slug' );
+			var installPath = serviceModel.get( 'installPath' );
 
 			// Request to Install the service plugin.
 			jQuery.post( ajaxurl, { action: 'nf_services_install', plugin: slug, install_path: installPath }, function( response ){

@@ -12,27 +12,22 @@ OAuth::getInstance()->setup();
 
 add_action( 'wp_ajax_nf_services', function(){
   $services = apply_filters( 'ninja_forms_services', [
+    'addon-manager' => [
+      'name' => __( 'Add-on Manager', 'ninja-mail' ),
+      'slug' => 'addon-manager',
+      'installPath' => 'ninja-forms-addon-manager/ninja-forms-addon-manager.php',
+      'description' => 'Install Ninja Forms add-ons remotely.',
+      'enabled' => null,
+      'learnMore' => '<div>Install Ninja Forms add-ons remotely.</div>',
+    ],
+
     'ninja-mail' => [
       'name' => __( 'Transactional Email', 'ninja-mail' ),
       'slug' => 'ninja-mail',
       'installPath' => 'ninja-mail/ninja-mail.php',
       'description' => 'Increase Email Deliverability with a dedicated email service by Ninja Forms for only $5/month/site.',
       'enabled' => null,
-      'infoLink' => [
-        'text' => 'Learn More',
-        // 'href' => 'https://ninjaforms.com/services/transactional-email',
-        'classes' => 'nf-button secondary',
-        // 'script' => "
-        //   new jBox( 'Modal', {
-        //       width: 300,
-        //       addClass: 'dashboard-modal',
-        //       overlay: true,
-        //       closeOnClick: 'body',
-        //       content: '<div>INSIDE <strong>HTML</strong> GOES HERE.</div>'
-        //   } ).open();
-        // "
-      ],
-      'classes' => 'full'
+      'learnMore' => '<div>INSIDE <strong>HTML</strong> GOES HERE.',
     ],
   ] );
   wp_die( json_encode( [ 'data' => array_values( $services ) ] ) );
@@ -44,12 +39,12 @@ add_action( 'admin_enqueue_scripts', function() {
 
 add_action( 'wp_ajax_nf_services_install', function() {
 
-  register_shutdown_function(function(){
-    if( ! error_get_last() ) return;
-    echo '<pre>';
-    print_r( error_get_last() );
-    echo '</pre>';
-  });
+  // register_shutdown_function(function(){
+  //   if( ! error_get_last() ) return;
+  //   echo '<pre>';
+  //   print_r( error_get_last() );
+  //   echo '</pre>';
+  // });
 
   if ( ! current_user_can('install_plugins') )
     die( json_encode( [ 'error' => __( 'Sorry, you are not allowed to install plugins on this site.' ) ] ) );
