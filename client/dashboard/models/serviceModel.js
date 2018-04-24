@@ -27,6 +27,14 @@ define( [], function() {
 
         var redirect = that.get( 'serviceLink' ).href;
 
+        new jBox( 'Modal', {
+                        width: 300,
+                        addClass: 'dashboard-modal',
+                        overlay: true,
+                        closeOnClick: 'body',
+                        content: '<p style="text-align:center;">Redirecting to NinjaForms.com</p>',
+                    } ).open();
+
         var oauth = nfRadio.channel( 'dashboard' ).request( 'get:oauth' );
         if( ! oauth.get( 'connected' ) ){
           window.location = oauth.get( 'connect_url' ) + '&redirect=' + redirect;

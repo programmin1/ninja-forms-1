@@ -81,8 +81,7 @@
           <# } #>
         <# } else { #>
           <a class="nf-button secondary js--learn-more" style="float:left;">Learn More</a>
-
-          <# if( data.slug && data.installPath ){ #>
+          <# if( ( ! data.is_connected ) || ( data.slug && data.installPath ) ){ #>
             <# if( ! data.is_installing ){ #>
               <a href="#services" class="nf-button primary js--install" style="float:right;">Setup</a>
             <# } else { #>
