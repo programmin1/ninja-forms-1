@@ -80,7 +80,9 @@
             <a href="{{{ data.serviceLink.href }}}" class="{{{data.serviceLink.classes}}}" style="float:right;">{{{data.serviceLink.text}}}</a>
           <# } #>
         <# } else { #>
+          <# if( data.learnMore ) { #>
           <a class="nf-button secondary js--learn-more" style="float:left;">Learn More</a>
+          <# } #>
           <# if( ( ! data.is_connected ) || ( data.slug && data.installPath ) ){ #>
             <# if( ! data.is_installing ){ #>
               <a href="#services" class="nf-button primary js--install" style="float:right;">Setup</a>

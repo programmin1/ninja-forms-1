@@ -27,7 +27,7 @@ add_action( 'wp_ajax_nf_services', function(){
       'installPath' => 'ninja-mail/ninja-mail.php',
       'description' => 'Increase Email Deliverability with a dedicated email service by Ninja Forms for only $5/month/site.',
       'enabled' => null,
-      'learnMore' => '<div>INSIDE <strong>HTML</strong> GOES HERE.',
+      'learnMore' => '<div>Increase Email Deliverability with a dedicated email service by Ninja Forms for only $5/month/site.</div>',
     ],
   ] );
   wp_die( json_encode( [ 'data' => array_values( $services ) ] ) );
