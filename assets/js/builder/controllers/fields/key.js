@@ -59,6 +59,9 @@ define( [], function() {
 				var d = new Date();
 				var n = d.valueOf();
 				var key = this.slugify( model.get( 'label' ) + '_' + n );
+                // If our slug didn't setup correctly...
+                // Force a valid entry.
+                if ( -1 == key.indexOf( '_' ) ) key = 'field_' + key;
 				model.set( 'key', key );
 			}
 		},
