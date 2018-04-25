@@ -43,7 +43,7 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 		templateHelpers: function () {
 	    	return {
 	    		renderClasses: function() {
-	    			var classes = 'nf-field-wrap';
+	    			var classes = 'nf-field-wrap ' + this.type;
 	    			if ( this.editActive ) {
 	    				classes += ' active';
 	    			}
