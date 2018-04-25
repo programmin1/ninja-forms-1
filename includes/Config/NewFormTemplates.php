@@ -111,7 +111,7 @@ $ads = array(
     'paypal-payment'                    => array(
         'id'                            => 'paypal-payment',
         'title'                         => __( 'PayPal Payment', 'ninja-forms' ),
-        'template-desc'                 => __( 'Collect a payment using PayPal Express', 'ninja-forms' ),
+        'template-desc'                 => __( 'Collect a payment using PayPal Express. You can add and remove fields as needed.', 'ninja-forms' ),
         'type'                          => 'ad',
         'modal-title'                   => 'Get PayPal Express for Ninja Forms',
         'modal-content'                 => '<div class="modal-ad">
