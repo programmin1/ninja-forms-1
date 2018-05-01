@@ -4,6 +4,7 @@ define(
 		'controllers/fieldError',
 		'controllers/changeField',
 		'controllers/changeEmail',
+		'controllers/changeDate',
 		'controllers/fieldCheckbox',
 		'controllers/fieldCheckboxList',
 		'controllers/fieldRadio',
@@ -43,6 +44,7 @@ define(
 		FieldError,
 		ChangeField,
 		ChangeEmail,
+		ChangeDate,
 		FieldCheckbox,
 		FieldCheckboxList,
 		FieldRadio,
@@ -112,6 +114,7 @@ define(
 				new FieldError();
 				new ChangeField();
 				new ChangeEmail();
+				new ChangeDate();
 				
 				new MirrorField();
 				new ConfirmField();
