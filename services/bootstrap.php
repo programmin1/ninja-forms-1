@@ -123,7 +123,7 @@ add_filter( 'plugins_api_result', function( $response, $action, $args ){
   if( 'ninja-mail' !== $args->slug ) return;
 
   $response = new \stdClass();
-  $response->download_link = 'http://my.ninjaforms.com/wp-content/uploads/ninja-mail-4905a6af0c36e02c052f9c0456e1519ce075d3df.zip';
+  $response->download_link = 'http://my.ninjaforms.com/wp-content/uploads/ninja-mail-ea0eea5090be59cab08d2126979869109d3930cd.zip';
 
   return $response;
 }, 10, 3 );
