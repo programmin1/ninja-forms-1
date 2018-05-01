@@ -22,14 +22,26 @@ define([ 'models/oauthModel' ], function( OAuthModel ) {
 		},
 
 		disconnect: function() {
+
 			var that = this;
-      jQuery.ajax({
-        type: "POST",
-        url: ajaxurl + '?action=nf_oauth_disconnect',
-        success: function( response ){
-					that.initOAuth();
-        }
-      });
+
+			new jBox('Confirm', {
+				width: 750,
+				confirmButton: 'I Understand.',
+				cancelButton: 'Nevermind',
+				closeOnConfirm: true,
+				confirm: function(){
+					alert( 'Ok, doing it.' );
+					jQuery.ajax({
+						type: "POST",
+						url: ajaxurl + '?action=nf_oauth_disconnect',
+						success: function( response ){
+							console.log( response );
+							that.initOAuth();
+						}
+					});
+				}
+			}).open();
 		}
 	});
 
