@@ -95,6 +95,8 @@ class OAuth
 
   public function disconnect() {
 
+    do_action( 'ninja_forms_oauth_disconnect' );
+
     $url = trailingslashit( $this->base_url ) . 'disconnect';
     $args = [
       'blocking' => false,
