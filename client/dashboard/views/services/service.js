@@ -46,19 +46,18 @@ define( [], function() {
 
       showLearnMore: function() {
         var that = this;
-        new jBox( 'Confirm', {
-                        width: 300,
-                        addClass: 'dashboard-modal',
-                        overlay: true,
-                        closeOnClick: 'body',
-                        content: this.model.get( 'learnMore' ),
-                        confirmButton: 'Setup',
-                        cancelButton: 'Close',
-                        closeOnConfirm: true,
-                        confirm: function(){
-                          nfRadio.channel( 'dashboard' ).request( 'install:service', that.model );
-                        }
-                    } ).open();
+
+        var modal = new jBox( 'Modal', {
+          width: 750,
+          title: this.model.get( 'name' ),
+          content: this.model.get( 'learnMore' ),
+          closeButton: 'box',
+          blockScroll: true
+        } );
+        modal.open();
+        nfRadio.channel( 'dashboard' ).reply( 'service:' + this.model.get( 'slug' ) + ':modal', function(){
+          return modal;
+        } );
       },
 
       updateOAuth: function() {

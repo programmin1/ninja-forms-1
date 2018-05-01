@@ -23,7 +23,13 @@ define([ 'models/serviceCollection' ], function( ServiceCollection ) {
 
 		installService: function( serviceModel ) {
 			var that = this;
-			
+
+			if ( ! ( serviceModel instanceof Backbone.Model ) ) {
+				var serviceModel = this.services.find( function( model ) {
+					return serviceModel == model.get( 'slug' );
+				});
+			}
+
 			serviceModel.set( 'is_installing', true );
 
 			var slug = serviceModel.get( 'slug' );

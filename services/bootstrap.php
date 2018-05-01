@@ -27,7 +27,20 @@ add_action( 'wp_ajax_nf_services', function(){
       'installPath' => 'ninja-mail/ninja-mail.php',
       'description' => 'Increase Email Deliverability with a dedicated email service by Ninja Forms for only $5/month/site.',
       'enabled' => null,
-      'learnMore' => '<div>Increase Email Deliverability with a dedicated email service by Ninja Forms for only $5/month/site.</div>',
+      'learnMore' => '
+      <h2>Frustrated by your WordPress forms not sending email?</h2>
+      <p>Form submission notifications not hitting your inbox? Some of your visitors getting form feedback via email, others not? Just can’t get your form email to work at all?</p>
+      <p>It’s an all too common issue in WordPress. There’s now a solution.</p>
+      <p>Sign up for Ninja Mail today, and never deal with form email issues again!</p>
+      <hr />
+      <h3>Why Ninja Mail?</h3>
+      <p>Because you can take the pain out of email, starting today!</p>
+      <h3>Cut out the middleman.</h3>
+      <p>Form email normally depends on your host or a third-party plugin to send it to its destination. That handoff is where the vast majority of email issues arise. No more. With Ninja Mail, we see to your form email being sent personally, from form to inbox.</p>
+      <h3>If it doesn’t work, it doesn’t cost a dime.</h3>
+      <p>Every new Ninja Mail subscription begins with a 14 day free trial. You’ll know right away if Ninja Mail works for you, and if not, you’re not out a single cent.</p>
+      <button class="nf-button primary" onclick="Backbone.Radio.channel( \'dashboard\' ).request( \'install:service\', \'ninja-mail\' );Backbone.Radio.channel( \'dashboard\' ).request( \'service:ninja-mail:modal\' ).close();">Setup</button>
+      ',
     ],
   ] );
   wp_die( json_encode( [ 'data' => array_values( $services ) ] ) );
