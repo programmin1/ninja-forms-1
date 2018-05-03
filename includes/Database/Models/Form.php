@@ -513,7 +513,15 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             $action[ 'email_subject' ] 	= str_replace( '`', ',', $action[ 'email_subject' ] );
             $action[ 'cc' ] 		= str_replace( '`', ',', $action[ 'cc' ] );
             $action[ 'bcc' ] 		= str_replace( '`', ',', $action[ 'bcc' ] );
-            $action[ 'email_message' ] = nl2br( $action[ 'email_message' ] );
+            // If our email is in plain text...
+            if ( $action[ 'email_format' ] == 'plain' ) {
+                // Record it as such.
+                $action[ 'email_message_plain' ] = $action[ 'email_message' ];
+            } // Otherwise... (It's not plain text.)
+            else {
+                // Record it as HTML.
+                $action[ 'email_message' ] = nl2br( $action[ 'email_message' ] );
+            }
         }
 
         // Convert `name` to `label`
