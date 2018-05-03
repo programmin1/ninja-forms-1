@@ -14,9 +14,6 @@ define( [], function() {
 		template: '#tmpl-nf-drawer-action-type-button',
 
 		onRender: function() {
-			this.$el = this.$el.children();
-			this.$el.unwrap();
-			this.setElement( this.$el );
 			
 			jQuery( this.el ).disableSelection();
 			
@@ -52,7 +49,20 @@ define( [], function() {
 				if ( 'installed' == this.model.get( 'section' ) ) { // Is this an installed action?
 					nfRadio.channel( 'actions' ).trigger( 'click:addAction', this.model );
 				} else { // This isn't an installed action
-					window.open( this.model.get( 'link' ), '_blank' );
+					var modalContent = this.model.get( 'modal_content' );
+
+					var modalAd = new jBox( 'Modal', {
+					  content: modalContent,
+					  zIndex:99999999,
+					  closeButton: 'box',
+					  overlay: true,
+					  width: 600,
+					  repositionOnOpen: true,
+					  reposition: true
+					});
+
+					modalAd.open();
+					// window.open( this.model.get( 'link' ), '_blank' );
 				}
 			}
 		},
