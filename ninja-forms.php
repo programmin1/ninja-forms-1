@@ -410,6 +410,9 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
          * Function to launch our various telemetry calls on admin_init.
          */
         public function nf_do_telemetry() {
+            if ( ! has_filter( 'ninja_forms_settings_licenses_addons' ) && ( ! Ninja_Forms()->tracking->is_opted_in() || Ninja_Forms()->tracking->is_opted_out() ) ) {
+                return false;
+            }
             global $wpdb;
             // If we've not already sent table collation...
             if ( ! get_option( 'nf_tel_collate' ) ) {
