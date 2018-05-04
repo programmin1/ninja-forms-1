@@ -51,7 +51,7 @@ define( [], function() {
 				} else { // This isn't an installed action
 					var modalContent = this.model.get( 'modal_content' );
 
-					var modalAd = new jBox( 'Modal', {
+					var actionModal = new jBox( 'Modal', {
 					  content: modalContent,
 					  zIndex:99999999,
 					  closeButton: 'box',
@@ -61,7 +61,7 @@ define( [], function() {
 					  reposition: true
 					});
 
-					modalAd.open();
+					actionModal.open();
 					// window.open( this.model.get( 'link' ), '_blank' );
 				}
 			}
