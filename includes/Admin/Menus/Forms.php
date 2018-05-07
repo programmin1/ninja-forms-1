@@ -111,6 +111,10 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 //                'add_new_text' => __( 'Add New Form', 'ninja-forms' )
 //            ) );
 
+            $use_services = false; // Feature Flag.
+            $use_services = $use_services && ( version_compare( PHP_VERSION, '5.6', '>=' ) ); // PHP Version Check.
+            $use_services = apply_filters( 'ninja_forms_use_services', $use_services ); // Last chance...
+
             /*
              * DASHBOARD
              */
@@ -118,7 +122,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             ?>
             <script>
                 var nfDashItems = <?php echo( json_encode( array_values( $dash_items ) ) ); ?>;
-                var useServices = true;
+                var useServices = <?php echo ( $use_services ) ? 'true' : 'false'; ?>;
             </script>
             <?php
 
