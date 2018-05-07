@@ -112,8 +112,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 //            ) );
 
             $use_services = false; // Feature Flag.
+            $use_services = apply_filters( 'ninja_forms_use_services', $use_services ); // The WordPress Way.
             $use_services = $use_services && ( version_compare( PHP_VERSION, '5.6', '>=' ) ); // PHP Version Check.
-            $use_services = apply_filters( 'ninja_forms_use_services', $use_services ); // Last chance...
 
             /*
              * DASHBOARD
