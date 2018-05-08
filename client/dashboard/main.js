@@ -37,7 +37,7 @@ jQuery( document ).ready( function( $ ) {
                 this.showView( new DashboardView() );
 
                 this.controllers.forms = new FormsController();
-                this.controllers.oauth = new OAuthController();
+                if( useServices ) this.controllers.oauth = new OAuthController();
                 if( useServices ) this.controllers.services = new ServicesController();
 
                 //var data = {id: 1, title: 'Contact Me', created: '10-23-2016'};
