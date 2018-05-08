@@ -95,3 +95,54 @@ _**nf3_field_meta**_ (Table of Settings associated with each Field)
 * value (The value of the Setting)
   * longtext
   * COLLATE DATABASE_DEFAULT
+  
+### Actions
+
+_**nf3_actions**_ (Table of individual Actions)
+* id (The unique ID of the Action)
+  * int(11)
+  * NOT NULL
+  * AUTO_INCREMENT
+  * Primrary Key
+* title (The displayable title of the Action)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
+* key (The administrative key of the Action)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
+* type (The type of Action this record represents)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
+* active (Whether or not the Action is active)
+  * tinyint(1)
+  * DEFAULT 1
+* parent_id (The Form ID this Action is associated with)
+  * int(11)
+  * NOT NULL
+  * Foreign Key ON *nf3_forms* id
+* created_at (The date/time the Action was created)
+  * timestamp
+  * NOT NULL
+  * DEFAULT CURRENT_TIMESTAMP
+  * ON UPDATE CURRENT_TIMESTAMP
+* updated_at (The date/time the Action was last updated)
+  * datetime
+
+
+_**nf3_action_meta**_ (Table of Settings associated with each Action)
+* id (The unique ID of the Setting)
+  * int(11)
+  * NOT NULL
+  * AUTO_INCREMENT
+  * Primary KEY
+* parent_id (The Action ID this Setting is associated with)
+  * int(11)
+  * NOT_NULL
+  * Foreign Key ON *nf3_actions* id
+* key (The administrative key of the Setting)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
+  * NOT NULL
+* value (The value of the Setting)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
