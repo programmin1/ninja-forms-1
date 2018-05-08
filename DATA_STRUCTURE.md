@@ -4,7 +4,7 @@ This document describes the architecture of the Ninja Forms database layer.
 ## Version 1.0
 
 ### Forms
-
+```
 _**nf3_forms**_ (Table of individual Forms)
 * id (The unique ID of the Form)
   * int(11)
@@ -28,8 +28,8 @@ _**nf3_forms**_ (Table of individual Forms)
   * int(11)
 * subs (The Form's number of lifetime Submissions)
   * int(11)
-
-
+```
+```
 _**nf3_form_meta**_ (Table of Settings assoicated with each Form)
 * id (The unique ID of the Setting)
   * int(11)
@@ -47,9 +47,9 @@ _**nf3_form_meta**_ (Table of Settings assoicated with each Form)
 * value (The value of the Setting)
   * longtext
   * COLLATE DATABASE_DEFAULT
-
+```
 ### Fields
-
+```
 _**nf3_fields**_ (Table of individual Fields)
 * id (The unique ID of the Field)
   * int(11)
@@ -76,8 +76,8 @@ _**nf3_fields**_ (Table of individual Fields)
   * ON UPDATE CURRENT_TIMESTAMP
 * updated_at (The date/time the Field was last updated)
   * datetime
-
-
+```
+```
 _**nf3_field_meta**_ (Table of Settings associated with each Field)
 * id (The unique ID of the Setting)
   * int(11)
@@ -95,9 +95,9 @@ _**nf3_field_meta**_ (Table of Settings associated with each Field)
 * value (The value of the Setting)
   * longtext
   * COLLATE DATABASE_DEFAULT
-  
+```
 ### Actions
-
+```
 _**nf3_actions**_ (Table of individual Actions)
 * id (The unique ID of the Action)
   * int(11)
@@ -127,8 +127,8 @@ _**nf3_actions**_ (Table of individual Actions)
   * ON UPDATE CURRENT_TIMESTAMP
 * updated_at (The date/time the Action was last updated)
   * datetime
-
-
+```
+```
 _**nf3_action_meta**_ (Table of Settings associated with each Action)
 * id (The unique ID of the Setting)
   * int(11)
@@ -146,3 +146,110 @@ _**nf3_action_meta**_ (Table of Settings associated with each Action)
 * value (The value of the Setting)
   * longtext
   * COLLATE DATABASE_DEFAULT
+```
+### Objects
+```
+_**nf3_objects**_ (Table of non-structured Objects)
+* id (The unique ID of the Object)
+  * int(11)
+  * NOT NULL
+  * AUTO_INCREMENT
+  * Primrary Key
+* type (The type of Object this record represents)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
+* title (The displayable title of the Object)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
+* created_at (The date/time the Object was created)
+  * timestamp
+  * NOT NULL
+  * DEFAULT CURRENT_TIMESTAMP
+  * ON UPDATE CURRENT_TIMESTAMP
+* updated_at (The date/time the Object was last updated)
+  * datetime
+```
+```
+_**nf3_object_meta**_ (Table of Settings associated with each Object)
+* id (The unique ID of the Setting)
+  * int(11)
+  * NOT NULL
+  * AUTO_INCREMENT
+  * Primary KEY
+* parent_id (The Object ID this Setting is associated with)
+  * int(11)
+  * NOT_NULL
+  * Foreign Key ON *nf3_objects* id
+* key (The administrative key of the Setting)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
+  * NOT NULL
+* value (The value of the Setting)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
+```
+```
+_**nf3_relationships**_ (Table of Relationships between Objects)
+* id (The unique ID of the Relationship)
+  * int(11)
+  * NOT NULL
+  * AUTO_INCREMENT
+  * Primary KEY
+* child_id (The child Object ID this record is associated with)
+  * int(11)
+  * NOT_NULL
+  * Foreign Key ON *nf3_objects* id
+* child_type (The type of Object represented by child_id)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
+  * NOT NULL
+* parent_id (The parent Object ID this record is associated with)
+  * int(11)
+  * NOT_NULL
+  * Foreign Key ON *nf3_objects* id
+* parent_type (The type of Object represented by parent_id)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
+  * NOT NULL
+* created_at (The date/time the Relationship was created)
+  * timestamp
+  * NOT NULL
+  * DEFAULT CURRENT_TIMESTAMP
+  * ON UPDATE CURRENT_TIMESTAMP
+* updated_at (The date/time the Relationship was last updated)
+  * datetime
+```
+```
+_**options**_ (The default WordPress options table)
+* option_name = 'nf_form_%' WHERE % = *nf3_forms* id
+* option_value = Serialized JSON Object (The Ninja Forms Cache)
+```
+### Submissions
+```
+_**posts**_ (The default WordPress posts table)
+* id (The unique ID of the Post)
+  * bigint(20)
+  * NOT NULL
+  * AUTO_INCREMENT
+  * Primary Key
+* post_type = 'nf_sub'
+```
+```
+_**postmeta**_ (The default WordPress postmeta table)
+* meta_id (The unique ID of the Metadata)
+  * bigint(20)
+  * NOT NULL
+  * AUTO_INCREMENT
+  * Primary Key
+* post_id (The Post ID this Metadata is associated with)
+  * bigint(20)
+  * NOT NULL
+  * DEFAULT 0
+  * Foreign Key ON *posts* id
+* meta_key (The identifiable key by which this record is referenced)
+  * varchar(255)
+  * COLLATE DATABASE_DEFAULT
+* meta_value (The value of this record)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
+```
