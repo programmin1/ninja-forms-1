@@ -1,11 +1,11 @@
 ## Description
 This document describes the architecture of the Ninja Forms database layer.
 
-### Version 1.0
+## Version 1.0
 
-**Forms**
+### Forms
 
-*nf3_forms*
+_**nf3_forms**_
 * id
   * int(11)
   * NOT NULL
@@ -26,10 +26,10 @@ This document describes the architecture of the Ninja Forms database layer.
   * datetime
 * views
   * int(11)
-*subs
+* subs
   * int(11)
 
-*nf3_form_meta*
+_**nf3_form_meta**_
 * id
   * int(11)
   * NOT NULL
