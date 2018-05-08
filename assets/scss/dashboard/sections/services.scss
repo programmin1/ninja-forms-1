@@ -4,6 +4,10 @@
   }
 }
 
+.dashicons-update-spin {
+  animation: nf-service-installing 1s linear infinite;
+}
+
 .services {
   .nf-extend.full {
     flex-basis: 100%;
@@ -14,9 +18,6 @@
   .nf-extend-buttons .nf-button {
     margin-top: auto; // Reset from anchor.
     margin-bottom: 10px; // Account for toggle.
-  }
-  .dashicons-update-spin {
-    animation: nf-service-installing 1s linear infinite;
   }
 }
 

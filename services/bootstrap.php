@@ -39,7 +39,7 @@ add_action( 'wp_ajax_nf_services', function(){
       <p>Form email normally depends on your host or a third-party plugin to send it to its destination. That handoff is where the vast majority of email issues arise. No more. With Ninja Mail, we see to your form email being sent personally, from form to inbox.</p>
       <h3>If it doesn’t work, it doesn’t cost a dime.</h3>
       <p>Every new Ninja Mail subscription begins with a 14 day free trial. You’ll know right away if Ninja Mail works for you, and if not, you’re not out a single cent.</p>
-      <button style="float:right;" class="nf-button primary" onclick="Backbone.Radio.channel( \'dashboard\' ).request( \'install:service\', \'ninja-mail\' );Backbone.Radio.channel( \'dashboard\' ).request( \'service:ninja-mail:modal\' ).close();">Setup</button>
+      <button style="float:right;" class="nf-button primary" onclick="Backbone.Radio.channel( \'dashboard\' ).request( \'install:service\', \'ninja-mail\' );var spinner = document.createElement(\'span\'); spinner.classList.add(\'dashicons\', \'dashicons-update\', \'dashicons-update-spin\'); this.innerHTML = spinner.outerHTML; console.log( spinner )">Setup</button>
       ',
     ],
   ] );
