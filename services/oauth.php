@@ -38,7 +38,7 @@ class OAuth
       wp_die( json_encode( [
         'data' => [
           'connected' => ( $this->client_id ),
-          'connect_url' => $this->connect_url(),
+          'connect_url' => self::connect_url(),
         ]
       ] ) );
     });
@@ -59,7 +59,7 @@ class OAuth
     return self::getInstance()->client_secret;
   }
 
-  public function connect_url() {
+  public static function connect_url( $endpoint = 'connect' ) {
 
     $client_redirect = add_query_arg( [
       'action' => 'nf_oauth_connect',
@@ -67,10 +67,10 @@ class OAuth
     ], admin_url( 'admin-ajax.php' ) );
 
     return add_query_arg([
-        'client_secret' => $this->client_secret,
+        'client_secret' => self::get_client_secret(),
         'client_redirect' => urlencode( $client_redirect ),
         'client_site_url' => urlencode( site_url() ),
-    ], $this->base_url . 'txnmail/app/' );
+    ], self::getInstance()->base_url . $endpoint );
   }
 
   public function connect() {

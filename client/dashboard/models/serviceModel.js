@@ -37,6 +37,9 @@ define( [], function() {
 
         var oauth = nfRadio.channel( 'dashboard' ).request( 'get:oauth' );
         if( ! oauth.get( 'connected' ) ){
+          if( that.get( 'connect_url' ) ){
+            return window.location = that.get( 'connect_url' ) + '&redirect=' + redirect;
+          }
           window.location = oauth.get( 'connect_url' ) + '&redirect=' + redirect;
         } else {
           window.location = redirect;

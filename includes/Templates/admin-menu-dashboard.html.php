@@ -71,7 +71,6 @@
     <div class="nf-extend-content">
       <p>{{{ data.description }}}</p>
       <div class="nf-extend-buttons">
-        <# console.log( data ); #>
         <# if( data.is_connected ){ #>
           <# if( null !== data.enabled){ #>
           <div style="float: left;">
