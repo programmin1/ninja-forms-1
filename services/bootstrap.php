@@ -14,7 +14,7 @@ add_action( 'wp_ajax_nf_services', function(){
   $services = apply_filters( 'ninja_forms_services', [
     'addon-manager' => [
       'name' => __( 'Add-on Manager', 'ninja-mail' ),
-      'slug' => 'addon-manager',
+      'slug' => 'ninja-forms-addon-manager',
       'installPath' => 'ninja-forms-addon-manager/ninja-forms-addon-manager.php',
       'description' => 'Install Ninja Forms add-ons remotely.',
       'enabled' => null,
@@ -124,6 +124,19 @@ add_filter( 'plugins_api_result', function( $response, $action, $args ){
 
   $response = new \stdClass();
   $response->download_link = 'http://my.ninjaforms.com/wp-content/uploads/ninja-mail-9cadb602a6b2e28adc3fa3f30049747220bba116.zip';
+
+  return $response;
+}, 10, 3 );
+
+/**
+ * Override the Add-on Manager download link until published in the repository.
+ */
+add_filter( 'plugins_api_result', function( $response, $action, $args ){
+  if( 'plugin_information' !== $action ) return $response;
+  if( 'ninja-forms-addon-manager' !== $args->slug ) return;
+
+  $response = new \stdClass();
+  $response->download_link = 'http://my.ninjaforms.com/wp-content/uploads/ninja-forms-addon-manager-c71361bc441f2205844a0f02f775b2277b75879e.zip';
 
   return $response;
 }, 10, 3 );
