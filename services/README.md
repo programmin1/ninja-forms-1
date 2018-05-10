@@ -42,7 +42,7 @@ Additional properties for installed service plugins:
   - `classes` string Add additional classes to the link, ie 'nf-button primary'.
   - `target` string Specify the anchor target.
 - `connect_url` string Override the OAuth connection URL.
-- `successMessage` string The content of the modal after the service is setup.
+- `successMessage` string The content of the modal after the service is setup. The success message can be triggered by passing the `?success` query string in the OAuth redirect with the `slug` of the service.
 
 ## OAuth Connection to My.NinjaForms.com
 
