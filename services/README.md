@@ -72,7 +72,7 @@ Service integrations are provided as additional plugins, which are installed rem
 
 This remote plugin installation uses a custom [Plugin_Installer_Skin](https://developer.wordpress.org/reference/classes/plugin_installer_skin/) in order to suppress any output feedback text - since this process happens asynchronously.
 
-See [services/remote-installer-skin.php](services/remote-installer-skin.php).
+See [services/remote-installer-skin.php](/remote-installer-skin.php).
 
 ## Local Development
 
