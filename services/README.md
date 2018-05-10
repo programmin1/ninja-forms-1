@@ -42,7 +42,8 @@ Additional properties for installed service plugins:
   - `classes` string Add additional classes to the link, ie 'nf-button primary'.
   - `target` string Specify the anchor target.
 - `connect_url` string Override the OAuth connection URL.
-- `successMessage` string The content of the modal after the service is setup. The success message can be triggered by passing the `?success` query string in the OAuth redirect with the `slug` of the service.
+- `successMessage` string The content of the modal after the service is setup.
+  - Note: The success message can be triggered by passing the `?success` query string in the OAuth redirect with the `slug` of the service.
 
 ## OAuth Connection to My.NinjaForms.com
 
@@ -54,14 +55,16 @@ The `server` accepts the passed secret key, registers an new OAuth Client, and r
 
 Communication between the `server` and the `client` requires a `hash` of the combined OAuth Client ID and OAuth Client Secret.
 
-The OAuth flow can be customized the a specific service (for an optimization experience) by passing a `connect_url` (See above).
-
 Registered services have access to OAuth connection data via the `\NinjaForms\OAuth` class.
 
 - `::is_connected()`
 - `::get_client_id()`
 - `::get_client_secret()`
 - `::connect_url()`
+
+### Customizing the OAuth Connect Flow
+
+The OAuth flow can be customized the a specific service (for an optimization experience) by passing a `connect_url` (See above).
 
 ## Remote Plugin Installation
 
