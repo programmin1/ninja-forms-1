@@ -54,6 +54,13 @@ The `server` accepts the passed secret key, registers an new OAuth Client, and r
 
 The OAuth flow can be customized the a specific service (for an optimization experience) by passing a `connect_url` (See above).
 
+Registered services have access to OAuth connection data via the `\NinjaForms\OAuth` class.
+
+- `::is_connected()`
+- `::get_client_id()`
+- `::get_client_secret()`
+- `::connect_url()`
+
 ## Remote Plugin Installation
 
 Service integrations are provided as additional plugins, which are installed remotely from the WordPress.org plugin directory.
