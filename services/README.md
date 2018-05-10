@@ -11,6 +11,8 @@ Requires PHP v5.6+.
 
 - Filter: `ninja_forms_services`
 
+Note: This filter is implemented during an AJAX request, which is used to "live update" the current state of a service from the Ninja Forms Dashboard. The below properties can be set dynamically to correspond to the current "state" of the service.
+
 Example
 ```php
 add_filter( 'ninja_forms_services', function( $services ){
