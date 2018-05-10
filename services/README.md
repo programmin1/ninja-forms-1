@@ -52,6 +52,8 @@ The `client` generates a local secret key which is passed to the `server` when c
 
 The `server` accepts the passed secret key, registers an new OAuth Client, and returns the OAuth Client ID.
 
+Communication between the `server` and the `client` requires a `hash` of the combined OAuth Client ID and OAuth Client Secret.
+
 The OAuth flow can be customized the a specific service (for an optimization experience) by passing a `connect_url` (See above).
 
 Registered services have access to OAuth connection data via the `\NinjaForms\OAuth` class.
