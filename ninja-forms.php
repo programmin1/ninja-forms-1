@@ -200,6 +200,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 }
 
                 update_option( 'ninja_forms_version', self::VERSION );
+                // If we've not recorded our db version...
+                if ( ! get_option( 'ninja_forms_db_version' ) ) {
+                    // Set it to the baseline (1.0).
+                    add_option( 'ninja_forms_db_version', '1.0', '', 'no' );
+                }
 
                 /*
                  * Register our autoloader
