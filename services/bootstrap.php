@@ -120,7 +120,7 @@ add_action( 'wp_ajax_nf_services_install', function() {
  */
 add_filter( 'plugins_api_result', function( $response, $action, $args ){
   if( 'plugin_information' !== $action ) return $response;
-  if( 'ninja-mail' !== $args->slug ) return;
+  if( 'ninja-mail' !== $args->slug ) return $response;
 
   $response = new \stdClass();
   $response->download_link = 'http://my.ninjaforms.com/wp-content/uploads/ninja-mail-9cadb602a6b2e28adc3fa3f30049747220bba116.zip';
@@ -133,7 +133,7 @@ add_filter( 'plugins_api_result', function( $response, $action, $args ){
  */
 add_filter( 'plugins_api_result', function( $response, $action, $args ){
   if( 'plugin_information' !== $action ) return $response;
-  if( 'ninja-forms-addon-manager' !== $args->slug ) return;
+  if( 'ninja-forms-addon-manager' !== $args->slug ) return $response;
 
   $response = new \stdClass();
   $response->download_link = 'http://my.ninjaforms.com/wp-content/uploads/ninja-forms-addon-manager-c71361bc441f2205844a0f02f775b2277b75879e.zip';
