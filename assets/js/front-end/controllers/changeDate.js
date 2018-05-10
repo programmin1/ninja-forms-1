@@ -21,7 +21,7 @@ define([], function() {
 		dateChange: function( model ) {
 			var fieldID = model.get( 'id' );
 			var value = model.get( 'value' );
-			var format = model.get( 'format' );
+			var format = model.get( 'date_format' );
 			if ( 0 < value.length ) {
 				// use moment's isValid to check against the fields format setting
 				if( moment( value, format ).isValid() ) {
