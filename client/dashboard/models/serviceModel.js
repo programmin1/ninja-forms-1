@@ -18,9 +18,20 @@ define( [], function() {
     },
 
     initialize: function() {
-      var that = this;
+
+      // Check for successful setup.
+      if( this.get( 'slug' ) == serviceSuccess && this.get( 'successMessage' ) ){
+        new jBox( 'Modal', {
+            width: 300,
+            addClass: 'dashboard-modal',
+            overlay: true,
+            closeOnClick: 'body',
+            content: this.get( 'successMessage' ),
+        } ).open();
+      }
 
       // Auto-redirect to the serviceLink on install.
+      var that = this;
       nfRadio.channel( 'dashboard' ).reply( 'install:service:' + this.get( 'slug' ), function(){
         if( ! that.get( 'serviceLink' ) ) return;
         if( ! that.get( 'serviceLink' ).href ) return;

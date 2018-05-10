@@ -115,6 +115,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $use_services = apply_filters( 'ninja_forms_use_services', $use_services ); // The WordPress Way.
             $use_services = $use_services && ( version_compare( PHP_VERSION, '5.6', '>=' ) ); // PHP Version Check.
 
+
             /*
              * DASHBOARD
              */
@@ -123,6 +124,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             <script>
                 var nfDashItems = <?php echo( json_encode( array_values( $dash_items ) ) ); ?>;
                 var useServices = <?php echo ( $use_services ) ? 'true' : 'false'; ?>;
+                var serviceSuccess = '<?php echo ( isset( $_GET[ 'success' ] ) ) ? $_GET[ 'success' ] : ''; ?>';
             </script>
             <?php
 
