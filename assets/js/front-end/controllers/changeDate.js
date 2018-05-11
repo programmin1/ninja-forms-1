@@ -22,6 +22,14 @@ define([], function() {
 			var fieldID = model.get( 'id' );
 			var value = model.get( 'value' );
 			var format = model.get( 'date_format' );
+			console.log(this);
+			console.log(model);
+			console.log(format);
+
+			if( 'default' === format) {
+				format = nfi18n.dateFormat;
+			}
+
 			if ( 0 < value.length ) {
 				// use moment's isValid to check against the fields format setting
 				if( moment( value, format ).isValid() ) {
@@ -68,7 +76,11 @@ define([], function() {
 			/*
 			* Get our current date format
 			 */
-			var format = model.get( 'format' );
+			var format = model.get( 'date_format' );
+
+			if( 'default' === format) {
+				format = nfi18n.dateFormat;
+			}
 
 			/*
 			 * Check our value to see if it is a valid email.
