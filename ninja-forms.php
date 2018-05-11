@@ -199,6 +199,15 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                     define( 'NF_PLUGIN_URL', self::$url );
                 }
 
+                $saved_version = get_option( 'ninja_forms_version' );
+                // If we have a recorded version...
+                // AND that version is less than our current version...
+                if ( $saved_version && version_compare( $saved_version, self::VERSION, '<' ) ) {
+                    // We just upgraded the plugin.
+                    $plugin_upgrade = true;
+                } else {
+                    $plugin_upgrade = false;
+                }
                 update_option( 'ninja_forms_version', self::VERSION );
                 // If we've not recorded our db version...
                 if ( ! get_option( 'ninja_forms_db_version' ) ) {
@@ -361,6 +370,13 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                     require_once( self::$dir . 'includes/Integrations/EDD/EDD_SL_Plugin_Updater.php');
                 }
                 require_once self::$dir . 'includes/Integrations/EDD/class-extension-updater.php';
+                
+                // If Ninja Forms was just upgraded...
+                if ( $plugin_upgrade ) {
+                    // Ensure all of our tables have been defined.
+                    $migrations = new NF_Database_Migrations();
+                    $migrations->migrate();
+                }
             }
 
             add_action( 'admin_notices', array( self::$instance, 'admin_notices' ) );
