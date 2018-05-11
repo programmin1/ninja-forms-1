@@ -22,9 +22,6 @@ define([], function() {
 			var fieldID = model.get( 'id' );
 			var value = model.get( 'value' );
 			var format = model.get( 'date_format' );
-			console.log(this);
-			console.log(model);
-			console.log(format);
 
 			if( 'default' === format) {
 				format = nfi18n.dateFormat;
