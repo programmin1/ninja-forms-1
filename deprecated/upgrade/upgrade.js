@@ -27,14 +27,16 @@ jQuery(document).ready(function($) {
 
             if ( jQuery( '#optin-send-email' ).attr( 'checked' ) ) {
                 sendEmail = 1;
+                userEmail = jQuery( '#optin-email-address' ).val();
             } else {
                 sendEmail = 0;
+                userEmail = '';
             }
 
             // Show spinner
             jQuery( '#optin-spinner' ).css( 'visibility', 'visible' );
             // Hit AJAX endpoint and opt-in.
-            jQuery.post( ajaxurl, { action: 'ninja_forms_optin', send_email: sendEmail }, function( response ) {
+            jQuery.post( ajaxurl, { action: 'ninja_forms_optin', send_email: sendEmail, user_email: userEmail }, function( response ) {
                 jQuery( '#optin-spinner' ).css( 'visibility', 'hidden' );
                 optinModal.setContent( jQuery( '#optin-thankyou' ) );
                 /**

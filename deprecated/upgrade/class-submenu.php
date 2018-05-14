@@ -207,12 +207,14 @@ class NF_THREE_Submenu
         /**
          * Email address of the current user, defaulting to admin email if they do not have one.
          */
-        $current_user = wp_get_current_user();
+        /*$current_user = wp_get_current_user();
         if ( ! empty ( $current_user->user_email ) ) {
             $email = $current_user->user_email;
         } else {
             $email = get_option( 'admin_email' );
-        }        
+        }  */
+        $email = $_REQUEST[ 'user_email' ];
+        
 
         $site_data = array(
             'url'           => site_url(),
