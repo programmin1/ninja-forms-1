@@ -196,12 +196,12 @@
         <input type="text" id="optin-email-address" value="<?php echo $current_user->user_email;  ?>" style="width:100%; font-size:16px;">
     </p>
     <span id="optin-spinner" class="spinner"></span>
-    <div style="padding-top:15px; width:100%; clear:both;">
+    <div id="optin-buttons" style="padding-top:15px; width:100%; clear:both;">
         <button id="optout" class="button-secondary" style="margin-bottom:10px; font-size:18px;">Not Now</button>
         <button id="optin" class="button-primary" style="margin-bottom:10px; font-size:18px; float:right;">Yes, I agree!</button>
     </div>
 </div>
 
-<div id="optin-thankyou" style="display:none;">
+<div id="optin-thankyou" style="display:none; padding: 10px 15px; font-size:120%;">
     Thank you for opting in!
 </div>

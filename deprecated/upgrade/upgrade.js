@@ -35,9 +35,11 @@ jQuery(document).ready(function($) {
 
             // Show spinner
             jQuery( '#optin-spinner' ).css( 'visibility', 'visible' );
+            jQuery( '#optin-buttons' ).css( 'visibility', 'hidden' );
             // Hit AJAX endpoint and opt-in.
             jQuery.post( ajaxurl, { action: 'ninja_forms_optin', send_email: sendEmail, user_email: userEmail }, function( response ) {
                 jQuery( '#optin-spinner' ).css( 'visibility', 'hidden' );
+                optinModal.setTitle( '<h2 style="font-size:150%;">Keep being awesome!</h2>' );
                 optinModal.setContent( jQuery( '#optin-thankyou' ) );
                 /**
                  * When we get a response from our endpoint, show a thank you and set a timeout
@@ -55,10 +57,11 @@ jQuery(document).ready(function($) {
 
         jQuery( '#optout' ).click( function( e ) {
             // Show spinner
-            jQuery( '#optin-spinner' ).attr( 'visibility', 'visible' );
+            jQuery( '#optin-spinner' ).css( 'visibility', 'visible' );
+            jQuery( '#optin-buttons' ).css( 'visibility', 'hidden' );
             // Hit AJAX endpoint and opt-in.
              jQuery.post( ajaxurl, { action: 'ninja_forms_optout' }, function( response ) {
-                jQuery( '#optin-spinner' ).attr( 'visibility', 'hidden' );
+                jQuery( '#optin-spinner' ).css( 'visibility', 'hidden' );
                 // When we get a response from our endpoint, close the modal. 
                 optinModal.close();
             } );            
