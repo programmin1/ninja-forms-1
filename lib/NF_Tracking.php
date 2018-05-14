@@ -33,7 +33,7 @@ final class NF_Tracking
         // Temporary: Report previously opted-in users that were not already reported. @todo Remove after a couple of versions.
         add_action( 'admin_init', array( $this, 'report_optin' ) );
 
-        add_filter( 'nf_admin_notices', array( $this, 'admin_notice' ) );
+//        add_filter( 'nf_admin_notices', array( $this, 'admin_notice' ) );
 
         add_filter( 'ninja_forms_check_setting_allow_tracking',  array( $this, 'check_setting' ) );
         add_filter( 'ninja_forms_update_setting_allow_tracking', array( $this, 'update_setting' ) );

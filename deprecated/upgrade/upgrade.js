@@ -7,10 +7,20 @@ jQuery(document).ready(function($) {
         var optinModal = new jBox( 'Modal', {
             content:        jQuery( '#optin-modal' ),
             closeOnEsc:     false,
-            closeOnClick:   false
+            closeOnClick:   false,
+            title:          jQuery( '#optin-modal-title' )
         } );
          
         optinModal.open();
+        
+        // Show/Hide email field, based on the opt-in checkbox.
+        jQuery( '#optin-send-email' ).click( function( e ) {
+            if( jQuery( this ).is( ':checked' ) ) {
+                jQuery( '#optin-block' ).show();
+            } else {
+                jQuery( '#optin-block' ).hide();
+            }
+        } )
 
         jQuery( '#optin' ).click( function( e ) {
             var sendEmail;

@@ -157,6 +157,7 @@
 </div>
 
 
+<!--
 <div id="optin-modal" style="display:none;">
     <h2>Help make Ninja Forms better!</h2>
     <p>
@@ -169,6 +170,36 @@
     </p>
     <span id="optin-spinner" class="spinner"></span>
     <button id="optin" class="button-primary" style="margin-bottom: 10px; font-size: 16px;">Yes, I want to make Ninja Forms better!</button> <button id="optout" class="button-secondary" style="margin-bottom: 10px;">No, please don't collect errors or other data.</button>
+</div>
+-->
+
+<div style="display:none;">
+    <div id="optin-modal-title">
+        <h2 style="font-size:180%;">Help make Ninja Forms better!</h2>
+    </div>
+</div>
+
+<div id="optin-modal" style="display:none; padding:5px 15px;">
+    <p>
+        We would like to collect data about how Ninja Forms is used so that we can improve the experience for everyone. This data will not include ANY submission data or personally identifiable information.
+    </p>
+    <p>    
+        Please check out our <a href="https://ninjaforms.com/privacy-policy/" target="_blank">privacy policy</a> for additional clarification.
+    </p>
+    <p>
+        <input id="optin-send-email" type="checkbox" style="margin:7px;"><label for="optin-send-email"> Yes, please send me occasional emails about Ninja Forms.</label>
+    </p>
+    <?php
+        $current_user = wp_get_current_user();
+    ?>
+    <p id="optin-block" style="padding-top:10px; display:none;">
+        <input type="text" id="optin-email-address" value="<?php echo $current_user->user_email;  ?>" style="width:100%; font-size:16px;">
+    </p>
+    <span id="optin-spinner" class="spinner"></span>
+    <div style="padding-top:15px; width:100%; clear:both;">
+        <button id="optout" class="button-secondary" style="margin-bottom:10px; font-size:18px;">Not Now</button>
+        <button id="optin" class="button-primary" style="margin-bottom:10px; font-size:18px; float:right;">Yes, I agree!</button>
+    </div>
 </div>
 
 <div id="optin-thankyou" style="display:none;">
