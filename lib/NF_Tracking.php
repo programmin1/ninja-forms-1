@@ -28,7 +28,7 @@ final class NF_Tracking
     {
 
         // Temporary: Report previously opted-in users that were not already reported. @todo Remove after a couple of versions.
-        add_action( 'admin_init', array( $this, 'report_optin' ) );
+//        add_action( 'admin_init', array( $this, 'report_optin' ) );
 
         add_action( 'wp_ajax_nf_optin', array( $this, 'maybe_opt_in' ) );
         add_filter( 'ninja_forms_check_setting_allow_tracking',  array( $this, 'check_setting' ) );
@@ -56,7 +56,6 @@ final class NF_Tracking
             }
         }
         die( 1 );
-//        header( 'Location: ' . admin_url( 'admin.php?page=ninja-forms' ) );
     }
 
     /**

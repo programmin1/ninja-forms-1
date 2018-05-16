@@ -203,7 +203,7 @@ final class NF_Dispatcher
         /**
          * Email address of the current user.
          */
-        $email = $data[ 'user_email' ];
+        $email = isset( $data[ 'user_email' ] ) ? $data[ 'user_email' ] : '';
 
         $site_data = array(
             'url'           => site_url(),
