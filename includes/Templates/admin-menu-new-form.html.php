@@ -539,6 +539,21 @@ Label Three, value-three, 3
 
 </script>
 
+
+<script id="tmpl-nf-edit-setting-radio" type="text/template">
+
+    <span class="nf-setting-label">{{{ data.label }}}{{{ data.renderTooltip() }}}</span>
+    <#
+    _.each( data.options, function( option ) {
+    #>
+    <span class="nf-setting-label">{{{ option.label }}}</span>
+    <input type="radio" value="{{{ option.value }}}" name="{{{ data.name }}}" {{{ data.value == option.value ? "checked" : '' }}}></option>
+    <#
+    } );
+    #>
+
+</script>
+
 <script id="tmpl-nf-edit-setting-color" type="text/template">
 
     <label for="{{{ data.name }}}" class="{{{ data.renderLabelClasses() }}}">{{{ data.label }}} {{{ data.renderTooltip() }}}</label>
