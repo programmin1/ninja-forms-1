@@ -20,7 +20,7 @@ jQuery(document).ready(function($) {
             } else {
                 jQuery( '#optin-block' ).hide();
             }
-        } )
+        } );
 
         jQuery( '#optin' ).click( function( e ) {
             var sendEmail;
