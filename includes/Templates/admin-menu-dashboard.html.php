@@ -77,6 +77,8 @@
             <input id="nfServiceTransactionalEmail" class="nf-toggle setting" {{{ ( data.enabled ) ? 'checked="checked"' : '' }}} {{{ ( data.isUpdating ) ? 'disabled="disabled"' : '' }}} type="checkbox">
             <label for="nfServiceTransactionalEmail"></label>
           </div>
+          <# } else { #>
+            <a href="#services" class="nf-button primary js--install" style="float:right;">Setup</a>
           <# } #>
           <# if( data.serviceLink ){ #>
             <a

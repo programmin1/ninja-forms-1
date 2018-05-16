@@ -88,25 +88,31 @@ add_action( 'wp_ajax_nf_services_install', function() {
     die( json_encode( [ 'error' => $api->get_error_message() ] ) );
   }
 
-  if ( ! class_exists( 'Plugin_Upgrader' ) ) {
-    include_once ABSPATH . 'wp-admin/includes/file.php';
-    include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+  $plugins = get_plugins();
+  if( ! isset( $plugins[ $install_path ] ) ){
+    if ( ! class_exists( 'Plugin_Upgrader' ) ) {
+      include_once ABSPATH . 'wp-admin/includes/file.php';
+      include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+    }
+
+    include_once plugin_dir_path( __FILE__ ) . 'remote-installer-skin.php';
+    ob_start();
+    $upgrader = new \Plugin_Upgrader( new Remote_Installer_Skin() );
+    $install = $upgrader->install( $api->download_link );
+    ob_clean();
+
+    if( ! $install ){
+      die( json_encode( [ 'error' => $upgrader->skin->get_errors() ] ) );
+    }
   }
 
-  include_once plugin_dir_path( __FILE__ ) . 'remote-installer-skin.php';
-  ob_start();
-  $upgrader = new \Plugin_Upgrader( new Remote_Installer_Skin() );
-
-  $install = $upgrader->install( $api->download_link );
-
-  if( ! $install ){
-    die( json_encode( [ 'error' => $upgrader->skin->get_errors() ] ) );
-  }
-
-  $activated = activate_plugin( $install_path );
-  ob_clean();
-  if( is_wp_error( $activated ) ){
-    die( json_encode( [ 'error' => $activated->get_error_message() ] ) );
+  if( ! is_plugin_active($plugin) ){
+    ob_start();
+    $activated = activate_plugin( $install_path );
+    ob_clean();
+    if( is_wp_error( $activated ) ){
+      die( json_encode( [ 'error' => $activated->get_error_message() ] ) );
+    }
   }
 
   $response = apply_filters( 'nf_services_installed_' . $plugin, '1' );
