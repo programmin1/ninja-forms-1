@@ -27,9 +27,9 @@ define([ 'models/oauthModel' ], function( OAuthModel ) {
 
 			new jBox('Confirm', {
 				width: 750,
-				content: 'Disconnecting from my.ninjaforms.com will cancel any services that you may currently be using.',
-				confirmButton: 'I Understand.',
-				cancelButton: 'Nevermind',
+				content: 'Disconnecting from my.ninjaforms.com will disrupt the functionality of all services.',
+				confirmButton: 'Disconnect',
+				cancelButton: 'Stay Connected',
 				closeOnConfirm: true,
 				confirm: function(){
 					jQuery.ajax({
