@@ -77,8 +77,6 @@
             <input id="nfServiceTransactionalEmail" class="nf-toggle setting" {{{ ( data.enabled ) ? 'checked="checked"' : '' }}} {{{ ( data.isUpdating ) ? 'disabled="disabled"' : '' }}} type="checkbox">
             <label for="nfServiceTransactionalEmail"></label>
           </div>
-          <# } else { #>
-            <a href="#services" class="nf-button primary js--install" style="float:right;">Setup</a>
           <# } #>
           <# if( data.serviceLink ){ #>
             <a
@@ -87,18 +85,17 @@
               <# if( data.serviceLink.target ) { #>target="{{{ data.serviceLink.target }}}"<# } #>
               style="float:right;">{{{data.serviceLink.text}}}</a>
           <# } #>
-        <# } else { #>
-          <# if( data.learnMore ) { #>
-          <button class="nf-button secondary js--learn-more" style="float:left;">Learn More</button>
-          <# } #>
-          <# if( ( ! data.is_connected ) || ( data.slug && data.installPath ) ){ #>
-            <# if( ! data.is_installing ){ #>
-              <a href="#services" class="nf-button primary js--install" style="float:right;">Setup</a>
-            <# } else { #>
-              <a href="#services" class="nf-button primary" style="float:right;" disabled>
-                <span class="dashicons dashicons-update dashicons-update-spin"></span>
-              </a>
-            <# } #>
+        <# } #>
+        <# if( data.learnMore ) { #>
+        <button class="nf-button secondary js--learn-more" style="float:left;">Learn More</button>
+        <# } #>
+        <# if( ( ! data.is_connected ) || ( data.slug && data.installPath ) ){ #>
+          <# if( ! data.is_installing ){ #>
+            <a href="#services" class="nf-button primary js--install" style="float:right;">Setup</a>
+          <# } else { #>
+            <a href="#services" class="nf-button primary" style="float:right;" disabled>
+              <span class="dashicons dashicons-update dashicons-update-spin"></span>
+            </a>
           <# } #>
         <# } #>
       </div>
