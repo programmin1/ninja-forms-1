@@ -89,7 +89,7 @@
           <# } #>
         <# } else { #>
           <# if( data.learnMore ) { #>
-          <a class="nf-button secondary js--learn-more" style="float:left;">Learn More</a>
+          <button class="nf-button secondary js--learn-more" style="float:left;">Learn More</button>
           <# } #>
           <# if( ( ! data.is_connected ) || ( data.slug && data.installPath ) ){ #>
             <# if( ! data.is_installing ){ #>
