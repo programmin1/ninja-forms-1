@@ -11,6 +11,9 @@ define( ['models/serviceModel'], function( ServiceModel ) {
       /* ... */
 		},
 
+		/*
+     * Use the `data` property of the response.
+     */
     parse: function( response, options ){
         return response.data;
     },

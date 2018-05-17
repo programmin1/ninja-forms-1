@@ -7,6 +7,9 @@ define( [ 'models/promotionModel' ], function( PromotionModel ) {
 
       className: 'nf-promotion',
 
+      /*
+       * Display a single promotion - chosen at random.
+       */
       initialize: function() {
         var promotion = nfPromotions[Math.floor(Math.random()*nfPromotions.length)];
         this.model = new PromotionModel( promotion );

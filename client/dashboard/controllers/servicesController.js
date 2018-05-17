@@ -12,6 +12,9 @@ define([ 'models/serviceCollection' ], function( ServiceCollection ) {
 			return this.services;
 		},
 
+		/*
+		 * Fetch services, with an optional callback function.
+		 */
 		fetchServices: function( callback ) {
 			this.services.fetch({
 				success: function( model ){
@@ -21,6 +24,9 @@ define([ 'models/serviceCollection' ], function( ServiceCollection ) {
 			});
 		},
 
+		/*
+		 * Request the remote install of the service's corresponding plugin.
+		 */
 		installService: function( serviceModel ) {
 			var that = this;
 

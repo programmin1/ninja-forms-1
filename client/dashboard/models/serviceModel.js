@@ -17,6 +17,10 @@ define( [], function() {
       return ajaxurl + "?action=nf_service_" + this.get( 'slug' );
     },
 
+    /*
+     * - Check for "Success"/Setup modal.
+     * - (Maybe) Auto-redirect to the service.
+     */
     initialize: function() {
 
       // Check for successful setup.
@@ -33,11 +37,14 @@ define( [], function() {
       // Auto-redirect to the serviceLink on install.
       var that = this;
       nfRadio.channel( 'dashboard' ).reply( 'install:service:' + this.get( 'slug' ), function(){
+
+        // If no service link url, then no need to auto-redirect.
         if( ! that.get( 'serviceLink' ) ) return;
         if( ! that.get( 'serviceLink' ).href ) return;
 
         var redirect = that.get( 'serviceLink' ).href;
 
+        // Display a redirect notice.
         new jBox( 'Modal', {
                         width: 300,
                         addClass: 'dashboard-modal',
@@ -46,6 +53,7 @@ define( [], function() {
                         content: '<p style="text-align:center;">Redirecting to NinjaForms.com</p>',
                     } ).open();
 
+        // Trigger a redirect, where depends on the connected status.
         var oauth = nfRadio.channel( 'dashboard' ).request( 'get:oauth' );
         if( ! oauth.get( 'connected' ) ){
           if( that.get( 'connect_url' ) ){
@@ -58,6 +66,9 @@ define( [], function() {
       } );
     },
 
+    /*
+     * Sync the server with the model.
+     */
     save: function() {
       var that = this;
       jQuery.ajax({

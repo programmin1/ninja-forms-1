@@ -2,6 +2,9 @@ var nfRadio = Backbone.Radio;
 var nfDebug = false;
 
 if( ! useServices ){
+  /**
+   * If the feature flag isn't set then filter out the "Services" tab.
+   */
   nfDashItems = nfDashItems.filter(function(item){
     return 'services' !== item.slug;
   });

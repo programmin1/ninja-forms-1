@@ -13,6 +13,9 @@ define( [], function() {
       /* ... */
     },
 
+    /*
+     * Use the `data` property of the response.
+     */
     parse: function( response, options ){
         return response.data;
     }

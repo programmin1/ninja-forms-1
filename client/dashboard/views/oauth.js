@@ -11,6 +11,9 @@ define( [ 'models/oauthModel' ], function( OAuthModel ) {
           disconnect: '.js--disconnect',
       },
 
+      /*
+       * Update when the OAuth controller is synced.
+       */
       initialize: function( oauthModel ) {
         this.listenTo( nfRadio.channel( 'dashboard' ), 'fetch:oauth', this.updateModel );
       },

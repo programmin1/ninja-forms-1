@@ -13,6 +13,9 @@ define([ 'models/oauthModel' ], function( OAuthModel ) {
 			return this.oauth;
 		},
 
+		/*
+		 * Fetch the OAuth Model add and notify via nfRadio.
+		 */
 		initOAuth: function() {
 			this.oauth.fetch({
 				success: function( model ){
@@ -21,6 +24,9 @@ define([ 'models/oauthModel' ], function( OAuthModel ) {
 			});
 		},
 
+		/**
+		 * Confirm disconnecting services, then POST to the server to to disconnect.
+		 */
 		disconnect: function() {
 
 			var that = this;
