@@ -22,7 +22,7 @@ add_action( 'wp_ajax_nf_services', function(){
     ],
 
     'ninja-mail' => [
-      'name' => __( 'Transactional Email', 'ninja-mail' ),
+      'name' => __( 'Ninja Mail - Transactional Email', 'ninja-mail' ),
       'slug' => 'ninja-mail',
       'installPath' => 'ninja-mail/ninja-mail.php',
       'description' => 'Increase Email Deliverability with a dedicated email service by Ninja Forms for only $5/month/site.',
