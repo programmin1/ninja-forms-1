@@ -554,6 +554,31 @@ Label Three, value-three, 3
 
 </script>
 
+<script id="tmpl-nf-edit-setting-button_toggle" type="text/template">
+
+	<span class="nf-setting-label">{{{ data.label }}}{{{ data.renderTooltip() }}}</span>
+	<div class="nf-setting" style="background: grey; padding: 5px;">
+		<#
+		_.each( data.options, function( option ) {
+		#>
+			<span class="nf-button primary {{{ data.value != option.value ?
+				"disabled": "" }}} class="width:
+			50%;"
+			data-option_value="{{{ option
+			.value }}}">{{{ option
+				.label
+				}}}</span>
+			<input type="radio" style="display:none;" value="{{{ option.value
+			       }}}" name="{{{
+		data.name }}}" {{{ data.value == option.value ? "checked" : '' }}}>
+			<#
+		} );
+		#>
+	</div>
+
+
+</script>
+
 <script id="tmpl-nf-edit-setting-color" type="text/template">
 
     <label for="{{{ data.name }}}" class="{{{ data.renderLabelClasses() }}}">{{{ data.label }}} {{{ data.renderTooltip() }}}</label>
@@ -706,6 +731,22 @@ Label Three, value-three, 3
         <input type="button" class="cancel-link extra" value="Cancel">
         <input type="button" class="insert-link extra" value="Insert">
     </div>
+</script>
+
+<script id="nf-tmpl-save-field-repeater-row" type="text/template">
+	<div>
+		<span class="dashicons dashicons-menu handle"></span>
+	</div>
+	<div>
+		<# try { #>
+		{{{ data.renderFieldSelect( 'field', data.field ) }}}
+		<# } catch ( err ) { #>
+		<input type="text" class="setting" value="{{ data.field }}" data-id="field" >
+		<# } #>
+	</div>
+	<div>
+		<span class="dashicons dashicons-dismiss nf-delete"></span>
+	</div>
 </script>
 
 <?php do_action( 'ninja_forms_builder_templates' ); ?>

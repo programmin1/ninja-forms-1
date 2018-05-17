@@ -69,7 +69,32 @@ final class NF_Actions_Save extends NF_Abstracts_Action
 
             $field[ 'value' ] = apply_filters( 'nf_save_sub_user_value', $field[ 'value' ], $field[ 'id' ] );
 
-            $sub->update_field_value( $field[ 'id' ], $field[ 'value' ] );
+            $save_all_none = $action_settings[ 'fields_save_toggle' ];
+            $save_field = true;
+
+            if( 'save_all' == $save_all_none ) {
+            	$save_field = true;
+            	foreach( $action_settings[ 'exception_fields' ] as
+		            $exception_field ) {
+            		if( $field[ 'key' ] == $exception_field[ 'field'] ) {
+            			$save_field = false;
+            			break;
+		            }
+	            }
+            } else if( 'save_none' == $save_all_none ) {
+            	$save_field = false;
+	            foreach( $action_settings[ 'exception_fields' ] as
+		            $exception_field ) {
+		            if( $field[ 'key' ] == $exception_field[ 'field'] ) {
+			            $save_field = true;
+			            break;
+		            }
+	            }
+            }
+
+            if( $save_field ) {
+	            $sub->update_field_value( $field['id'], $field['value'] );
+            }
         }
 
         if( isset( $data[ 'extra' ] ) ) {
