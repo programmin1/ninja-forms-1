@@ -27,19 +27,22 @@ add_action( 'wp_ajax_nf_services', function(){
       'installPath' => 'ninja-mail/ninja-mail.php',
       'description' => 'Increase Email Deliverability with a dedicated email service by Ninja Forms for only $5/month/site.',
       'enabled' => null,
+      'learnMoreTitle' => 'Improve Ninja Forms Email Reliability!',
       'learnMore' => '
-      <h2>Frustrated by your WordPress forms not sending email?</h2>
-      <p>Form submission notifications not hitting your inbox? Some of your visitors getting form feedback via email, others not? Just can’t get your form email to work at all?</p>
-      <p>It’s an all too common issue in WordPress. There’s now a solution.</p>
-      <p>Sign up for Ninja Mail today, and never deal with form email issues again!</p>
-      <hr />
-      <h3>Why Ninja Mail?</h3>
-      <p>Because you can take the pain out of email, starting today!</p>
-      <h3>Cut out the middleman.</h3>
-      <p>Form email normally depends on your host or a third-party plugin to send it to its destination. That handoff is where the vast majority of email issues arise. No more. With Ninja Mail, we see to your form email being sent personally, from form to inbox.</p>
-      <h3>If it doesn’t work, it doesn’t cost a dime.</h3>
-      <p>Every new Ninja Mail subscription begins with a 14 day free trial. You’ll know right away if Ninja Mail works for you, and if not, you’re not out a single cent.</p>
-      <button style="float:right;" class="nf-button primary" onclick="Backbone.Radio.channel( \'dashboard\' ).request( \'install:service\', \'ninja-mail\' );var spinner = document.createElement(\'span\'); spinner.classList.add(\'dashicons\', \'dashicons-update\', \'dashicons-update-spin\'); this.innerHTML = spinner.outerHTML; console.log( spinner )">Setup</button>
+      <div style="padding:20px;">
+        <h2>Frustrated that Ninja Forms email isn’t being received?</h2>
+        <p>Form submission notifications not hitting your inbox? Some of your visitors getting form feedback via email, others not? By default, your WordPress site sends emails through your web host, which can be unreliable. Your host has spent lots of time and money optimizing to serve your pages, not send your emails.</p>
+        <h3>Sign up for Ninja Mail today, and never deal with form email issues again!</h3>
+        <p>Ninja Mail is a transactional email service that removes your web host from the email equation.</p>
+        <ul style="list-style-type:initial;margin-left: 20px;">
+          <li>Sends email through dedicated email service, increasing email deliverability.</li>
+          <li>Keeps form submission emails out of spam by using a trusted email provider.</li>
+          <li>On a shared web host? Don’t worry about emails being rejected because of blocked IP addresses.</li>
+          <li><strong>Only $5/month. Free 14-day trial. Cancel anytime!</strong></li>
+        </ul>
+        <br />
+        <button style="display:block;width:100%;text-align:center;" class="nf-button primary" onclick="Backbone.Radio.channel( \'dashboard\' ).request( \'install:service\', \'ninja-mail\' );var spinner = document.createElement(\'span\'); spinner.classList.add(\'dashicons\', \'dashicons-update\', \'dashicons-update-spin\'); this.innerHTML = spinner.outerHTML; console.log( spinner )">SIGNUP FOR NINJA MAIL NOW!</button>
+      </div>
       ',
     ],
   ] );

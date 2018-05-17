@@ -49,7 +49,7 @@ define( [], function() {
 
         var modal = new jBox( 'Modal', {
           width: 750,
-          title: this.model.get( 'name' ),
+          title: this.model.get( 'learnMoreTitle' ) || this.model.get( 'name' ),
           content: this.model.get( 'learnMore' ),
           closeButton: 'box',
           blockScroll: true
