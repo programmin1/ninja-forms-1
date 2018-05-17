@@ -202,6 +202,7 @@ final class NF_Dispatcher
 
         /**
          * Email address of the current user.
+         * (if one was provided)
          */
         $email = isset( $data[ 'user_email' ] ) ? $data[ 'user_email' ] : '';
 
