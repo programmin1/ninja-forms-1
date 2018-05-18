@@ -557,20 +557,20 @@ Label Three, value-three, 3
 <script id="tmpl-nf-edit-setting-button_toggle" type="text/template">
 
 	<span class="nf-setting-label">{{{ data.label }}}{{{ data.renderTooltip() }}}</span>
-	<div class="nf-setting" style="background: grey; padding: 5px;">
+	<div class="nf-setting button-toggle" style="background: #f1f1f1; padding:
+	5px;width: 100%;">
 		<#
 		_.each( data.options, function( option ) {
 		#>
-			<span class="nf-button primary {{{ data.value != option.value ?
-				"disabled": "" }}} class="width:
-			50%;"
-			data-option_value="{{{ option
-			.value }}}">{{{ option
-				.label
-				}}}</span>
-			<input type="radio" style="display:none;" value="{{{ option.value
-			       }}}" name="{{{
-		data.name }}}" {{{ data.value == option.value ? "checked" : '' }}}>
+			<label for="field-{{{ option.value }}}"
+				data-option_value="{{{ option.value }}}">
+				<input type="radio" id="field-{{{ option.value }}}"
+			       style="display:none;"
+					value="{{{ option.value }}}" name="{{{data.name }}}"
+	                {{{ data.value == option.value ? "checked" : '' }}}>
+				<span class="nf-button primary {{{ data.value != option.value ?
+				"disabled": "" }}}">{{{ option.label }}}</span>
+			</label>
 			<#
 		} );
 		#>
