@@ -7,15 +7,15 @@ return apply_filters( 'ninja_forms_action_email_settings', array(
      */
 
     'fields_save_toggle' => array(
-        'name' => 'fields_save_toggle',
-        'type' => 'button_toggle',
+        'name' => 'fields-save-toggle',
+        'type' => 'button-toggle',
         'width' => 'full',
         'options' => array(
             array( 'label' => __( 'Save All', 'ninja-forms' ), 'value' => 'save_all' ),
             array( 'label' => __( 'Save None', 'ninja-forms' ), 'value' => 'save_none' )
         ),
         'group' => 'primary',
-        'label' => __( 'Fields Save', 'ninja-forms' ),
+        'label' => __( 'Fields', 'ninja-forms' ),
         'value' => 'save_all',
     ),
 	/*

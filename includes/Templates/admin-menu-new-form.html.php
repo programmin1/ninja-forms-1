@@ -554,11 +554,10 @@ Label Three, value-three, 3
 
 </script>
 
-<script id="tmpl-nf-edit-setting-button_toggle" type="text/template">
+<script id="tmpl-nf-edit-setting-button-toggle" type="text/template">
 
 	<span class="nf-setting-label">{{{ data.label }}}{{{ data.renderTooltip() }}}</span>
-	<div class="nf-setting button-toggle" style="background: #f1f1f1; padding:
-	5px;width: 100%;">
+	<div class="nf-setting button-toggle">
 		<#
 		_.each( data.options, function( option ) {
 		#>
@@ -566,6 +565,7 @@ Label Three, value-three, 3
 				data-option_value="{{{ option.value }}}">
 				<input type="radio" id="field-{{{ option.value }}}"
 			       style="display:none;"
+			       class="nf-button-toggle setting"
 					value="{{{ option.value }}}" name="{{{data.name }}}"
 	                {{{ data.value == option.value ? "checked" : '' }}}>
 				<span class="nf-button primary {{{ data.value != option.value ?
