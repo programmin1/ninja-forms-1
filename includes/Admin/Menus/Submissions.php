@@ -121,8 +121,10 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
 	 */
 	public function enqueue_scripts() {
 		// let's check and make sure we're on the submissions page.
+		$test = strpos( $_SERVER[ 'REQUEST_URI' ], '/wp-admin/edit.php' );
 		if( isset( $_GET[ 'post_type' ] ) && 'nf_sub' == $_GET[ 'post_type' ]
-			&& $_SERVER[ 'DOCUMENT_URI'] == '/wp-admin/edit.php' ) {
+			&& -1 < strpos( $_SERVER[ 'REQUEST_URI' ], '/wp-admin/edit.php' )
+	) {
 			wp_enqueue_style( 'nf-admin-settings', Ninja_Forms::$url . 'assets/css/admin-settings.css' );
 
 			wp_register_script( 'ninja_forms_admin_submissions',
