@@ -12,7 +12,7 @@ define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// We don't want the RTE setting to re-render when the value changes.
-			nfRadio.channel( 'setting-type-button-toggle' ).reply( 'renderOnChange', function(){ console.log('here');return false } );
+			nfRadio.channel( 'setting-type-button-toggle' ).reply( 'renderOnChange', function(){ return false; } );
 
 			// Respond to requests for field setting filtering.
 			nfRadio.channel( 'button-toggle' ).reply( 'before:updateSetting', this.updateSetting, this );

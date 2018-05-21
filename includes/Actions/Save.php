@@ -60,10 +60,13 @@ final class NF_Actions_Save extends NF_Abstracts_Action
 
         $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
 
+        // For each field on the form...
         foreach( $data['fields'] as $field ){
 
+            // If this is a "hidden" field type.
             if( in_array( $field[ 'type' ], array_values( $hidden_field_types ) ) ) {
-                $data['actions']['save']['hidden'][] = $field['type'];
+                // Do not save it.
+                $data[ 'actions' ][ 'save' ][ 'hidden' ][] = $field[ 'type' ];
                 continue;
             }
 
@@ -72,19 +75,25 @@ final class NF_Actions_Save extends NF_Abstracts_Action
             $save_all_none = $action_settings[ 'fields-save-toggle' ];
             $save_field = true;
 
+            // If we were told to save all fields...
             if( 'save_all' == $save_all_none ) {
             	$save_field = true;
+                // For each exception to that rule...
             	foreach( $action_settings[ 'exception_fields' ] as
 		            $exception_field ) {
+                    // Remove it from the list.
             		if( $field[ 'key' ] == $exception_field[ 'field'] ) {
             			$save_field = false;
             			break;
 		            }
 	            }
-            } else if( 'save_none' == $save_all_none ) {
+            } // Otherwise... (We were told to save no fields.)
+            else if( 'save_none' == $save_all_none ) {
             	$save_field = false;
+                // For each exception to that rule...
 	            foreach( $action_settings[ 'exception_fields' ] as
 		            $exception_field ) {
+                    // Add it to the list.
 		            if( $field[ 'key' ] == $exception_field[ 'field'] ) {
 			            $save_field = true;
 			            break;
@@ -92,13 +101,17 @@ final class NF_Actions_Save extends NF_Abstracts_Action
 	            }
             }
 
+            // If we're supposed to save this field...
             if( $save_field ) {
+                // Do so.
 	            $sub->update_field_value( $field['id'], $field['value'] );
             }
         }
 
+        // If we have extra data...
         if( isset( $data[ 'extra' ] ) ) {
-            $sub->update_extra_values( $data['extra'] );
+            // Save that.
+            $sub->update_extra_values( $data[ 'extra' ] );
         }
 
         do_action( 'nf_before_save_sub', $sub->get_id() );
