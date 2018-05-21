@@ -69,7 +69,7 @@ final class NF_Actions_Save extends NF_Abstracts_Action
 
             $field[ 'value' ] = apply_filters( 'nf_save_sub_user_value', $field[ 'value' ], $field[ 'id' ] );
 
-            $save_all_none = $action_settings[ 'fields_save_toggle' ];
+            $save_all_none = $action_settings[ 'fields-save-toggle' ];
             $save_field = true;
 
             if( 'save_all' == $save_all_none ) {
