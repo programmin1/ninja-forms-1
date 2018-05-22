@@ -102,10 +102,13 @@ th {
   flex-wrap: wrap;
 
   & > div {
+    display: flex;
     width: 50%;
   }
 
   .template {
+    display: grid;
+    width: 100%;
     a {
       color: #424242;
       display: block;

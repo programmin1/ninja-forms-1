@@ -296,6 +296,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 new NF_Admin_Metaboxes_Calculations();
 
                 /*
+                 * User data requests ( GDPR actions )
+                 */
+                new NF_Admin_UserDataRequests();
+
+                /*
                  * Logger
                  */
                 self::$instance->_logger = new NF_Database_Logger();
