@@ -184,6 +184,14 @@ final class NF_Tracking
 
         // Clear dispatch debounce flag.
         update_option( 'ninja_forms_optin_reported', 0 );
+        
+        $data = array();
+        $user_email = get_option( 'ninja_forms_optin_email' );
+        if ( $user_email ) {
+            $data[ 'user_email' ] = $user_email;
+        }
+        Ninja_Forms()->dispatcher()->send( 'optout', $data );
+        delete_option( 'ninja_forms_optin_email' );
     }
 
     public function check_setting( $setting )
