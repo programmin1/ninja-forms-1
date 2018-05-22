@@ -118,15 +118,13 @@ class NF_Admin_UserDataRequests {
 					);
 				}
 			}
-
-
-			// Returns an array of exported items for this pass, but also a boolean whether this exporter is finished.
-			//If not it will be called again with $page increased by 1.
-			return array(
-				'data' => $export_items,
-				'done' => true,
-			);
 		}
+		// Returns an array of exported items for this pass, but also a boolean whether this exporter is finished.
+		//If not it will be called again with $page increased by 1.
+		return array(
+			'data' => $export_items,
+			'done' => true,
+		);
 	}
 
 	/**
