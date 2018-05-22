@@ -104,41 +104,28 @@ define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections
                 var title = document.createElement( 'div' );
                 title.id = 'optin-modal-title';
                 var titleStyling = document.createElement( 'h2' );
-                titleStyling.style.fontSize = '130%';
                 titleStyling.innerHTML = 'Help make Ninja Forms better!';
-                titleStyling.style.textAlign = 'left';
                 title.appendChild( titleStyling );
                 // Define the modal content.
                 var content = document.createElement( 'div' );
-                content.style.padding = '5px 15px';
+                content.classList.add( 'message' );
+                content.style.padding = '0px 20px 20px 20px';
+                content.innerHTML = nfi18n.optinContent;
                 var p = document.createElement( 'p' );
-                p.innerHTML = 'We would like to collect data about how Ninja Forms is used so that we can improve the experience for everyone. This data will not include ANY submission data or personally identifiable information.';
-                content.appendChild( p );
-                var text = document.createTextNode( 'Please check out our ' );
-                var privacy = document.createElement( 'a' );
-                privacy.setAttribute( 'href', 'https://ninjaforms.com/privacy-policy/' );
-                privacy.setAttribute( 'target', '_blank' );
-                privacy.innerHTML = 'privacy policy';
-                p = document.createElement( 'p' );
-                p.appendChild( text );
-                p.appendChild( privacy );
-                text = document.createTextNode ( ' for additional clarification.' );
-                p.appendChild( text );
-                content.appendChild( p );
-                p = document.createElement( 'p' );
+                p.style.paddingBottom = '10px';
                 var checkBox = document.createElement( 'input' );
                 checkBox.id = 'optin-send-email';
                 checkBox.setAttribute( 'type', 'checkbox' );
                 checkBox.style.margin = '7px';
                 var label = document.createElement( 'label' );
                 label.setAttribute( 'for', 'optin-send-email' );
-                label.innerHTML = ' Yes, please send me occasional emails about Ninja Forms.';
+                label.innerHTML = nfi18n.optinYesplease;
                 p.appendChild( checkBox );
                 p.appendChild( label );
                 content.appendChild( p );
                 p = document.createElement( 'p' );
                 p.id = 'optin-block';
-                p.style.paddingTop = '10px';
+                p.style.padding = '0px 5px 20px 5px';
                 p.style.display = 'none';
                 var email = document.createElement( 'input' );
                 email.id = 'optin-email-address';
@@ -151,38 +138,31 @@ define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections
                 var spinner = document.createElement( 'span' );
                 spinner.id = 'optin-spinner';
                 spinner.classList.add( 'spinner' );
+                spinner.style.display = 'none';
                 content.appendChild( spinner );
                 var actions = document.createElement( 'div' );
                 actions.id = 'optin-buttons';
-                actions.style.paddingTop = '15px';
-                actions.style.width = '100%';
-                actions.style.clear = 'both';
-                var cancel = document.createElement( 'button' );
+                actions.classList.add( 'buttons' );
+                var cancel = document.createElement( 'div' );
                 cancel.id = 'optout';
-                cancel.classList.add( 'button-secondary' );
-                cancel.style.marginBottom = '10px';
-                cancel.style.fontSize = '16px';
-                cancel.innerHTML = 'Not Now';
+                cancel.classList.add( 'nf-button', 'secondary' );
+                cancel.innerHTML = nfi18n.optinSecondary;
                 actions.appendChild( cancel );
                 var confirm = document.createElement( 'button' );
                 confirm.id = 'optin';
-                confirm.classList.add( 'button-primary' );
-                confirm.style.marginBottom = '10px';
-                confirm.style.fontSize = '16px';
-                confirm.style.float = 'right';
-                confirm.innerHTML = 'Yes, I agree!';
+                confirm.classList.add( 'nf-button', 'primary', 'pull-right' );
+                confirm.innerHTML = nfi18n.optinPrimary;
                 actions.appendChild( confirm );
                 content.appendChild( actions );
                 // Define the success title.
                 var successTitle = document.createElement( 'h2' );
-                successTitle.style.fontSize = '130%';
-                successTitle.innerHTML = 'Keep being awesome!';
+                successTitle.innerHTML = nfi18n.optinAwesome;
                 // Define the success content.
                 var successContent = document.createElement( 'div' );
                 successContent.id = 'optin-thankyou';
-                successContent.style.padding = '10px 15px';
-                successContent.style.fontSize = '120%';
-                successContent.innerHTML = 'Thank you for opting in!';
+                successContent.classList.add( 'message' );
+                successContent.style.padding = '20px';
+                successContent.innerHTML = nfi18n.optinThanks;
                 // Set the options for the modal and open it.
                 optinModal.setContent( document.createElement( 'div' ).appendChild( content ).innerHTML );
                 optinModal.setTitle( document.createElement( 'div' ).appendChild( title ).innerHTML );
@@ -209,11 +189,13 @@ define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections
 
                     // Show spinner
                     jQuery( '#optin-spinner' ).css( 'visibility', 'visible' );
+                    jQuery( '#optin-spinner' ).css( 'display', 'inline-block' );
                     jQuery( '#optin-buttons' ).css( 'visibility', 'hidden' );
                     // Hit AJAX endpoint and opt-in.
                     jQuery.post( ajaxurl, { action: 'nf_optin', ninja_forms_opt_in: 1, send_email: sendEmail, user_email: userEmail },
                                 function( response ) {
                         jQuery( '#optin-spinner' ).css( 'visibility', 'hidden' );
+                        jQuery( '#optin-spinner' ).css( 'display', 'none' );
                         optinModal.setTitle( document.createElement( 'div' ).appendChild( successTitle ).innerHTML );
                         optinModal.setContent( document.createElement( 'div' ).appendChild( successContent ).innerHTML );
                         /**
