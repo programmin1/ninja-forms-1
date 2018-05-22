@@ -177,13 +177,6 @@ final class NF_Tracking
     private function opt_out()
     {
         if( $this->is_opted_out() ) return;
-
-        // Disable tracking.
-        update_option( 'ninja_forms_allow_tracking', false );
-        update_option( 'ninja_forms_do_not_allow_tracking', true );
-
-        // Clear dispatch debounce flag.
-        update_option( 'ninja_forms_optin_reported', 0 );
         
         $data = array();
         $user_email = get_option( 'ninja_forms_optin_email' );
@@ -192,6 +185,13 @@ final class NF_Tracking
         }
         Ninja_Forms()->dispatcher()->send( 'optout', $data );
         delete_option( 'ninja_forms_optin_email' );
+
+        // Disable tracking.
+        update_option( 'ninja_forms_allow_tracking', false );
+        update_option( 'ninja_forms_do_not_allow_tracking', true );
+
+        // Clear dispatch debounce flag.
+        update_option( 'ninja_forms_optin_reported', 0 );
     }
 
     public function check_setting( $setting )
