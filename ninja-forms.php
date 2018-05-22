@@ -424,6 +424,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
 	     * Privacy policy suggested content for Ninja Forms
 	     */
         function nf_plugin_add_suggested_privacy_content() {
+            if ( ! function_exists( 'wp_add_privacy_policy_content' ) ) return;
 			$content = $this->plugin_get_default_privacy_content();
 	        wp_add_privacy_policy_content(
 	        	__( 'Ninja Forms' ),
