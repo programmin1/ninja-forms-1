@@ -23,10 +23,10 @@ define([], function() {
 			var value = model.get( 'value' );
 			var format = model.get( 'date_format' );
 
-            if( 'default' === format) {
+			if( 'default' === format) {
 				format = nfi18n.dateFormat;
 			}
-            
+
 			if ( 0 < value.length ) {
 				// use moment's isValid to check against the fields format setting
 				if( moment( value, format ).isValid() ) {

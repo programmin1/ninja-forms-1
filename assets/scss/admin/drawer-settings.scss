@@ -237,6 +237,33 @@
             }
         }
     }
+    .button-toggle {
+        text-align: left;
+        border: #ccc 1px solid;
+        border-radius: 5px;
+        background: #f1f1f1;
+        margin-top: 35px;
+        padding: 9px 0px;
+        width: 100%;
+        label {
+            width: 48%;
+            display: inline-block;
+            margin-left: 1%;
+            span {
+                width: 100%;
+                display: inline-block;
+                cursor: pointer;
+            }
+            input:checked + span {
+                background-color: #1ea9ea;
+                border-color: #1ea9ea;
+            }
+            input + span {
+                background-color: #ccc;
+                border-color: #ccc;
+            }
+        }
+    }
 }
 .nf-drawer-buttons {
     display: none;
