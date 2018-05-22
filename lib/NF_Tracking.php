@@ -138,6 +138,7 @@ final class NF_Tracking
         if ( isset ( $_REQUEST[ 'send_email' ] ) ) {
             $send_email = absint( $_REQUEST[ 'send_email' ] );
             $user_email = $_REQUEST[ 'user_email' ];
+            add_option( 'ninja_forms_optin_email', $user_email, '', 'no' );
         } else {
             $send_email = 0;
             $user_email = '';
