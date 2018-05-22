@@ -400,6 +400,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             }
             
             add_action( 'admin_init', array( self::$instance, 'nf_do_telemetry' ) );
+            add_action( 'admin_init', array( self::$instance, 'nf_plugin_add_suggested_privacy_content' ), 20 );
 
             return self::$instance;
         }
@@ -418,6 +419,28 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
 
             add_filter( 'ninja_forms_dashboard_menu_items', array( $this, 'maybe_hide_dashboard_items' ) );
         }
+
+	    /**
+	     * Privacy policy suggested content for Ninja Forms
+	     */
+        function nf_plugin_add_suggested_privacy_content() {
+			$content = $this->plugin_get_default_privacy_content();
+	        wp_add_privacy_policy_content(
+	        	__( 'Ninja Forms' ),
+		        wp_kses_post( wpautop( $content, false) ) );
+
+        }
+
+	    /**
+	     * Return the default suggested privacy policy content.
+	     *
+	     * @return string The default policy content.
+	     */
+	    function plugin_get_default_privacy_content() {
+		    return
+			    '<h2>' . __( 'Ninja Forms allows you to collect personal information' ) . '</h2>' .
+			    '<p>' . __( 'If you are using Ninja Forms to collect personal information, you should consult a legal professional for your use case.' ) . '</p>';
+	    }
 
         /**
          * NF Whip Notice
