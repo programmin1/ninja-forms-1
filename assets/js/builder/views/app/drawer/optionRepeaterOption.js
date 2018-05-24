@@ -159,6 +159,52 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 					// The template requires a string.
 					return label.innerHTML;
 				},
+                renderSaveActionFieldSelect: function( dataID, value ){
+                    var initialOption, select, emptyContainer, label;
+
+                    var fields = nfRadio.channel( 'fields' ).request( 'get:collection' );
+
+                    initialOption = document.createElement( 'option' );
+                    initialOption.value = '';
+                    initialOption.label = '--';
+                    initialOption.innerHTML = '--';
+
+                    select = document.createElement( 'select' );
+                    select.classList.add( 'setting' );
+                    select.setAttribute( 'data-id', dataID );
+                    select.appendChild( initialOption );
+
+                    // Build a lookup table for fields we want to remove from our fields list.
+                    var removeFieldsLookup = [ 'html', 'submit', 'divider', 'recaptcha', 'spam', 'creditcard', 'creditcardcvc', 'creditcardexpiration', 'creditcardfullname', 'creditcardnumber', 'creditcardzip'];
+
+                    fields.each( function( field ){
+                    	// Check for the field type in our lookup array and...
+						if( jQuery.inArray( field.get( 'type' ), removeFieldsLookup ) !== -1 ) {
+							// Return if the type is in our lookup array.
+							return '';
+						}
+
+                        var option = document.createElement( 'option' );
+                        if ( value == field.get( 'key' ) ) {
+                            option.setAttribute( 'selected', 'selected' );
+                        }
+                        option.value = field.get( 'key' );
+                        option.innerHTML = field.get( 'label' );
+                        option.label = field.get( 'label' );
+                        select.appendChild( option );
+                    });
+
+                    label = document.createElement( 'label' );
+                    label.classList.add( 'nf-select' );
+                    label.appendChild( select );
+
+                    // Select Lists need an empty '<div></div>' for styling purposes.
+                    emptyContainer = document.createElement( 'div' );
+                    label.appendChild( emptyContainer );
+
+                    // The template requires a string.
+                    return label.innerHTML;
+                },
 				renderOptions: function( column, value ) {
 
 					if( 'undefined' == typeof that.options.columns[ column ] ) return;

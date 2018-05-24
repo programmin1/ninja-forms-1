@@ -739,7 +739,7 @@ Label Three, value-three, 3
 	</div>
 	<div>
 		<# try { #>
-		{{{ data.renderFieldSelect( 'field', data.field ) }}}
+		{{{ data.renderSaveActionFieldSelect( 'field', data.field ) }}}
 		<# } catch ( err ) { #>
 		<input type="text" class="setting" value="{{ data.field }}" data-id="field" >
 		<# } #>

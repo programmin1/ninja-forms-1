@@ -79,8 +79,7 @@ final class NF_Actions_Save extends NF_Abstracts_Action
             if( 'save_all' == $save_all_none ) {
             	$save_field = true;
                 // For each exception to that rule...
-            	foreach( $action_settings[ 'exception_fields' ] as
-		            $exception_field ) {
+            	foreach( $action_settings[ 'exception_fields' ] as $exception_field ) {
                     // Remove it from the list.
             		if( $field[ 'key' ] == $exception_field[ 'field'] ) {
             			$save_field = false;
