@@ -39,7 +39,7 @@ define( [ 'models/app/optionRepeaterCollection' ], function( ListOptionCollectio
                 // Sanitize any unwanted special characters.
                 // TODO: This assumes English is the standard language.
                 //       We might want to allow other language characters through this check later.
-                var pattern = /[^0-9a-zA-Z_@.-]/g;
+                var pattern = /[^0-9a-zA-Z _@.-]/g;
                 newVal = newVal.replace( pattern, '' );
                 model.set( 'value', newVal );
                 // Re-render the value.

@@ -130,6 +130,7 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
                     initialOption = document.createElement( 'option' );
                     initialOption.value = '';
                     initialOption.label = '--';
+                    initialOption.innerHTML = '--';
 
 					select = document.createElement( 'select' );
 					select.classList.add( 'setting' );
@@ -138,8 +139,11 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 
 					fields.each( function( field ){
 						var option = document.createElement( 'option' );
-						option.selected = ( value == field.get( 'key' ) );
+						if ( value == field.get( 'key' ) ) {
+                            option.setAttribute( 'selected', 'selected' );
+                        }
 						option.value = field.get( 'key' );
+                        option.innerHTML = field.get( 'label' );
 						option.label = field.get( 'label' );
 						select.appendChild( option );
 					});
