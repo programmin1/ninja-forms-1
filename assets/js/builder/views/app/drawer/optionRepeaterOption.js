@@ -159,7 +159,7 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 					// The template requires a string.
 					return label.innerHTML;
 				},
-                renderSaveActionFieldSelect: function( dataID, value ){
+                renderNonSaveFieldSelect: function( dataID, value ){
                     var initialOption, select, emptyContainer, label;
 
                     var fields = nfRadio.channel( 'fields' ).request( 'get:collection' );
@@ -175,7 +175,10 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
                     select.appendChild( initialOption );
 
                     // Build a lookup table for fields we want to remove from our fields list.
-                    var removeFieldsLookup = [ 'html', 'submit', 'divider', 'recaptcha', 'spam', 'creditcard', 'creditcardcvc', 'creditcardexpiration', 'creditcardfullname', 'creditcardnumber', 'creditcardzip'];
+                    var removeFieldsLookup = [ 'html', 'submit', 'hr',
+						'recaptcha', 'spam', 'creditcard', 'creditcardcvc',
+						'creditcardexpiration', 'creditcardfullname',
+						'creditcardnumber', 'creditcardzip' ];
 
                     fields.each( function( field ){
                     	// Check for the field type in our lookup array and...
