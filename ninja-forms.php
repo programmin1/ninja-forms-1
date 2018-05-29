@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 3.2.21
+Version: 3.3.1
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
@@ -58,7 +58,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         /**
          * @since 3.0
          */
-        const VERSION = '3.2.21';
+        const VERSION = '3.3.1';
 
         const WP_MIN_VERSION = '4.7';
 
@@ -204,7 +204,21 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                     define( 'NF_PLUGIN_URL', self::$url );
                 }
 
+                $saved_version = get_option( 'ninja_forms_version' );
+                // If we have a recorded version...
+                // AND that version is less than our current version...
+                if ( $saved_version && version_compare( $saved_version, self::VERSION, '<' ) ) {
+                    // We just upgraded the plugin.
+                    $plugin_upgrade = true;
+                } else {
+                    $plugin_upgrade = false;
+                }
                 update_option( 'ninja_forms_version', self::VERSION );
+                // If we've not recorded our db version...
+                if ( ! get_option( 'ninja_forms_db_version' ) ) {
+                    // Set it to the baseline (1.0).
+                    add_option( 'ninja_forms_db_version', '1.0', '', 'no' );
+                }
 
                 /*
                  * Register our autoloader
@@ -287,6 +301,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 new NF_Admin_Metaboxes_Calculations();
 
                 /*
+                 * User data requests ( GDPR actions )
+                 */
+                new NF_Admin_UserDataRequests();
+
+                /*
                  * Logger
                  */
                 self::$instance->_logger = new NF_Database_Logger();
@@ -361,6 +380,13 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                     require_once( self::$dir . 'includes/Integrations/EDD/EDD_SL_Plugin_Updater.php');
                 }
                 require_once self::$dir . 'includes/Integrations/EDD/class-extension-updater.php';
+                
+                // If Ninja Forms was just upgraded...
+                if ( $plugin_upgrade ) {
+                    // Ensure all of our tables have been defined.
+                    $migrations = new NF_Database_Migrations();
+                    $migrations->migrate();
+                }
             }
 
             add_action( 'admin_notices', array( self::$instance, 'admin_notices' ) );
@@ -377,6 +403,9 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 // Pulls in the whip notice if the user is.
                 add_action( 'admin_init', array( self::$instance, 'nf_whip_notice' ) );
             }
+            
+            add_action( 'admin_init', array( self::$instance, 'nf_do_telemetry' ) );
+            add_action( 'admin_init', array( self::$instance, 'nf_plugin_add_suggested_privacy_content' ), 20 );
 
             return self::$instance;
         }
@@ -396,6 +425,29 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             add_filter( 'ninja_forms_dashboard_menu_items', array( $this, 'maybe_hide_dashboard_items' ) );
         }
 
+	    /**
+	     * Privacy policy suggested content for Ninja Forms
+	     */
+        function nf_plugin_add_suggested_privacy_content() {
+            if ( ! function_exists( 'wp_add_privacy_policy_content' ) ) return;
+			$content = $this->plugin_get_default_privacy_content();
+	        wp_add_privacy_policy_content(
+	        	__( 'Ninja Forms' ),
+		        wp_kses_post( wpautop( $content, false) ) );
+
+        }
+
+	    /**
+	     * Return the default suggested privacy policy content.
+	     *
+	     * @return string The default policy content.
+	     */
+	    function plugin_get_default_privacy_content() {
+		    return
+			    '<h2>' . __( 'Ninja Forms allows you to collect personal information' ) . '</h2>' .
+			    '<p>' . __( 'If you are using Ninja Forms to collect personal information, you should consult a legal professional for your use case.' ) . '</p>';
+	    }
+
         /**
          * NF Whip Notice
          * If the user is on a version below PHP 5.6 then we get an instance of the
@@ -407,6 +459,32 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         {
             require_once self::$dir . '/includes/Libraries/Whip/NF_Whip.php';
             return new NF_Whip();
+        }
+        
+        /**
+         * Function to launch our various telemetry calls on admin_init.
+         */
+        public function nf_do_telemetry() {
+            if ( ! has_filter( 'ninja_forms_settings_licenses_addons' ) && ( ! Ninja_Forms()->tracking->is_opted_in() || Ninja_Forms()->tracking->is_opted_out() ) ) {
+                return false;
+            }
+            global $wpdb;
+            // If we've not already sent table collation...
+            if ( ! get_option( 'nf_tel_collate' ) ) {
+                $collate = array();
+                // Get the collation of the wp_options table.
+                $sql = "SHOW FULL COLUMNS FROM `" . $wpdb->prefix . "options` WHERE Field = 'option_value'";
+                $result = $wpdb->get_results( $sql, 'ARRAY_A' );
+                $collate[ 'cache' ] = $result[ 0 ][ 'Collation' ];
+                // Get the collation of the nf3_forms table.
+                $sql = "SHOW FULL COLUMNS FROM `" . $wpdb->prefix . "nf3_forms` WHERE Field = 'title'";
+                $result = $wpdb->get_results( $sql, 'ARRAY_A' );
+                $collate[ 'forms' ] = $result[ 0 ][ 'Collation' ];
+                // Send our data to api.ninjaforms.com.
+                Ninja_Forms()->dispatcher()->send( 'table_collate', $collate );
+                // Record an option so that we don't run this again.
+                add_option( 'nf_tel_collate', '1', '', 'no' );
+            }
         }
 
         public function maybe_hide_dashboard_items( $items )
