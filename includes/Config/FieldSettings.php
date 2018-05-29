@@ -653,6 +653,14 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'help' => __( 'This column in the submissions table will sort by number.', 'ninja-forms' ),
     ),
 
+    'personally_identifiable'   => array(
+	    'name'           => 'anonymize',
+	    'type'           => 'toggle',
+	    'group'          => 'advanced',
+	    'label'          => __( 'Anonymize Data', 'ninja-forms' ),
+	    'width'          => 'full',
+    ),
+
     /*
      |--------------------------------------------------------------------------
      | Display Settings
