@@ -17,11 +17,32 @@ define( [], function() {
 			nfRadio.channel( 'app' ).request( 'update:db' );			
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', true );
 			nfRadio.channel( 'app' ).request( 'close:drawer' );
+            this.dispatchClick();
 		},
 
 		undoSingle: function( change, undoAll ) {
 			nfRadio.channel( 'changes' ).request( 'undo:' + change.get( 'action' ), change, undoAll );
-		}
+            this.dispatchClick();
+		},
+        
+        dispatchClick: function() {
+            // If we already have a cookie, exit.
+            if ( document.cookie.includes( 'nf_undo' ) ) return;
+            // Otherwise, prepare our cookie.
+            var cname = "nf_undo";
+            var d = new Date();
+            // Set expiration at 1 week.
+            d.setTime( d.getTime() + ( 7*24*60*60*1000 ) );
+            var expires = "expires="+ d.toUTCString();
+            // Bake the cookie.
+            document.cookie = cname + "=1;" + expires + ";path=/";
+            var data = {
+                action: 'nf_undo_click',
+                security: nfAdmin.ajaxNonce
+            }
+            // Make our AJAX call.
+            jQuery.post( ajaxurl, data );
+        }
 
 	});
 

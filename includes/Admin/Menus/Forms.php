@@ -111,7 +111,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 //                'add_new_text' => __( 'Add New Form', 'ninja-forms' )
 //            ) );
 
-            $use_services = true; // Feature Flag.
+            $use_services = false; // Feature Flag.
             $use_services = apply_filters( 'ninja_forms_use_services', $use_services ); // The WordPress Way.
             $use_services = $use_services && ( version_compare( PHP_VERSION, '5.6', '>=' ) ); // PHP Version Check.
 
@@ -136,6 +136,10 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             wp_localize_script( 'nf-dashboard', 'nfi18n', Ninja_Forms::config( 'i18nDashboard' ) );
             wp_localize_script( 'nf-dashboard', 'nfPromotions', array_values( Ninja_Forms::config( 'DashboardPromotions' ) ) );
+            wp_localize_script( 'nf-dashboard', 'nfAdmin', array(
+                'ajaxNonce'         => wp_create_nonce( 'ninja_forms_dashboard_nonce' ),
+                'formTelemetry'     => ( get_option( 'nf_form_tel_sent' ) ) ? 0 : 1
+            ) );
 
             wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
             wp_enqueue_style( 'nf-dashboard', Ninja_Forms::$url . 'assets/css/dashboard.min.css' );
