@@ -654,11 +654,13 @@ return apply_filters( 'ninja_forms_field_settings', array(
     ),
 
     'personally_identifiable'   => array(
-	    'name'           => 'anonymize',
+	    'name'           => 'personally_identifiable',
 	    'type'           => 'toggle',
 	    'group'          => 'advanced',
-	    'label'          => __( 'Anonymize Data', 'ninja-forms' ),
+	    'label'          => __( 'This Field Is Personally Identifiable Data', 'ninja-forms' ),
 	    'width'          => 'full',
+	    'value'          => '',
+	    'help' => __( 'This option helps with privacy regulation compliance', 'ninja-forms' ),
     ),
 
     /*

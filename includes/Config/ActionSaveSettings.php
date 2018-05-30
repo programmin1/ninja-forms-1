@@ -5,6 +5,15 @@ return apply_filters( 'ninja_forms_action_email_settings', array(
     /*
      * To
      */
+	'submitter_email' => array(
+		'name' => 'submitter_email',
+		'type' => 'email-select',
+		'options' => array(),
+		'group' => 'primary',
+		'label' => __( 'Designated Submitter\'s Email Address', 'ninja-forms' ),
+		'value' => '',
+		'help' => __( 'This field helps you with privacy regulations.', 'ninja-forms' ),
+	),
 
     'fields_save_toggle' => array(
         'name' => 'fields-save-toggle',
