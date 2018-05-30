@@ -253,6 +253,7 @@
                 width: 100%;
                 display: inline-block;
                 cursor: pointer;
+                transition: background-color 0.4s;
             }
             input:checked + span {
                 background-color: #1ea9ea;
