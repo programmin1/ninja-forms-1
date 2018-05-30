@@ -287,13 +287,17 @@ define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sect
                 } );                
                 // Setup the confirm click event.
                 jQuery( '#nf-confirm' ).click( function( e ) {
+                    // Prevent the user from leaving without firing an alert.
                     jQuery( window ).bind( 'beforeunload', function() { 
-                        return 'Leaving could cause damage to your data.';
+                        return 'Are you sure? Leaving before the process completes could cause damage to your data.';
                     } );
+                    // Hide the buttons.
                     jQuery( '#nf-cancel' ).hide();
                     jQuery( '#nf-confirm' ).hide();
+                    // Show the progress bar.
                     jQuery( '#nf-progress-bar' ).show();
                     jQuery( '#nf-loading-text' ).show();
+                    // Begin our cleanup process.
                     that.cleanupProcess( that, -1, cleanupModal );
                 } );
             }
@@ -330,6 +334,15 @@ define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sect
             }
         },
         
+        /**
+         * Function to manage our data cleanup batch process response.
+         * 
+         * @since 3.3.1
+         * 
+         * @param context (this) The context at the time of function definition.
+         * @param steps (int) The total number of steps in this process.
+         * @param modal (jBox) A reference to the modal where this process is running.
+         */
         cleanupProcess: function( context, steps, modal ) {
             var data = {
                 action: 'nf_batch_process',
@@ -340,7 +353,9 @@ define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sect
                 response = JSON.parse( response );
                 // If we're done...
                 if ( response.batch_complete ) {
+                    // Push our progress bar to 100%.
                     jQuery( '.nf-progress-bar-slider' ).css( 'width', '100%' );
+                    // Allow the user to leave the page now.
                     jQuery( window ).unbind( 'beforeunload' );
                     modal.close();
                     // Exit.

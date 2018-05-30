@@ -851,6 +851,14 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             }
         }
         
+        /**
+         * Function to register an admin notice if we detect that this installation has "unclean" Ninja Forms data.
+         * 
+         * @since 3.3.1
+         * 
+         * @param $notices (Array) Our array of admin notices.
+         * @return $notices (Array) Our array of admin notices.
+         */
         public function data_cleanup_notice( $notices ) {
             $notices[ 'data_cleanup' ] = array(
                 'title' => __( 'Data Cleanup', 'ninja-forms' ),
