@@ -134,7 +134,10 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 'formTelemetry'     => ( get_option( 'nf_form_tel_sent' ) ) ? 0 : 1,
                 'showOptin'         => ( get_option( 'ninja_forms_do_not_allow_tracking' ) ||
                                          get_option( 'ninja_forms_allow_tracking' ) ) ? 0 : 1,
-                'currentUserEmail'  => $current_user->user_email
+                'currentUserEmail'  => $current_user->user_email,
+                'doingCleanup'      => ( ! get_option( 'ninja_forms_data_is_clean' ) &&
+                                        isset( $_REQUEST[ 'action' ] ) &&
+                                        'cleanup' == $_REQUEST[ 'action' ] ) ? 1 : 0,
             ) );
 
             wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
