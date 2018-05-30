@@ -229,6 +229,26 @@ jBox
 }
 
 /*
+Progress Bar
+---------------------------------------------*/
+
+.nf-progress-bar {
+    height: 20px;
+    border-radius: 3px;
+    margin: 25px 0px;
+    border: 1px solid #1ea9ea;
+    position: relative;
+    overflow: hidden;
+    
+    .nf-progress-bar-slider {
+        height: 20px;
+        width: 0%;
+        background-color: #1ea9ea;
+        transition: width 0.3s;
+    }
+}
+
+/*
 Loading Spinner
 ---------------------------------------------*/
 
