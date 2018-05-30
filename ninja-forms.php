@@ -849,9 +849,10 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         public function data_cleanup_notice( $notices ) {
             $notices[ 'data_cleanup' ] = array(
                 'title' => __( 'Data Cleanup', 'ninja-forms' ),
-                'msg' => sprintf( __( 'Ninja Forms has detected data on your site leftover from old forms or Ninja Forms versions.%sWe would like to run a quick cleanup process to remove this old data. Your forms will not be impacted by this process, but it may take several minutes to complete.%sPlease %sclick here%s to begin.', 'ninja-forms' ), '<br />', '<br /><br />', '<a href="#">', '</a>' ),
+                'msg' => sprintf( __( 'Ninja Forms has detected data on your site leftover from old forms or Ninja Forms versions.%sWe would like to run a quick cleanup process to remove this old data. Your forms will not be impacted by this process, but it may take several minutes to complete.%sPlease %sclick here%s to begin.', 'ninja-forms' ), '<br />', '<br /><br />', '<a href="' . admin_url( 'admin.php?page=ninja-forms&action=cleanup' ) . '">', '</a>' ),
                 'int' => 0,
                 'ignore_spam' => true,
+                'dismiss' => 0
             );
             return $notices;
         }
