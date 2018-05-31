@@ -17,8 +17,12 @@ final class NF_Database_SubmissionDeletionController
         foreach( $options as $option ) {
             $option = explode( ',', $option );
 
-            $expired_subs = $this->get_expired_subs( $option[ 0 ], $option[ 1 ] );
+            $expired_subs[] = $this->get_expired_subs( $option[ 0 ], $option[ 1 ] );
         }
+
+        echo '<pre>';
+        var_dump( $expired_subs );
+        echo '</pre>';
     }
 
     public function get_expired_subs( $form_id, $expiration_time )
