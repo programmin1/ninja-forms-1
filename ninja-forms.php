@@ -205,6 +205,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 }
 
                 $saved_version = get_option( 'ninja_forms_version' );
+                // If this is a fresh install... (The version has never been saved.)
+                if ( ! $saved_version ) {
+                    // Assume we have clean data.
+                    update_option( 'ninja_forms_data_is_clean', 'true' );
+                }
                 // If we have a recorded version...
                 // AND that version is less than our current version...
                 if ( $saved_version && version_compare( $saved_version, self::VERSION, '<' ) ) {
