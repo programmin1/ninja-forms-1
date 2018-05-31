@@ -60,6 +60,7 @@ define([], function() {
 				option.classes = this.classes;
 				option.currentValue = this.value;
 				option.index = index;
+				option.required = this.required;
 
 				/*
 				 * If we haven't edited this field yet, use the default checked

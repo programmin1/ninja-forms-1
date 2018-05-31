@@ -99,6 +99,7 @@ define([], function() {
 	            // }
 	            option.selected = selected;
 	            option.isSelected = selected;
+	            option.required = this.required;
                 var template = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-field-listcheckbox-option' );
                 html += template( option );
             }, this );
