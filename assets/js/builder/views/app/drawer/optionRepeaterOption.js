@@ -154,6 +154,7 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 
 					// Select Lists need an empty '<div></div>' for styling purposes.
 					emptyContainer = document.createElement( 'div' );
+                    emptyContainer.style.bottom = '6px';
 					label.appendChild( emptyContainer );
 
 					// The template requires a string.
