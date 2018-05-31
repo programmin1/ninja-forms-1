@@ -239,8 +239,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  * AJAX Controllers
                  */
                 self::$instance->controllers[ 'form' ]          = new NF_AJAX_Controllers_Form();
-                self::$instance->controllers[ 'batch_process' ]          = new
-                NF_AJAX_REST_BatchProcess();
+                self::$instance->controllers[ 'batch_process' ] = new NF_AJAX_REST_BatchProcess();
                 self::$instance->controllers[ 'preview' ]       = new NF_AJAX_Controllers_Preview();
                 self::$instance->controllers[ 'submission' ]    = new NF_AJAX_Controllers_Submission();
                 self::$instance->controllers[ 'savedfields' ]   = new NF_AJAX_Controllers_SavedFields();
@@ -265,6 +264,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  */
                 require_once Ninja_Forms::$dir . 'includes/Libraries/BackgroundProcessing/wp-background-processing.php';
                 self::$instance->requests[ 'update-fields' ] = new NF_AJAX_Processes_UpdateFields();
+
 
                 /*
                  * WP-CLI Commands
@@ -352,6 +352,9 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  */
                 self::$instance->tracking = new NF_Tracking();
 
+
+                self::$instance->subDeletionCRON = new NF_Database_SubmissionDeletionController();
+
                 /*
                  * JS Exception Handler
                  *
@@ -401,6 +404,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             
             add_action( 'admin_init', array( self::$instance, 'nf_do_telemetry' ) );
             add_action( 'admin_init', array( self::$instance, 'nf_plugin_add_suggested_privacy_content' ), 20 );
+//            add_action( 'admin_init', array( self::$instance, 'subs_expiration_controller' ), 9999 );
 
             return self::$instance;
         }
@@ -431,6 +435,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
 		        wp_kses_post( wpautop( $content, false) ) );
 
         }
+
 
 	    /**
 	     * Return the default suggested privacy policy content.
@@ -492,6 +497,16 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 );
             }
             return $items;
+        }
+
+        public function subs_expiration_controller()
+        {
+            $options = get_option( 'nf_sub_expiration' );
+
+            $subs = array();
+            foreach( $options as $option ) {
+                $subs[] = Ninja_Forms()->form( $option[ 0 ] )->get_subs();
+            }
         }
 
         public function scrub_available_actions( $actions )

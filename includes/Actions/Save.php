@@ -37,6 +37,7 @@ final class NF_Actions_Save extends NF_Abstracts_Action
         $settings = Ninja_Forms::config( 'ActionSaveSettings' );
 
         $this->_settings = array_merge( $this->_settings, $settings );
+
     }
 
     /*
@@ -45,7 +46,76 @@ final class NF_Actions_Save extends NF_Abstracts_Action
 
     public function save( $action_settings )
     {
+        if( 1 == $action_settings[ 'set_subs_to_expire' ] ) {
+            $form = json_decode( stripslashes( $_POST[ 'form' ] ) );
+            $this->add_submission_expiration_option( $action_settings, $form->id );
+        }
+    }
 
+    /**
+     * Add Submission Expiration Option
+     *
+     * @param $action_settings
+     * @param $form_id
+     */
+    public function add_submission_expiration_option( $action_settings, $form_id )
+    {
+        // TODO: Change this to be a dynamic value instead of a static value.
+        $expiration_value = $form_id . ',' . $action_settings[ 'subs_expire_time' ];
+
+        // Check for option value...
+        $option = get_option( 'nf_sub_expiration' );
+
+        // If option doesn't exist we know that we can just create the option.
+        if( empty( $option ) ){
+            update_option( 'nf_sub_expiration', array( $expiration_value ) );
+            return;
+        }
+
+        /*
+         * If option already exists we need to check the lookup array to see if this value is in the array
+         * use the check deletion option method.
+         */
+        $this->compare_expiration_option( $expiration_value, $option );
+
+        /*
+         *
+         */
+    }
+
+    /**
+     * Compare Expiration Option
+     * Accepts $expiration_data and checks to see if the values already exist in the array.
+     * @since 3.3.2
+     *
+     * @param array $expiration_value - key/value pair
+     *      $expiration_value[ 'form_id' ]      = form_id(int)
+     *      $expiration_value[ 'expire_time' ]  = subs_expire_time(int)
+     * @param array $expiration_option - list of key/value pairs of the expiration options.
+     * @return null
+     */
+    public function compare_expiration_option( $expiration_value, $expiration_option )
+    {
+        $values = explode( ',', $expiration_value );
+
+        // Find the position of the value we are tyring to update.
+        $array_position = array_search( ( int ) $values[ 0 ], $expiration_option );
+
+        /*
+         * TODO: Refactor this to only run when needed.
+         * Remove this value from the array.
+         */
+        if( isset( $array_position ) ) {
+            unset( $expiration_option[ $array_position ] );
+        }
+
+        // Check for our value in the options and then add it if it doesn't exist.
+        if( ! in_array( $expiration_value, $expiration_option ) ) {
+            $expiration_option[] = $expiration_value;
+        }
+
+        // Update our option.
+        update_option( 'nf_sub_expiration', $expiration_option  );
     }
 
     public function process( $action_settings, $form_id, $data )
