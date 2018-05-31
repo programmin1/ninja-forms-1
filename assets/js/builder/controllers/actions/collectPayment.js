@@ -37,7 +37,7 @@ define( [], function( settingCollection ) {
 			/*
 			 * We have changed a calculation. Make sure that 'calc' is our payment total type.
 			 */
-			if ( 'calculation' != this.get( 'payment_total_type' ) ) {
+			if ( 'calc' != this.get( 'payment_total_type' ) ) {
 				return
 			}
 			

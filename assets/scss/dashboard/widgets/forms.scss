@@ -102,10 +102,13 @@ th {
   flex-wrap: wrap;
 
   & > div {
+    display: flex;
     width: 50%;
   }
 
   .template {
+    display: grid;
+    width: 100%;
     a {
       color: #424242;
       display: block;
@@ -147,7 +150,7 @@ table .forms-table-row li {
     display: inline-block;
 }
 
-.modal-ad {
+.modal-template {
   padding: 20px;
   img {
     width: 100%;
