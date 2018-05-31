@@ -737,7 +737,7 @@ Label Three, value-three, 3
 	<div>
 		<span class="dashicons dashicons-menu handle"></span>
 	</div>
-	<div>
+	<div class="nf-select">
 		<# try { #>
 		{{{ data.renderNonSaveFieldSelect( 'field', data.field ) }}}
 		<# } catch ( err ) { #>

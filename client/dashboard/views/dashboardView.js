@@ -162,7 +162,7 @@ define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sect
                 cancel.classList.add( 'nf-button', 'secondary' );
                 cancel.innerHTML = nfi18n.optinSecondary;
                 actions.appendChild( cancel );
-                var confirm = document.createElement( 'button' );
+                var confirm = document.createElement( 'div' );
                 confirm.id = 'optin';
                 confirm.classList.add( 'nf-button', 'primary', 'pull-right' );
                 confirm.innerHTML = nfi18n.optinPrimary;
@@ -200,22 +200,23 @@ define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sect
                         sendEmail = 0;
                         userEmail = '';
                     }
-
-                    // Show spinner
-                    jQuery( '#optin-spinner' ).css( 'visibility', 'visible' );
-                    jQuery( '#optin-spinner' ).css( 'display', 'inline-block' );
-                    jQuery( '#optin-buttons' ).css( 'visibility', 'hidden' );
+                    // Disable our buttons.
+                    jQuery( '#optin' ).unbind( 'click' );
+                    jQuery( '#optout' ).unbind( 'click' );
+                    // Get a reference to the current width (to avoid resizing the button).
+                    var width = jQuery( '#optin' ).width();
+                    // Show spinner.
+                    jQuery( '#optin' ).html( '<span class="dashicons dashicons-update dashicons-update-spin"></span>' );
+                    jQuery( '#optin' ).width( width );
                     // Hit AJAX endpoint and opt-in.
                     jQuery.post( ajaxurl, { action: 'nf_optin', ninja_forms_opt_in: 1, send_email: sendEmail, user_email: userEmail },
                                 function( response ) {
-                        jQuery( '#optin-spinner' ).css( 'visibility', 'hidden' );
-                        jQuery( '#optin-spinner' ).css( 'display', 'none' );
-                        optinModal.setTitle( document.createElement( 'div' ).appendChild( successTitle ).innerHTML );
-                        optinModal.setContent( document.createElement( 'div' ).appendChild( successContent ).innerHTML );
                         /**
                          * When we get a response from our endpoint, show a thank you and set a timeout
                          * to close the modal.
                          */
+                        optinModal.setTitle( document.createElement( 'div' ).appendChild( successTitle ).innerHTML );
+                        optinModal.setContent( document.createElement( 'div' ).appendChild( successContent ).innerHTML );
                         setTimeout (
                             function(){
                                 optinModal.close();
@@ -226,12 +227,16 @@ define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sect
                 } );
                 // Setup the optout click event.
                 jQuery( '#optout' ).click( function( e ) {
-                    // Show spinner
-                    jQuery( '#optin-spinner' ).css( 'visibility', 'visible' );
-                    jQuery( '#optin-buttons' ).css( 'visibility', 'hidden' );
+                    // Disable our buttons.
+                    jQuery( '#optin' ).unbind( 'click' );
+                    jQuery( '#optout' ).unbind( 'click' );
+                    // Get a reference to the current width (to avoid resizing the button).
+                    var width = jQuery( '#optout' ).width();
+                    // Show spinner.
+                    jQuery( '#optout' ).html( '<span class="dashicons dashicons-update dashicons-update-spin"></span>' );
+                    jQuery( '#optout' ).width( width );
                     // Hit AJAX endpoint and opt-in.
                      jQuery.post( ajaxurl, { action: 'nf_optin', ninja_forms_opt_in: 0 }, function( response ) {
-                        jQuery( '#optin-spinner' ).css( 'visibility', 'hidden' );
                         // When we get a response from our endpoint, close the modal. 
                         optinModal.close();
                     } );            
