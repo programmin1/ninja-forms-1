@@ -337,8 +337,6 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 					    
 					    if( that.value === field.get( 'key' ) ) {
 						    option.setAttribute( 'selected', 'selected' );
-					    } else if( 0 === index ) {
-						    option.setAttribute( 'selected', 'selected' );
 					    }
 					    select.appendChild( option );
 					    index = index + 1;
