@@ -501,6 +501,13 @@ Label Three, value-three, 3
     </label>
 </script>
 
+<script id="tmpl-nf-edit-setting-email-select" type="text/template">
+	<label for="{{{ data.name }}}" class="nf-select">{{{ data.label }}} {{{ data.renderTooltip() }}}
+			{{{ data.renderEmailFieldOptions() }}}
+		<div></div>
+	</label>
+</script>
+
 <script id="tmpl-nf-edit-setting-field-select" type="text/template">
     <label for="{{{ data.name }}}" class="nf-select">{{{ data.label }}} {{{ data.renderTooltip() }}}
         <select id="{{{ data.name }}}" class="setting">

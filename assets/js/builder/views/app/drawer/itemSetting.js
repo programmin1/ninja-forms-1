@@ -302,6 +302,59 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 					return helpTextWrapper.innerHTML;
 				},
 
+			    /*
+			     * Render a select element with only the email fields on the
+			      * form
+			     */
+			    renderEmailFieldOptions: function() {
+				    var fields = nfRadio.channel( 'fields' ).request( 'get:collection' );
+
+				    initialOption = document.createElement( 'option' );
+				    initialOption.value = '';
+				    initialOption.label = '--';
+				    initialOption.innerHTML = '--';
+
+				    var select_value = '';
+				    var select = document.createElement( 'select' );
+				    select.classList.add( 'setting' );
+				    select.setAttribute( 'data-id', 'my_seledt' );
+				    select.appendChild( initialOption );
+
+				    var index = 0;
+				    var that = this;
+				    fields.each( function( field ) {
+					    // Check for the field type in our lookup array and...
+					    if( 'email' != field.get( 'type' ) ) {
+						    // Return if the type is in our lookup array.
+						    return '';
+					    }
+
+					    var option = document.createElement( 'option' );
+
+					    option.value = field.get( 'key' );
+					    option.innerHTML = field.get( 'label' );
+					    option.label = field.get( 'label' );
+					    
+					    if( that.value === field.get( 'key' ) ) {
+						    option.setAttribute( 'selected', 'selected' );
+					    }
+					    select.appendChild( option );
+					    index = index + 1;
+				    });
+
+				    label = document.createElement( 'label' );
+				    label.classList.add( 'nf-select' );
+
+				    label.appendChild( select );
+
+				    // Select Lists need an empty '<div></div>' for styling purposes.
+				    emptyContainer = document.createElement( 'div' );
+				    label.appendChild( emptyContainer );
+
+				    // The template requires a string.
+				    return label.innerHTML;
+			    },
+
 				renderMergeTags: function() {
 					if ( this.use_merge_tags && ! this.hide_merge_tags ) {
 						return '<span class="dashicons dashicons-list-view merge-tags"></span>';

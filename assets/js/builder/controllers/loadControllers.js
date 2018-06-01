@@ -101,6 +101,7 @@ define(
 		'controllers/actions/collectPaymentCalculations',
 		'controllers/actions/collectPaymentFixed',
 		'controllers/actions/collectPayment',
+		'controllers/actions/save',
 
 		/*
 		 * TODO: Settings domain controllers
@@ -205,6 +206,7 @@ define(
 		ActionCollectPaymentCalculations,
 		ActionCollectPaymentFixed,
 		ActionCollectPayment,
+		ActionSave,
 
 		/*
 		 * TODO: Settings domain controllers
@@ -297,7 +299,8 @@ define(
 				new ActionNewsletterList();
 				new ActionDeleteFieldListener();
 				new ActionCollectPaymentCalculations();
-				new ActionCollectPayment();				
+				new ActionCollectPayment();
+				new ActionSave();
 				new ActionTypes();
 				new ActionData();
 				new ActionSettings();
