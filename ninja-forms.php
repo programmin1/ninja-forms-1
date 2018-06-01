@@ -353,7 +353,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 self::$instance->tracking = new NF_Tracking();
 
 
-                self::$instance->subDeletionCRON = new NF_Database_SubmissionDeletionController();
+                self::$instance->submission_expiration_cron = new NF_Database_SubmissionExpirationCron();
 
                 /*
                  * JS Exception Handler
@@ -404,7 +404,6 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             
             add_action( 'admin_init', array( self::$instance, 'nf_do_telemetry' ) );
             add_action( 'admin_init', array( self::$instance, 'nf_plugin_add_suggested_privacy_content' ), 20 );
-//            add_action( 'admin_init', array( self::$instance, 'subs_expiration_controller' ), 9999 );
 
             return self::$instance;
         }
@@ -497,16 +496,6 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 );
             }
             return $items;
-        }
-
-        public function subs_expiration_controller()
-        {
-            $options = get_option( 'nf_sub_expiration' );
-
-            $subs = array();
-            foreach( $options as $option ) {
-                $subs[] = Ninja_Forms()->form( $option[ 0 ] )->get_subs();
-            }
         }
 
         public function scrub_available_actions( $actions )
