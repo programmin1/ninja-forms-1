@@ -11,12 +11,11 @@ final class NF_Database_SubmissionExpirationCron
     {
         // Retrieves the option that contains all of our expiration data.
         $options = get_option( 'nf_sub_expiration' );
-
         // Schedules our CRON job.
         if( ! wp_next_scheduled( 'nf_submission_expiration_cron' ) &&  ! empty( $options ) ) {
-            wp_schedule_event( time(), 'daily', 'nf_submission_expiration_cron' );
+            wp_schedule_event( time(), 'daily', 'nf_submission_expiration_cron', $options );
         }
-        add_action( 'nf_submission_expiration_cron', array( $this, 'expired_submission_cron' ) );
+        add_action( 'nf_submission_expiration_cron', array( $this, 'expired_submission_cron' ), 10, 1 );
     }
 
     /**
