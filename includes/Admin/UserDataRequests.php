@@ -115,12 +115,13 @@ class NF_Admin_UserDataRequests {
 						// make sure there is a value
 						if ( isset( $sub_meta[ '_field_' . $field_id ] ) ) {
 
-							//listcheckbox fields may need to be unserialized
-							if( 'listcheckbox' == $field->get_setting( 'type' ) ) {
+							//multi-value fields may need to be unserialized
+							if( in_array( $field->get_setting( 'type' ),
+								array( 'listcheckbox', 'listmultiselect' ) ) ){
 
 								//implode the unserialized array
 								$value = implode( ',', maybe_unserialize(
-									$sub_meta[	'_field_' . $field_id ][ 0 ] ));
+									$sub_meta[	'_field_' . $field_id ][ 0 ] ) );
 							} else {
 								$value = $sub_meta[	'_field_' . $field_id ][ 0 ];
 							}
@@ -313,13 +314,21 @@ class NF_Admin_UserDataRequests {
 
 				$form = Ninja_Forms()->form( $form_id );
 
+				/*
+				 * Do we have a use, if so does the post(submission) author
+				 * match the user. If so, then anonymize
+				 */
 				if( $this->user && $this->user->ID
 				    && $sub->post_author == $this->user->ID ) {
 					$anonymize_data = true;
 				} else {
+					/*
+					 * Otherwise, does the submitter email for the submission
+					 *  equal the email for the request
+					 */
 					$form_submitter_email = '';
 					if( in_array( $form_id, array_keys( $form_id_array ) ) ) {
-						/**
+						/*
 						 * if we already have the submitter field key, no
 						 * need to iterate over the actions again
 						 */
@@ -332,7 +341,14 @@ class NF_Admin_UserDataRequests {
 								if ( 'save' == $action->get_setting( 'type' )
 								     && null != $action->get_setting( 'submitter_email' )
 								     && '' != $action->get_setting( 'submitter_email' ) ) {
+									// get the submitter field
 									$submitter_field = $action->get_setting( 'submitter_email' );
+									/*
+									 * Add the form id and submitter field to
+									 *  this array so we don't have to load
+									 * the form again if we have multiple
+									 * submissions for the same form
+									 */
 									$form_id_array[ $form_id ] = $submitter_field;
 									break;
 								}
@@ -340,7 +356,7 @@ class NF_Admin_UserDataRequests {
 						}
 					}
 
-					/**
+					/*
 					 * If the submitter field is not empty, then let's
 					 * get the value given in the form submission for
 					 * that field
@@ -352,6 +368,7 @@ class NF_Admin_UserDataRequests {
 							// we only care about email fields
 							if ( 'email' == $field->get_setting( 'type' )
 							     && $submitter_field == $key ) {
+								// if we have a match, get the value
 								$form_submitter_email = get_post_meta(
 									$sub->ID,
 									'_field_' . $field->get_id(),
@@ -367,6 +384,7 @@ class NF_Admin_UserDataRequests {
 				}
 
 				if( $anonymize_data ) {
+					// anonymize the actual submitted for values
 					$this->anonymize_fields($sub, $form->get_fields() );
 				}
 			}
@@ -384,6 +402,7 @@ class NF_Admin_UserDataRequests {
 		foreach( $fields as $field ) {
 			$type = $field->get_setting( 'type' );
 
+			// ignore fields that aren't saved
 			if( ! in_array( $type, $this->ignored_field_types ) ) {
 				$is_personal = $field->get_setting( 'personally_identifiable' );
 
@@ -393,6 +412,7 @@ class NF_Admin_UserDataRequests {
 				if( null != $is_personal && '1' == $is_personal ) {
 					$field_id = $field->get_id();
 
+					// make sure we have that field saved.
 					$field_value = get_post_meta(
 						$sub->ID,
 						'_field_' . $field_id,
