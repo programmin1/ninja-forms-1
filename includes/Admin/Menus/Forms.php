@@ -142,7 +142,10 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 'formTelemetry'     => ( get_option( 'nf_form_tel_sent' ) ) ? 0 : 1,
                 'showOptin'         => ( get_option( 'ninja_forms_do_not_allow_tracking' ) ||
                                          get_option( 'ninja_forms_allow_tracking' ) ) ? 0 : 1,
-                'currentUserEmail'  => $current_user->user_email
+                'currentUserEmail'  => $current_user->user_email,
+                'doingCleanup'      => ( ! get_option( 'ninja_forms_data_is_clean' ) &&
+                                        isset( $_REQUEST[ 'action' ] ) &&
+                                        'cleanup' == $_REQUEST[ 'action' ] ) ? 1 : 0,
             ) );
 
             wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
@@ -504,6 +507,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $nicename = ( isset( $action[ 'nicename' ] ) ) ? $action[ 'nicename' ] : '';
             $image = ( isset( $action[ 'image' ] ) ) ? $action[ 'image' ] : '';
             $link = ( isset( $action[ 'link' ] ) ) ? $action[ 'link' ] : '';
+            $modal_content = ( isset( $action[ 'modal_content' ] ) ) ? $action[ 'modal_content' ] : '';            
 
             if ( $u_id ) {
                 $last_slash = strripos( $link, '/' );
@@ -520,6 +524,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 'nicename' => $nicename,
                 'image' => $image,
                 'link' => $link,
+                'modal_content' => $modal_content,
                 'settingGroups' => array(),
                 'settingDefaults' => array()
             );

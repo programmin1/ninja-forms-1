@@ -191,6 +191,14 @@ define( [], function() {
 						return '';
 					}
 				},
+                
+                maybeRequired: function() {
+                    if ( 1 == this.required ) {
+                        return 'required';
+                    } else {
+                        return '';
+                    }
+                },
 
 				maybeDisableAutocomplete: function() {
 					if ( 1 == this.disable_browser_autocomplete ) {

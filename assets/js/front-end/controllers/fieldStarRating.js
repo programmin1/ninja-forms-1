@@ -27,7 +27,7 @@ define([], function() {
 		        if ( this.value == num ) {
 		        	checked = 'checked';
 		        }
-                var htmlFragment = template( { id: this.id, classes: this.classes, num: num, checked: checked } );
+                var htmlFragment = template( { id: this.id, classes: this.classes, num: num, checked: checked, required: this.required } );
                 html.appendChild(
                     document.createRange().createContextualFragment( htmlFragment )
                 );

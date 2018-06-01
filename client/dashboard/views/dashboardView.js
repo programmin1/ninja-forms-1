@@ -106,17 +106,6 @@ define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sect
                     var childView = new WidgetView();
             }
             this.showChildView('content', childView );
-            // If form telemetry is defined...
-            // AND if we should run it...
-            if ( 'undefined' !== typeof nfAdmin.formTelemetry && 1 == nfAdmin.formTelemetry ) {
-                // Make our AJAX call.
-                var data = {
-                    action: 'nf_form_telemetry',
-                    security: nfAdmin.ajaxNonce
-                }
-                // Make our AJAX call.
-                jQuery.post( ajaxurl, data );
-            }
             // If the user has not seen the opt-in modal yet...
             if ( '1' == nfAdmin.showOptin ) {
                 // Declare all of our opt-in code here.
@@ -173,7 +162,7 @@ define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sect
                 cancel.classList.add( 'nf-button', 'secondary' );
                 cancel.innerHTML = nfi18n.optinSecondary;
                 actions.appendChild( cancel );
-                var confirm = document.createElement( 'button' );
+                var confirm = document.createElement( 'div' );
                 confirm.id = 'optin';
                 confirm.classList.add( 'nf-button', 'primary', 'pull-right' );
                 confirm.innerHTML = nfi18n.optinPrimary;
@@ -211,22 +200,23 @@ define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sect
                         sendEmail = 0;
                         userEmail = '';
                     }
-
-                    // Show spinner
-                    jQuery( '#optin-spinner' ).css( 'visibility', 'visible' );
-                    jQuery( '#optin-spinner' ).css( 'display', 'inline-block' );
-                    jQuery( '#optin-buttons' ).css( 'visibility', 'hidden' );
+                    // Disable our buttons.
+                    jQuery( '#optin' ).unbind( 'click' );
+                    jQuery( '#optout' ).unbind( 'click' );
+                    // Get a reference to the current width (to avoid resizing the button).
+                    var width = jQuery( '#optin' ).width();
+                    // Show spinner.
+                    jQuery( '#optin' ).html( '<span class="dashicons dashicons-update dashicons-update-spin"></span>' );
+                    jQuery( '#optin' ).width( width );
                     // Hit AJAX endpoint and opt-in.
                     jQuery.post( ajaxurl, { action: 'nf_optin', ninja_forms_opt_in: 1, send_email: sendEmail, user_email: userEmail },
                                 function( response ) {
-                        jQuery( '#optin-spinner' ).css( 'visibility', 'hidden' );
-                        jQuery( '#optin-spinner' ).css( 'display', 'none' );
-                        optinModal.setTitle( document.createElement( 'div' ).appendChild( successTitle ).innerHTML );
-                        optinModal.setContent( document.createElement( 'div' ).appendChild( successContent ).innerHTML );
                         /**
                          * When we get a response from our endpoint, show a thank you and set a timeout
                          * to close the modal.
                          */
+                        optinModal.setTitle( document.createElement( 'div' ).appendChild( successTitle ).innerHTML );
+                        optinModal.setContent( document.createElement( 'div' ).appendChild( successContent ).innerHTML );
                         setTimeout (
                             function(){
                                 optinModal.close();
@@ -237,16 +227,95 @@ define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sect
                 } );
                 // Setup the optout click event.
                 jQuery( '#optout' ).click( function( e ) {
-                    // Show spinner
-                    jQuery( '#optin-spinner' ).css( 'visibility', 'visible' );
-                    jQuery( '#optin-buttons' ).css( 'visibility', 'hidden' );
+                    // Disable our buttons.
+                    jQuery( '#optin' ).unbind( 'click' );
+                    jQuery( '#optout' ).unbind( 'click' );
+                    // Get a reference to the current width (to avoid resizing the button).
+                    var width = jQuery( '#optout' ).width();
+                    // Show spinner.
+                    jQuery( '#optout' ).html( '<span class="dashicons dashicons-update dashicons-update-spin"></span>' );
+                    jQuery( '#optout' ).width( width );
                     // Hit AJAX endpoint and opt-in.
                      jQuery.post( ajaxurl, { action: 'nf_optin', ninja_forms_opt_in: 0 }, function( response ) {
-                        jQuery( '#optin-spinner' ).css( 'visibility', 'hidden' );
                         // When we get a response from our endpoint, close the modal. 
                         optinModal.close();
                     } );            
                 } );
+            } // If we've been told to run cleanup...
+            else if ( '1' == nfAdmin.doingCleanup ) {
+                var cleanupModal = new jBox( 'Modal', {
+                    closeOnEsc:     false,
+                    closeOnClick:   false,
+                    width:          400
+                } );
+                var that = this;
+                // Define the modal content.
+                var content = document.createElement( 'div' );
+                content.classList.add( 'message' );
+                content.style.padding = '0px 20px 20px 20px';
+                content.innerHTML = nfi18n.cleanupContent;
+                var bar = document.createElement( 'div' );
+                bar.id = 'nf-progress-bar';
+                bar.classList.add( 'nf-progress-bar' );
+                bar.style.display = 'none';
+                var progress = document.createElement( 'div' );
+                progress.classList.add( 'nf-progress-bar-slider' );
+                bar.appendChild( progress );
+                content.appendChild( bar );
+                var loading = document.createElement( 'p' );
+                loading.id = 'nf-loading-text';
+                loading.style.color = '#1ea9ea';
+                loading.style.fontWeight = 'bold';
+                loading.innerHTML = nfi18n.cleanupLoading;
+                loading.style.display = 'none';
+                content.appendChild( loading );
+                var actions = document.createElement( 'div' );
+                actions.id = 'nf-action-buttons';
+                actions.classList.add( 'buttons' );
+                var cancel = document.createElement( 'div' );
+                cancel.id = 'nf-cancel';
+                cancel.classList.add( 'nf-button', 'secondary' );
+                cancel.innerHTML = nfi18n.cleanupSecondary;
+                actions.appendChild( cancel );
+                var confirm = document.createElement( 'button' );
+                confirm.id = 'nf-confirm';
+                confirm.classList.add( 'nf-button', 'primary', 'pull-right' );
+                confirm.innerHTML = nfi18n.cleanupPrimary;
+                actions.appendChild( confirm );
+                content.appendChild( actions );
+                // Set the options for the modal and open it.
+                cleanupModal.setContent( document.createElement( 'div' ).appendChild( content ).innerHTML );
+                cleanupModal.open();
+                // Setup the cancel click event.
+                jQuery( '#nf-cancel' ).click( function( e ) {
+                    cleanupModal.close();
+                } );                
+                // Setup the confirm click event.
+                jQuery( '#nf-confirm' ).click( function( e ) {
+                    // Prevent the user from leaving without firing an alert.
+                    jQuery( window ).bind( 'beforeunload', function() { 
+                        return 'Are you sure? Leaving before the process completes could cause damage to your data.';
+                    } );
+                    // Hide the buttons.
+                    jQuery( '#nf-cancel' ).hide();
+                    jQuery( '#nf-confirm' ).hide();
+                    // Show the progress bar.
+                    jQuery( '#nf-progress-bar' ).show();
+                    jQuery( '#nf-loading-text' ).show();
+                    // Begin our cleanup process.
+                    that.cleanupProcess( that, -1, cleanupModal );
+                } );
+            }
+            // If form telemetry is defined...
+            // AND if we should run it...
+            if ( 'undefined' !== typeof nfAdmin.formTelemetry && 1 == nfAdmin.formTelemetry ) {
+                // Make our AJAX call.
+                var data = {
+                    action: 'nf_form_telemetry',
+                    security: nfAdmin.ajaxNonce
+                }
+                // Make our AJAX call.
+                jQuery.post( ajaxurl, data );
             }
         },
 
@@ -268,6 +337,62 @@ define( [ 'views/sections/widgets.js', 'views/sections/services.js', 'views/sect
                     return content.innerHTML;
                 },
             }
+        },
+        
+        /**
+         * Function to manage our data cleanup batch process response.
+         * 
+         * @since 3.3.1
+         * 
+         * @param context (this) The context at the time of function definition.
+         * @param steps (int) The total number of steps in this process.
+         * @param modal (jBox) A reference to the modal where this process is running.
+         */
+        cleanupProcess: function( context, steps, modal ) {
+            var data = {
+                action: 'nf_batch_process',
+                batch_type: 'data_cleanup',
+                security: nfAdmin.ajaxNonce
+            };
+            jQuery.post( ajaxurl, data, function( response ) {
+                response = JSON.parse( response );
+                // If we're done...
+                if ( response.batch_complete ) {
+                    // Push our progress bar to 100%.
+                    jQuery( '.nf-progress-bar-slider' ).css( 'width', '100%' );
+                    // Allow the user to leave the page now.
+                    jQuery( window ).unbind( 'beforeunload' );
+                    modal.close();
+                    // Exit.
+                    return false;
+                }
+                // If we do not yet have a determined number of steps...
+                if ( -1 == steps ) {
+                    // If step_toal is defined...
+                    if ( 'undefined' != typeof response.step_total ) {
+                        // Use the step_total.
+                        steps = response.step_total;
+                    } // Otherwise... (step_total is not defined)
+                    else {
+                        // Use step_remaining.
+                        steps = response.step_remaining;
+                    }
+                }
+                // Calculate our current step.
+                var step = steps - response.step_remaining;
+                // Calculate our maximum progress for this step.
+                var maxProgress = Math.round( step / steps * 100 );
+                // Get our current progress for this step.
+                var currentProgress = Math.round( jQuery( '.nf-progress-bar-slider' ).width() / jQuery( '.nf-progress-bar-slider' ).parent().width() * 100 );
+                // If our maximum progress is more than our current progress...
+                if ( maxProgress > currentProgress ) {
+                    // Increment our progress bar.
+                    currentProgress = Number( currentProgress ) + 1;
+                    jQuery( '.nf-progress-bar-slider' ).css( 'width', currentProgress + '%' );
+                }
+                // Recall our function...
+                context.cleanupProcess( context, steps, modal );
+            } );
         }
     } );
     return view;
