@@ -30,7 +30,7 @@ define( [], function( settingCollection ) {
 			 * When we init a save action model, register a listener for deleted
 			  * fields
 			 */
-			this.listenTo( Backbone.Radio.channel( 'fields' ), 'deleteFields',
+			this.listenTo( Backbone.Radio.channel( 'fields' ), 'delete:field',
 				this.checkFieldDeleted );
 		},
 
@@ -62,7 +62,7 @@ define( [], function( settingCollection ) {
 		 */
 		checkFieldDeleted: function( fieldModel ) {
 			var submitter_email = this.model.get( 'submitter_email' );
-
+			
 			if( submitter_email == fieldModel.get( 'key' ) ) {
 				this.model.set( 'submitter_email', '' );
 			}
