@@ -13,7 +13,7 @@ final class NF_Database_SubmissionExpirationCron
         $options = get_option( 'nf_sub_expiration' );
 
         // Schedules our CRON job.
-        if( ! wp_next_scheduled( 'nf_expired_submission_cleanup' ) && ! $options ) {
+        if( ! wp_next_scheduled( 'expired_submission_cron' ) && ! $options ) {
             wp_schedule_event( time(), 'daily', $this->expired_submission_cron( $options ) );
         }
     }
