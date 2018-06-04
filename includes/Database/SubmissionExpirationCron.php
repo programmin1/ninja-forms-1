@@ -34,10 +34,6 @@ final class NF_Database_SubmissionExpirationCron
         // If options are empty bail..
         if( ! $options ) return;
 
-        echo '<pre>';
-        var_dump( $options );
-        echo '</pre>';
-
         // Loop over our options and ...
         foreach( $options as $option ) {
             /*
