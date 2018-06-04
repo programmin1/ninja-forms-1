@@ -11,11 +11,12 @@ final class NF_Database_SubmissionExpirationCron
     {
         // Retrieves the option that contains all of our expiration data.
         $options = get_option( 'nf_sub_expiration' );
+
         // Schedules our CRON job.
         if( ! wp_next_scheduled( 'nf_submission_expiration_cron' ) &&  ! empty( $options ) ) {
-            wp_schedule_event( time(), 'daily', 'nf_submission_expiration_cron', $options );
+            wp_schedule_event( time(), 'daily', 'nf_submission_expiration_cron' );
         }
-        add_action( 'nf_submission_expiration_cron', array( $this, 'expired_submission_cron' ), 10, 1 );
+        add_action( 'nf_submission_expiration_cron', array( $this, 'expired_submission_cron' ) );
     }
 
     /**
@@ -26,10 +27,16 @@ final class NF_Database_SubmissionExpirationCron
      * @param $options
      * @return void
      */
-    public function expired_submission_cron( $options )
+    public function expired_submission_cron()
     {
+        $options = get_option( 'nf_sub_expiration' );
+
         // If options are empty bail..
         if( ! $options ) return;
+
+        echo '<pre>';
+        var_dump( $options );
+        echo '</pre>';
 
         // Loop over our options and ...
         foreach( $options as $option ) {
@@ -43,10 +50,8 @@ final class NF_Database_SubmissionExpirationCron
             // Use the helper method to build an array of expired subs.
             $expired_subs[] = $this->get_expired_subs( $option[ 0 ], $option[ 1 ] );
         }
-
         // If the expired subs array is empty bail.
         if( empty( $expired_subs ) ) return;
-
         // Call the helper method that deletes the expired subs.
         $this->delete_expired_subs( $expired_subs );
     }
@@ -92,13 +97,13 @@ final class NF_Database_SubmissionExpirationCron
      */
     public function delete_expired_subs( $expired_subs )
     {
+        $i = 0;
         // Loop over our subs
         foreach( $expired_subs as $subs ) {
             foreach( $subs as $sub ) {
-                // Delete 100 subs at a time.
-                for( $i = 0; $i <= 100; $i++ ) {
-                    wp_delete_post( $sub );
-                }
+                if( $i >= 100 ) break;
+                wp_delete_post( $sub );
+                $i++;
             }
         }
     }
