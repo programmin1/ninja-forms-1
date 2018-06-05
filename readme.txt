@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, kbjohnson90, klhall1987, krmoorho
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 3.3.2
+Stable tag: 3.3.3
 License: GPLv2 or later
 
 Drag and drop fields in an intuitive UI to create contact forms, email subscription forms, order forms, payment forms, send emails and more!
@@ -111,10 +111,11 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.3.2 (4 June 2018) =
+= 3.3.3 (5 June 2018) =
 
 *Bugs:*
 
+* Resolved an issue that sometimes caused our opt-in modal to become undismissable.
 * Fields that do not actually save data should no longer appear in the include/exclude fields list for the store submission action.
 * Improved performance of our Add Form modal in the post editor.
 * Resolved an issue that sometimes caused the Submissions page to display as a white screen.
@@ -130,6 +131,12 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * The list of actions in the form builder has been updated, and non-enabled actions now include a short blurb describing their usage.
 
 == Changelog ==
+
+= 3.3.3 (5 June 2018) =
+
+*Bugs:*
+
+* Resolved an issue that sometimes caused our opt-in modal to become undismissable.
 
 = 3.3.2 (4 June 2018) =
 
