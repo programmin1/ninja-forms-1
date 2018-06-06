@@ -6,6 +6,8 @@ define([ 'models/oauthModel' ], function( OAuthModel ) {
       nfRadio.channel( 'dashboard' ).reply( 'get:oauth', this.getOAuth, this );
 			nfRadio.channel( 'dashboard' ).reply( 'disconnect:oauth', this.disconnect, this );
 
+			nfRadio.channel( 'dashboard' ).reply( 'oauth:learn-more', this.learnMoreModal, this );
+
 			this.initOAuth();
 		},
 
@@ -47,6 +49,18 @@ define([ 'models/oauthModel' ], function( OAuthModel ) {
 						}
 					});
 				}
+			}).open();
+		},
+
+		/**
+		 * Show a Learn More modal.
+		 */
+		learnMoreModal: function() {
+			var that = this;
+
+			new jBox('Modal', {
+				width: 500,
+				content: '<p>This website is connected to NinjaForms.com via a secure OAuth connection for the enabled services.</p><br /><a href="https://ninjaforms.com/privacy-policy/">Privacy Policy</a>',
 			}).open();
 		}
 	});
