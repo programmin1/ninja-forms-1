@@ -16,9 +16,27 @@ add_action( 'wp_ajax_nf_services', function(){
       'name' => __( 'Add-on Manager (Beta)', 'ninja-mail' ),
       'slug' => 'ninja-forms-addon-manager',
       'installPath' => 'ninja-forms-addon-manager/ninja-forms-addon-manager.php',
-      'description' => 'Install Ninja Forms add-ons remotely.',
+      'description' => 'Install any purchased Ninja Forms add-ons with a single click. No need to ever download a zip file or copy paste a license key!',
       'enabled' => null,
-      'learnMore' => '<div>Install Ninja Forms add-ons remotely.</div>',
+      'learnMore' => '
+      <div style="pading:20px;">
+        <p>Here at Ninja Forms, we love add-ons. It lets us create awesome products that serve very specific users with integrations, workflows, and power features, while keeping those options away from users that don’t need them. It also lets our users pay for what they need, rather than a bloated, one-size-fits-all solution.</p>
+        <p>Despite all the great things about add-ons, there’s a glaring downside: installing 40+ add-ons and setting up licensing for all of those add-ons is a pain. We’re trying to change all of that with the Ninja Forms Add-on Manager, and we want your help putting it through its paces!</p>
+        <p>The Add-on Manager makes installing Ninja Forms Add-ons a snap. Once you connect your site to my.ninjaforms.com using the Setup button, you can install add-ons and setup their licenses with a single click!</p>
+        <p>
+          How it works:
+          <ol>
+            <li>Connect to my.ninjaforms.com using the Try the Add-on Manager Beta button.</li>
+            <li>Click the “Install Plugins” button.</li>
+            <li>Click “Install” for the plugins you want to install.</li>
+            <li>Make awesome stuff using Ninja Forms!</li>
+          </ol>
+        </p>
+        <p>The add-on manager is free to use for anyone that has a Ninja Forms add-on purchase. At the moment, it’s in a Beta state as we work out some bugs. We’d love your feedback. Please, try it out today!</p>
+        <br />
+        <button style="display:block;width:100%;text-align:center;" class="nf-button primary" onclick="Backbone.Radio.channel( \'dashboard\' ).request( \'install:service\', \'ninja-forms-addon-manager\' );var spinner = document.createElement(\'span\'); spinner.classList.add(\'dashicons\', \'dashicons-update\', \'dashicons-update-spin\'); this.innerHTML = spinner.outerHTML; console.log( spinner )">Try the Add-on Manager (Beta)</button>
+      </div>
+      ',
     ],
 
     'ninja-mail' => [
