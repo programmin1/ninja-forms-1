@@ -70,7 +70,24 @@ define( [], function() {
 
 		updateFieldKey: function( keyModel, settingModel ) {
 			nfRadio.channel( 'app' ).trigger( 'replace:fieldKey', this, keyModel, settingModel );
-		}
+		},
+        
+        /**
+         * Function used to get the formatted lable of the fieldModel.
+         * 
+         * @since 3.3.3
+         * @return String
+         */
+        formatLabel: function() {
+            // Try to use admin label.
+            var label = this.get( 'admin_label' );
+            // If our admin label is empty...
+            if ( '' == label ) {
+                // Use the field label instead.
+                label = this.get( 'label' );
+            }
+            return label;
+        }
 	} );
 	
 	return model;
