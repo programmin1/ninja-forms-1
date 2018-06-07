@@ -60,7 +60,7 @@ define([ 'models/oauthModel' ], function( OAuthModel ) {
 
 			new jBox('Modal', {
 				width: 500,
-				content: '<p>This website is connected to NinjaForms.com via a secure OAuth connection for the enabled services.</p><br /><a href="https://ninjaforms.com/privacy-policy/">Privacy Policy</a>',
+				content: '<p>Since you’re using one of our Ninja Forms services, like Ninja Mail or our Add-on Manager, your site is connected to my.ninjaforms.com. This allows us to send data between your site and my.ninjaforms.com. For details about what is being shared, you can see our <a href="https://ninjaforms.com/privacy-policy/">Privacy Policy</a>.</p>',
 			}).open();
 		}
 	});
