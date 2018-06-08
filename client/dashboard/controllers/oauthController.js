@@ -6,6 +6,8 @@ define([ 'models/oauthModel' ], function( OAuthModel ) {
       nfRadio.channel( 'dashboard' ).reply( 'get:oauth', this.getOAuth, this );
 			nfRadio.channel( 'dashboard' ).reply( 'disconnect:oauth', this.disconnect, this );
 
+			nfRadio.channel( 'dashboard' ).reply( 'oauth:learn-more', this.learnMoreModal, this );
+
 			this.initOAuth();
 		},
 
@@ -47,6 +49,18 @@ define([ 'models/oauthModel' ], function( OAuthModel ) {
 						}
 					});
 				}
+			}).open();
+		},
+
+		/**
+		 * Show a Learn More modal.
+		 */
+		learnMoreModal: function() {
+			var that = this;
+
+			new jBox('Modal', {
+				width: 500,
+				content: '<p>Since you’re using one of our Ninja Forms services, like Ninja Mail or our Add-on Manager, your site is connected to my.ninjaforms.com. This allows us to send data between your site and my.ninjaforms.com. For details about what is being shared, you can see our <a href="https://ninjaforms.com/privacy-policy/">Privacy Policy</a>.</p>',
 			}).open();
 		}
 	});
