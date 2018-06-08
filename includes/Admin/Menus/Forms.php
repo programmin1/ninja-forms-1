@@ -507,7 +507,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $nicename = ( isset( $action[ 'nicename' ] ) ) ? $action[ 'nicename' ] : '';
             $image = ( isset( $action[ 'image' ] ) ) ? $action[ 'image' ] : '';
             $link = ( isset( $action[ 'link' ] ) ) ? $action[ 'link' ] : '';
-            $modal_content = ( isset( $action[ 'modal_content' ] ) ) ? $action[ 'modal_content' ] : '';            
+            $modal_content = ( isset( $action[ 'modal_content' ] ) ) ? $action[ 'modal_content' ] : '';
 
             if ( $u_id ) {
                 $last_slash = strripos( $link, '/' );
