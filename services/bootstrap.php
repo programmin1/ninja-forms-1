@@ -163,7 +163,7 @@ add_filter( 'plugins_api_result', function( $response, $action, $args ){
   if( 'ninja-forms-addon-manager' !== $args->slug ) return $response;
 
   $response = new \stdClass();
-  $response->download_link = 'http://my.ninjaforms.com/wp-content/uploads/ninja-forms-addon-manager-c71361bc441f2205844a0f02f775b2277b75879e.zip';
+  $response->download_link = 'http://my.ninjaforms.com/wp-content/uploads/ninja-forms-addon-manager-4b6a3f724b27d6d9f7d4e89ebe12dad215ec1b20.zip';
 
   return $response;
 }, 10, 3 );
