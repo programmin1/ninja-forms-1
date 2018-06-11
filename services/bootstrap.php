@@ -16,10 +16,10 @@ add_action( 'wp_ajax_nf_services', function(){
       'name' => __( 'Add-on Manager (Beta)', 'ninja-mail' ),
       'slug' => 'ninja-forms-addon-manager',
       'installPath' => 'ninja-forms-addon-manager/ninja-forms-addon-manager.php',
-      'description' => 'Install any purchased Ninja Forms add-ons with a single click. No need to ever download a zip file or copy paste a license key!',
+      'description' => 'Install any purchased Ninja Forms add-ons with a single click. No need to download a file or copy/paste a license key! <strong>* Won\'t work on a local dev environment.</strong>',
       'enabled' => null,
       'learnMore' => '
-      <div style="pading:20px;">
+      <div style="padding:20px;">
         <p>Here at Ninja Forms, we love add-ons. Add-ons let us create awesome products that serve very specific users with integrations, workflows, and power features, while keeping those options away from users that don’t need them. It also lets our users pay for what they need, rather than a bloated, one-size-fits-all solution.</p>
         <p>Despite all the great things about add-ons, there’s a glaring downside: installing 40+ add-ons and setting up licensing for all of those add-ons is a pain. We’re trying to change all of that with the Ninja Forms Add-on Manager, and we want your help putting it through its paces!</p>
         <p>The Add-on Manager makes installing Ninja Forms Add-ons a snap. Once you connect your site to my.ninjaforms.com using the Setup button, you can install add-ons and setup their licenses with a single click!</p>
@@ -145,6 +145,7 @@ add_action( 'wp_ajax_nf_services_install', function() {
 /**
  * Override the Ninja Mail download link until published in the repository.
  */
+/*
 add_filter( 'plugins_api_result', function( $response, $action, $args ){
   if( 'plugin_information' !== $action ) return $response;
   if( 'ninja-mail' !== $args->slug ) return $response;
@@ -154,10 +155,11 @@ add_filter( 'plugins_api_result', function( $response, $action, $args ){
 
   return $response;
 }, 10, 3 );
-
+*/
 /**
  * Override the Add-on Manager download link until published in the repository.
  */
+/*
 add_filter( 'plugins_api_result', function( $response, $action, $args ){
   if( 'plugin_information' !== $action ) return $response;
   if( 'ninja-forms-addon-manager' !== $args->slug ) return $response;
@@ -175,3 +177,4 @@ add_filter( 'http_request_args', function( $args, $url ){
   }
   return $args;
 }, 10, 2 );
+*/

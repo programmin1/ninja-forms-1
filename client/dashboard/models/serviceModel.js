@@ -29,8 +29,10 @@ define( [], function() {
             width: 300,
             addClass: 'dashboard-modal',
             overlay: true,
-            closeOnClick: 'body',
+            closeOnClick: true,
             content: this.get( 'successMessage' ),
+            title: this.get( 'successMessageTitle' ),
+            closeButton: 'box'
         } ).open();
       }
 
