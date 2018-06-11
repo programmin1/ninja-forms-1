@@ -16,7 +16,7 @@ add_action( 'wp_ajax_nf_services', function(){
       'name' => __( 'Add-on Manager (Beta)', 'ninja-mail' ),
       'slug' => 'ninja-forms-addon-manager',
       'installPath' => 'ninja-forms-addon-manager/ninja-forms-addon-manager.php',
-      'description' => 'Install any purchased Ninja Forms add-ons with a single click. No need to ever download a zip file or copy paste a license key! <strong>* Requires a live server.</strong>',
+      'description' => 'Install any purchased Ninja Forms add-ons with a single click. No need to download a file or copy/paste a license key! <strong>* Won\'t work on a local dev environment.</strong>',
       'enabled' => null,
       'learnMore' => '
       <div style="padding:20px;">
