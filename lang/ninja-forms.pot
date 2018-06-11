@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ninja Forms\n"
-"POT-Creation-Date: 2018-06-05 12:45-0400\n"
-"PO-Revision-Date: 2018-06-05 12:45-0400\n"
+"POT-Creation-Date: 2018-06-11 13:28-0400\n"
+"PO-Revision-Date: 2018-06-11 13:28-0400\n"
 "Last-Translator: \n"
 "Language-Team: WP Ninjas <info@wpninjas.com>\n"
 "Language: en\n"
@@ -13,10 +13,11 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-SearchPath-0: includes\n"
+"X-Poedit-SearchPath-0: services\n"
 "X-Poedit-SearchPath-1: lib\n"
-"X-Poedit-SearchPath-2: deprecated\n"
-"X-Poedit-SearchPath-3: ninja-forms.php\n"
+"X-Poedit-SearchPath-2: includes\n"
+"X-Poedit-SearchPath-3: deprecated\n"
+"X-Poedit-SearchPath-4: ninja-forms.php\n"
 
 #: deprecated/classes/add-form-modal.php:41
 #: deprecated/classes/add-form-modal.php:99 includes/Admin/AddFormModal.php:42
@@ -6563,6 +6564,40 @@ msgstr ""
 msgid "Processing..."
 msgstr ""
 
+#: includes/Config/i18nDashboard.php:88
+#, php-format
+msgid ""
+"Disconnecting from my.ninjaforms.com will disrupt the functionality of all "
+"services. To manage your service subscriptions please visit %smy.ninjaforms."
+"com%s"
+msgstr ""
+
+#: includes/Config/i18nDashboard.php:89
+msgid "Disconnect"
+msgstr ""
+
+#: includes/Config/i18nDashboard.php:90
+msgid "Stay Connected"
+msgstr ""
+
+#: includes/Config/i18nDashboard.php:91
+#, php-format
+msgid ""
+"%sSince you’re using one of our Ninja Forms services, like Ninja Mail or our "
+"Add-on Manager, your site is connected to my.ninjaforms.com. This allows us "
+"to send data between your site and my.ninjaforms.com. For details about what "
+"is being shared, you can see our %sPrivacy Policy%s.%s"
+msgstr ""
+
+#: includes/Config/i18nDashboard.php:94
+#, php-format
+msgid "%sRedirecting to NinjaForms.com%s"
+msgstr ""
+
+#: includes/Config/i18nDashboard.php:95
+msgid "Unable to update the service."
+msgstr ""
+
 #: includes/Config/i18nFrontEnd.php:16
 msgid "Insert Link"
 msgstr ""
@@ -7764,4 +7799,16 @@ msgstr ""
 
 #: ninja-forms.php:941
 msgid "Once per month"
+msgstr ""
+
+#: services/bootstrap.php:16
+msgid "Add-on Manager (Beta)"
+msgstr ""
+
+#: services/bootstrap.php:43
+msgid "Ninja Mail - Transactional Email"
+msgstr ""
+
+#: services/bootstrap.php:84
+msgid "Sorry, you are not allowed to install plugins on this site."
 msgstr ""
