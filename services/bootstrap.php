@@ -145,6 +145,7 @@ add_action( 'wp_ajax_nf_services_install', function() {
 /**
  * Override the Ninja Mail download link until published in the repository.
  */
+/*
 add_filter( 'plugins_api_result', function( $response, $action, $args ){
   if( 'plugin_information' !== $action ) return $response;
   if( 'ninja-mail' !== $args->slug ) return $response;
@@ -154,10 +155,11 @@ add_filter( 'plugins_api_result', function( $response, $action, $args ){
 
   return $response;
 }, 10, 3 );
-
+*/
 /**
  * Override the Add-on Manager download link until published in the repository.
  */
+/*
 add_filter( 'plugins_api_result', function( $response, $action, $args ){
   if( 'plugin_information' !== $action ) return $response;
   if( 'ninja-forms-addon-manager' !== $args->slug ) return $response;
@@ -175,3 +177,4 @@ add_filter( 'http_request_args', function( $args, $url ){
   }
   return $args;
 }, 10, 2 );
+*/
