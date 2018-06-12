@@ -17,6 +17,7 @@
  *     btnSecondary.class (string) The class to be added to the button.
  *     btnSecondary.callback (function) The function to be called when the button is clicked.
  *   data.useProgressBar (bool) Whether or not this modal needs the progress bar.
+ *   data.loadingText (string) The text to be shown while the progress bar is visible.
  */
 function NinjaModal ( data ) {
     // Setup our modal settings.
@@ -38,6 +39,10 @@ function NinjaModal ( data ) {
     this.buttons.secondary.data = ( 'undefined' != typeof data.btnSecondary ? data.btnSecondary : false );
     // See if we need the progress bar.
     this.useProgressBar = ( 'undefined' !=  typeof data.useProgressBar ? data.useProgressBar : false );
+    if ( this.useProgressBar ) {
+        // TODO: translate
+        this.loadingText = ( 'undefined' != typeof data.loadingText ? data.loadingText : 'Loading...' );
+    }
     // Declare our popup item.
     this.popup;
     // Declare our button booleans.
@@ -51,23 +56,20 @@ function NinjaModal ( data ) {
 
 
 /**
- * Function to initialize the popup modal.
+ * Function to increment the progress bar.
+ * 
+ * @param max (int) The maximum percentage of complete the progress bar can be.
  */
-NinjaModal.prototype.initModal = function () {
-    // Setup our popup.
-    this.popup = new jBox( 'Modal', {
-        width: this.settings.width,
-        addClass: this.settings.class,
-        overlay: true,
-        closeOnClick: this.settings.closeOnClick,
-        closeOnEsc: this.settings.closeOnEsc
-    } );
-    // Render the title.
-    this.renderTitle();
-    // Initialize the buttons (if they exist).
-    this.initButtons();
-    // Render the content.
-    this.renderContent();
+NinjaModal.prototype.incrementProgress = function ( max ) {
+    var progressBar = document.getElementById( 'nf-progress-bar-slider-' + this.popup.dataId );
+    // Get our current progress.
+    var currentProgress = progressBar.offsetWidth / progressBar.parentElement.offsetWidth * 100;
+    // If we've not already passed the max value...
+    if ( max > currentProgress ) {
+        // Increase the progress by 1 step.
+        currentProgress = Number( currentProgress ) + 1;
+        this.setProgress( currentProgress );
+    }
 }
 
 
@@ -79,7 +81,7 @@ NinjaModal.prototype.initButtons = function () {
     if ( this.buttons.primary.data ) {
         // Create the button.
         var primary = document.createElement( 'div' );
-        primary.id = 'button-primary';
+        primary.id = 'nf-button-primary-' + this.popup.dataId;
         primary.classList.add( 'nf-button', 'primary', 'pull-right' );
         // If we have a class...
         if ( this.buttons.primary.data.class ) {
@@ -108,7 +110,7 @@ NinjaModal.prototype.initButtons = function () {
     if ( this.buttons.secondary.data ) {
         // Create the button.
         var secondary = document.createElement( 'div' );
-        secondary.id = 'button-secondary';
+        secondary.id = 'nf-button-secondary-' + this.popup.dataId;
         secondary.classList.add( 'nf-button', 'secondary' );
         // If we have a class...
         if ( this.buttons.secondary.data.class ) {
@@ -137,31 +139,72 @@ NinjaModal.prototype.initButtons = function () {
 
 
 /**
- * Function to toggle the visibility of the popup.
- * 
- * @param show (bool) Whether or not to show the popup.
+ * Function to initialize the popup modal.
  */
-NinjaModal.prototype.toggleModal = function ( show ) {
-    // If we were told to show the modal...
-    if ( show ) {
-        // Open it.
-        this.popup.open();
-    } // Otherwise... (We were told to hide it.)
-    else {
-        // Close it.
-        this.popup.close();
+NinjaModal.prototype.initModal = function () {
+    // Save the context of this for callbacks.
+    var that = this;
+    // Setup our popup.
+    this.popup = new jBox( 'Modal', {
+        width: this.settings.width,
+        addClass: this.settings.class,
+        overlay: true,
+        closeOnClick: this.settings.closeOnClick,
+        closeOnEsc: this.settings.closeOnEsc,
+        onOpen: function() {
+            // If we have a primary button...
+            if ( that.hasPrimary ) {
+                // Attach the callback.
+                jQuery( this.content ).find( '#nf-button-primary-' + this.dataId ).click( that.buttons.primary.callback );
+            }
+            // If we have a secondary button...
+            if ( that.hasSecondary ) {
+                // Attach the callback.
+                jQuery( this.content ).find( '#nf-button-secondary-' + this.dataId ).click( that.buttons.secondary.callback );
+            }
+        },
+    } );
+    // Setup our data id to keep the DOM ids unique.
+    this.popup.dataId = this.popup.id.replace( 'jBoxID', '' );
+    // Render the title.
+    this.renderTitle();
+    // Initialize the buttons (if they exist).
+    this.initButtons();
+    // Render the content.
+    this.renderContent();
+}
+
+
+/**
+ * Function to toggle the display of the action block.
+ * 
+ * @param show (bool) Whether to show the block.
+ */
+NinjaModal.prototype.maybeShowActions = function ( show ) {
+    if ( this.hasPrimary || this.hasSecondary ) {
+        if ( show ) {
+            document.getElementById( 'nf-action-block-' + this.popup.dataId ).style.display = 'block';
+        }
+        else {
+            document.getElementById( 'nf-action-block-' + this.popup.dataId ).style.display = 'none';
+        }
     }
 }
 
 
 /**
- * Function to append the title to the popup.
+ * Function to toggle the display of the progress block.
+ * 
+ * @param show (bool) Whether to show the block.
  */
-NinjaModal.prototype.renderTitle = function () {
-    // If we have a title...
-    if ( '' != this.title ) {
-        // Set our title.
-        this.popup.setTitle( this.title );
+NinjaModal.prototype.maybeShowProgress = function ( show ) {
+    if ( this.useProgressBar ) {
+        if ( show ) {
+            document.getElementById( 'nf-progress-block-' + this.popup.dataId ).style.display = 'block';
+        }
+        else {
+            document.getElementById( 'nf-progress-block-' + this.popup.dataId ).style.display = 'none';
+        }
     }
 }
 
@@ -181,23 +224,21 @@ NinjaModal.prototype.renderContent = function () {
     if ( this.useProgressBar ) {
         // Define our progress block.
         var progressBlock = document.createElement( 'div' );
-        progressBlock.id = 'nf-progress-block';
+        progressBlock.id = 'nf-progress-block-' + this.popup.dataId;
         progressBlock.style.display = 'none';
         // Define our progress bar.
         var progressBar = document.createElement( 'div' );
         progressBar.classList.add( 'nf-progress-bar' );
         var progressSlider = document.createElement( 'div' );
+        progressSlider.id = 'nf-progress-bar-slider-' + this.popup.dataId;
         progressSlider.classList.add( 'nf-progress-bar-slider' );
         progressBar.appendChild( progressSlider );
         progressBlock.appendChild( progressBar );
         // Define our loading text.
-        // TODO: maybe make this configurable?
-        var lodingText = document.createElement( 'p' );
-        lodingText.id = 'nf-loading-text';
-        lodingText.style.color = '#1ea9ea';
-        lodingText.style.fontWeight = 'bold';
-        // TODO: translate
-        lodingText.innerHTML = 'Loading...';
+        var loadingText = document.createElement( 'p' );
+        loadingText.style.color = '#1ea9ea';
+        loadingText.style.fontWeight = 'bold';
+        loadingText.innerHTML = this.loadingText;
         progressBlock.appendChild( loadingText );
         // Append it to the content box.
         contentBox.appendChild( progressBlock );
@@ -206,7 +247,7 @@ NinjaModal.prototype.renderContent = function () {
     if ( this.hasPrimary || this.hasSecondary ) {
         // Define our action block.
         var actionBlock = document.createElement( 'div' );
-        actionBlock.id = 'nf-action-buttons';
+        actionBlock.id = 'nf-action-block-' + this.popup.dataId;
         actionBlock.classList.add( 'buttons' );
         // Insert the primary button, if one exists.
         if ( this.hasPrimary ) actionBlock.appendChild( this.buttons.primary.dom );
@@ -220,8 +261,64 @@ NinjaModal.prototype.renderContent = function () {
         }
     }
     // Set our content.
-    this.popup.setContent( document.createElement( 'div' ).appendChild( contentBox ).innerHTML );
+    this.popup.setContent( document.createElement( 'div' ).appendChild( contentBox ).parentElement.innerHTML );
 }
+
+
+/**
+ * Function to append the title to the popup.
+ */
+NinjaModal.prototype.renderTitle = function () {
+    // If we have a title...
+    if ( '' != this.title ) {
+        // Set our title.
+        this.popup.setTitle( this.title );
+    }
+}
+
+
+/**
+ * Function to set the value of the progress bar.
+ * 
+ * @param percent (int) The value to set the progress bar to.
+ */
+NinjaModal.prototype.setProgress = function ( percent ) {
+    // Update the width of the element as a percentage.
+    var progressBar = document.getElementById( 'nf-progress-bar-slider-' + this.popup.dataId );
+    progressBar.style.width = percent + '%';
+}
+
+
+/**
+ * Function to toggle the visibility of the popup.
+ * 
+ * @param show (bool) Whether or not to show the popup.
+ */
+NinjaModal.prototype.toggleModal = function ( show ) {
+    // If we were told to show the modal...
+    if ( show ) {
+        // Open it.
+        this.popup.open();
+    } // Otherwise... (We were told to hide it.)
+    else {
+        // Close it.
+        this.popup.close();
+    }
+}
+
+
+/**
+ * Function to update the content of the popup.
+ * 
+ * @param content (string) The new content.
+ */
+NinjaModal.prototype.updateContent = function ( content ) {
+    // Set the new content.
+    this.content = content;
+    // Re-render.
+    this.renderContent();
+}
+
 
 
 /**
@@ -234,16 +331,4 @@ NinjaModal.prototype.updateTitle = function ( title ) {
     this.title = title;
     // Re-render.
     this.renderTitle();
-}
-
-/**
- * Function to update the content of the popup.
- * 
- * @param content (string) The new content.
- */
-NinjaModal.prototype.updateContent = function ( content ) {
-    // Set the new content.
-    this.content = content;
-    // Re-render.
-    this.renderContent();
 }
