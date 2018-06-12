@@ -35,9 +35,9 @@ define([ 'models/oauthModel' ], function( OAuthModel ) {
 
 			new jBox('Confirm', {
 				width: 750,
-				content: 'Disconnecting from my.ninjaforms.com will disrupt the functionality of all services. To manage your service subscriptions please visit <a href="https://my.ninjaforms.com">my.ninjaforms.com</a>',
-				confirmButton: 'Disconnect',
-				cancelButton: 'Stay Connected',
+				content: nfi18n.oauthDisconnectContent,
+				confirmButton: nfi18n.oauthDisconnectConfirm,
+				cancelButton: nfi18n.oauthDisconnectCancel,
 				closeOnConfirm: true,
 				confirm: function(){
 					jQuery.ajax({
@@ -60,7 +60,7 @@ define([ 'models/oauthModel' ], function( OAuthModel ) {
 
 			new jBox('Modal', {
 				width: 500,
-				content: '<p>Since you’re using one of our Ninja Forms services, like Ninja Mail or our Add-on Manager, your site is connected to my.ninjaforms.com. This allows us to send data between your site and my.ninjaforms.com. For details about what is being shared, you can see our <a href="https://ninjaforms.com/privacy-policy/">Privacy Policy</a>.</p>',
+				content: nfi18n.oauthLearnMoreContent,
 			}).open();
 		}
 	});
