@@ -9,7 +9,7 @@
 define( [], function() {
 	var controller = Marionette.Object.extend( {
 
-		deleting: false,
+		deleting: false, // block edit functionality while deleting field
 
 		initialize: function() {
 			// Listen for clicks to edit, delete, duplicate actions.
@@ -29,6 +29,7 @@ define( [], function() {
 		 * @return void
 		 */
 		clickEdit: function( e, model ) {
+			// if we are deleting a field, we don't want to the edit drawer to open
 			if( ! this.deleting ) {
 				var currentDomain = nfRadio.channel('app').request('get:currentDomain');
 				var currentDomainID = currentDomain.get('id');
@@ -49,36 +50,70 @@ define( [], function() {
 		 * @return void
 		 */
 		maybeDelete: function( e, dataModel ) {
+			// we set deleting to true, so the edit event doesn't open drawer
 			this.deleting = true;
 			var modelID = dataModel.get( 'id' );
+			var modelType = dataModel.get( 'objectType' );
 
-			if( 'tmp' === modelID.substring( 0, 3 ) ) {
+			// Build a lookup table for fields that we don't save
+			var nonSaveFields = [ 'html', 'submit', 'hr',
+				'recaptcha', 'spam', 'creditcard', 'creditcardcvc',
+				'creditcardexpiration', 'creditcardfullname',
+				'creditcardnumber', 'creditcardzip' ];
+
+			/*
+			* If this is a new field that hasn't been saved, then we don't
+			 * need to check for data
+			 */
+			if( 'field' != modelType.toLowerCase() ) {
 				this.clickDelete( e, dataModel );
 			} else {
-				var formModel = Backbone.Radio.channel('app').request('get:formModel');
-				var data = {
-					'action': 'nf_maybe_delete_field',
-					'security': nfAdmin.ajaxNonce,
-					'formID': formModel.get( 'id' ),
-					'fieldKey': dataModel.get( 'key' ),
-					'fieldID': modelID
-				};
-				var that = this;
-				jQuery.post( ajaxurl, data )
-					.done( function( response ) {
-						var res = JSON.parse( response );
-						if( res.data.field_has_data ) {
-							that.doDeleteFieldModal( e, dataModel );
-							return false;
-						} else {
-							that.clickDelete( e, dataModel );
-							return false;
-						}
-					});
+				/*
+				* If the field has been saved, then we need to check for
+				 * submission data for this field
+				 */
+				if( 'tmp' === modelID.substring( 0, 3 )
+					|| -1 != jQuery.inArray( dataModel.get( 'type' ), nonSaveFields ) ) {
+					// not a saved field so proceed as normal
+					this.clickDelete( e, dataModel );
+				} else {
+					// need the form id
+					var formModel = Backbone.Radio.channel('app').request('get:formModel');
+					var data = {
+						'action': 'nf_maybe_delete_field',
+						'security': nfAdmin.ajaxNonce,
+						'formID': formModel.get('id'),
+						'fieldKey': dataModel.get('key'),
+						'fieldID': modelID
+					};
+					var that = this;
+
+					// make call to see if field has submission data
+					jQuery.post(ajaxurl, data)
+						.done(function (response) {
+							var res = JSON.parse(response);
+							if (res.data.field_has_data) {
+								// if it does, show warning modal
+								that.doDeleteFieldModal(e, dataModel);
+								return false;
+							} else {
+								// if not, proceed like normal
+								that.clickDelete(e, dataModel);
+								return false;
+							}
+						});
+				}
 			}
 		},
 
+		/**
+		 * Create the field delete warning modal
+		 *
+		 * @param e
+		 * @param dataModel
+		 */
 		doDeleteFieldModal: function( e, dataModel ) {
+			// Build warning modal to warn user a losing all data related to field
 			var message, container, messageBox, deleteMsgs, buttons, confirm, cancel, lineBreak;
 			container = document.createElement( 'div' );
 			messageBox = document.createElement( 'p' );
@@ -86,6 +121,7 @@ define( [], function() {
 			buttons = document.createElement( 'div' );
 			buttons.style.marginTop = '10px';
 			buttons.style.backgroundColor = '#f4f5f6';
+
 			confirm = document.createElement( 'div' );
 			confirm.style.padding = '8px';
 			confirm.style.backgroundColor = '#d9534f';
@@ -94,6 +130,7 @@ define( [], function() {
 			confirm.style.fontWeight = 'bold';
 			confirm.style.color = '#ffffff';
 			confirm.style.borderRadius = '4px';
+
 			cancel = document.createElement( 'div' );
 			cancel.style.padding = '8px';
 			cancel.style.backgroundColor = '#5bc0de';
@@ -102,28 +139,31 @@ define( [], function() {
 			cancel.style.fontWeight = 'bold';
 			cancel.style.color = '#ffffff';
 			cancel.style.borderRadius = '4px';
+
 			lineBreak = document.createElement( 'br' );
+
 			container.classList.add( 'message' );
 			messageBox.innerHTML += 'This will DELETE all data' +
 				' associated with this field. You will not be able to' +
 				' retrieve data for this field!';
 
 			messageBox.appendChild( lineBreak );
-
 			container.appendChild( messageBox );
-
 			container.appendChild( lineBreak );
 
 			confirm.innerHTML = 'Delete';
 			confirm.classList.add( 'confirm', 'nf-button', 'primary' );
 			confirm.style.float = 'left';
+
 			cancel.innerHTML = 'Cancel';
 			cancel.classList.add( 'cancel', 'nf-button', 'secondary', 'cancel-delete-all' );
 			cancel.style.float = 'right';
+
 			buttons.appendChild( confirm );
 			buttons.appendChild( cancel );
 			buttons.classList.add( 'buttons' );
 			container.appendChild( buttons );
+
 			message = document.createElement( 'div' );
 			message.appendChild( container );
 
@@ -144,18 +184,22 @@ define( [], function() {
 			var btnCancel = deleteFieldModal.container[0].getElementsByClassName('cancel')[0];
 			btnCancel.addEventListener('click', function() {
 
+				// close and destroy modal
 				deleteFieldModal.close();
 				deleteFieldModal.destroy();
+				// set deleting to false so edit can work as normal
 				that.deleting = false;
 
 			} );
-
+			// add event listener for delete button
 			var btnDelete = deleteFieldModal.container[0].getElementsByClassName('confirm')[0];
-
 			btnDelete.addEventListener('click', function() {
+
+				// close and destroy modal.
 				deleteFieldModal.close();
 				deleteFieldModal.destroy();
 
+				// proceed as normal, data will be deleted in backend on publish
 				that.clickDelete( e, dataModel );
 			} );
 

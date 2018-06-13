@@ -25,6 +25,27 @@ final class NF_Database_Models_Field extends NF_Abstracts_Model
         parent::__construct( $db, $id, $parent_id );
     }
 
+    public function delete() {
+    	parent::delete();
+
+    	// delete data for field if it exists
+    	$this->deleteData();
+    }
+
+    private function deleteData() {
+
+    	// check for numeric ids only
+    	if( is_numeric( $this->_id ) ) {
+    		// delete submitted values for deleted field
+		    $this->_db->delete(
+			    $this->_db->prefix . 'postmeta',
+			    array(
+				    'meta_key' => '_field_' . $this->_id
+			    )
+		    );
+	    }
+    }
+
     public static function import( array $settings, $field_id = '', $is_conversion = FALSE )
     {
         $settings = apply_filters( 'ninja_forms_before_import_fields', $settings );
