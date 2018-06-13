@@ -29,7 +29,7 @@
     </a> -->
     <# } else { #>
     <div class="nf-oauth--connected">
-      Connected to My.NinjaForms.com
+      Connected to My.NinjaForms.com &nbsp; <span style="cursor:pointer;" onclick="Backbone.Radio.channel( 'dashboard' ).request( 'oauth:learn-more' );">Learn More</span>
       <span class="js--disconnect" style="float:right;cursor:pointer;">
         <span class="dashicons dashicons-no"></span>
       </span>

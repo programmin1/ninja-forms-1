@@ -111,7 +111,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 //                'add_new_text' => __( 'Add New Form', 'ninja-forms' )
 //            ) );
 
-            $use_services = false; // Feature Flag.
+            $use_services = true; // Feature Flag.
             $use_services = apply_filters( 'ninja_forms_use_services', $use_services ); // The WordPress Way.
             $use_services = $use_services && ( version_compare( PHP_VERSION, '5.6', '>=' ) ); // PHP Version Check.
 
@@ -507,7 +507,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $nicename = ( isset( $action[ 'nicename' ] ) ) ? $action[ 'nicename' ] : '';
             $image = ( isset( $action[ 'image' ] ) ) ? $action[ 'image' ] : '';
             $link = ( isset( $action[ 'link' ] ) ) ? $action[ 'link' ] : '';
-            $modal_content = ( isset( $action[ 'modal_content' ] ) ) ? $action[ 'modal_content' ] : '';            
+            $modal_content = ( isset( $action[ 'modal_content' ] ) ) ? $action[ 'modal_content' ] : '';
 
             if ( $u_id ) {
                 $last_slash = strripos( $link, '/' );
