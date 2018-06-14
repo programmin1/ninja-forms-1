@@ -143,8 +143,8 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
                             option.setAttribute( 'selected', 'selected' );
                         }
 						option.value = field.get( 'key' );
-                        option.innerHTML = field.get( 'label' );
-						option.label = field.get( 'label' );
+                        option.innerHTML = field.formatLabel();
+						option.label = field.formatLabel();
 						select.appendChild( option );
 					});
 
@@ -193,8 +193,8 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
                             option.setAttribute( 'selected', 'selected' );
                         }
                         option.value = field.get( 'key' );
-                        option.innerHTML = field.get( 'label' );
-                        option.label = field.get( 'label' );
+                        option.innerHTML = field.formatLabel();
+                        option.label = field.formatLabel();
                         select.appendChild( option );
                     });
 
