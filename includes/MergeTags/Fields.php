@@ -220,6 +220,12 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
                 // ...then set the value equal to the field label.
                 $field[ 'value' ] = $this->get_list_labels( $field );
 
+                // If we have multiple values in from the list field...
+                if( is_array( $field[ 'value' ] ) ){
+                    // ...convert our values into an array.
+                    $field[ 'value' ] = implode( ', ', $field[ 'value' ] );
+                }
+
                 // Set callback and add this merge tag.
                 $callback = 'field_' . $field_key . '_label';
                 $this->add( $callback, $field_key, '{field:' . $field_key . ':label}', $field[ 'value' ] );
