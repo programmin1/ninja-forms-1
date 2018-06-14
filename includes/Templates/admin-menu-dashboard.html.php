@@ -95,7 +95,7 @@
               <# if( data.setupButtonText ){ #>
                 {{{ data.setupButtonText }}}
               <# } else { #>
-                Setup
+                <?php echo __( 'Setup', 'ninja-forms' ); ?>
               <# } #>
             </a>
           <# } else { #>
