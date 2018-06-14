@@ -8,8 +8,6 @@ class NF_AJAX_Controllers_Fields extends NF_Abstracts_Controller
 	{
 		add_action( 'wp_ajax_nf_maybe_delete_field', array( $this,
 			'maybe_delete_field' ) );
-		add_action( 'wp_ajax_nopriv_nf_maybe_delete_field', array( $this,
-			'maybe_delete_field' ) );
 
 	}
 
