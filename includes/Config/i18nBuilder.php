@@ -69,6 +69,7 @@ return apply_filters( 'ninja_forms_i18n_builder', array(
                                                 __( 'We', 'ninja-forms' ),
                                                 __( 'Th', 'ninja-forms' ),
                                                 __( 'Fr', 'ninja-forms' ),
-                                                __( 'Sa', 'ninja-forms' )
-                                            )
+                                                __( 'Sa', 'ninja-forms' ),
+                                            ),
+    'valueChars'                => __( 'In order to prevent errors, values may only contain a specific subset of characters.', 'ninja-forms' ),
 ));

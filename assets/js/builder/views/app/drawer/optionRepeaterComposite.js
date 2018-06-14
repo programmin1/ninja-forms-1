@@ -76,6 +76,8 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 					nfRadio.channel( 'option-repeater' ).request( 'update:optionSortable', ui, this, that );
 				}
 			} );
+            
+            that.setupTooltip();
             that.maybeHideNew( that.collection );
 
 			/*
@@ -111,11 +113,56 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'attach:setting', this.model, this.dataModel, this );
 			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'attach:setting', this.model, this.dataModel, this );
 		},
+        
+        /**
+         * Function to append jBox modals to each tooltip element in the option repeater.
+         */
+        setupTooltip: function() {
+            // For each .nf-help in the option repeater...
+            jQuery( this.el ).find('.nf-list-options').find( '.nf-help' ).each(function() {
+                // Get the content.
+                var content = jQuery(this).next('.nf-help-text');
+                // Declare the modal.
+                jQuery( this ).jBox( 'Tooltip', {
+                    content: content,
+                    maxWidth: 200,
+                    theme: 'TooltipBorder',
+                    trigger: 'click',
+                    closeOnClick: true
+                })
+            });
+        },
 
 		templateHelpers: function () {
 			var that = this;
 	    	return {
 	    		renderHeaders: function() {
+                    // If this is a Field...
+                    // AND If the type includes 'list'...
+                    if ( 'Field' == that.dataModel.get( 'objectType' ) && -1 !== that.dataModel.get( 'type' ).indexOf( 'list' )  ) {
+                        // Declare help text.
+                        var helpText, helpTextContainer, helpIcon, helpIconLink, helpTextWrapper;
+
+                        helpText = document.createTextNode( nfi18n.valueChars );
+                        helpTextContainer = document.createElement( 'div' );
+                        helpTextContainer.classList.add( 'nf-help-text' );
+                        helpTextContainer.appendChild( helpText );
+
+                        helpIcon = document.createElement( 'span' );
+                        helpIcon.classList.add( 'dashicons', 'dashicons-admin-comments' );
+                        helpIconLink = document.createElement( 'a' );
+                        helpIconLink.classList.add( 'nf-help' );
+                        helpIconLink.setAttribute( 'href', '#' );
+                        helpIconLink.setAttribute( 'tabindex', '-1' );
+                        helpIconLink.appendChild( helpIcon );
+
+                        helpTextWrapper = document.createElement( 'span' );
+                        helpTextWrapper.appendChild( helpIconLink );
+                        helpTextWrapper.appendChild( helpTextContainer );
+
+                        // Append the help text to the 'value' header.
+                        that.model.get('columns').value.header += helpTextWrapper.innerHTML;
+                    }
 	    			var columns, beforeColumns, afterColumns;
 
 	    			beforeColumns = document.createElement( 'div' );
