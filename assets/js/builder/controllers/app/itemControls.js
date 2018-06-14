@@ -143,19 +143,17 @@ define( [], function() {
 			lineBreak = document.createElement( 'br' );
 
 			container.classList.add( 'message' );
-			messageBox.innerHTML += 'This will DELETE all data' +
-				' associated with this field. You will not be able to' +
-				' retrieve data for this field!';
+			messageBox.innerHTML += nfi18n.fieldDataDeleteMsg;
 
 			messageBox.appendChild( lineBreak );
 			container.appendChild( messageBox );
 			container.appendChild( lineBreak );
 
-			confirm.innerHTML = 'Delete';
+			confirm.innerHTML = nfi18n.delete;
 			confirm.classList.add( 'confirm', 'nf-button', 'primary' );
 			confirm.style.float = 'left';
 
-			cancel.innerHTML = 'Cancel';
+			cancel.innerHTML = nfi18n.cancel;
 			cancel.classList.add( 'cancel', 'nf-button', 'secondary', 'cancel-delete-all' );
 			cancel.style.float = 'right';
 

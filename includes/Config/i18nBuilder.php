@@ -70,5 +70,10 @@ return apply_filters( 'ninja_forms_i18n_builder', array(
                                                 __( 'Th', 'ninja-forms' ),
                                                 __( 'Fr', 'ninja-forms' ),
                                                 __( 'Sa', 'ninja-forms' )
-                                            )
+                                            ),
+	'fieldDataDeleteMsg'   => __( 'This will DELETE all data' .
+	                       ' associated with this field. You will not be able to' .
+	                       ' retrieve data for this field!' ),
+	'delete'    => __( 'Delete' ),
+	'cancel'    => __( 'Cancel' )
 ));

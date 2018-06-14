@@ -25,13 +25,34 @@ final class NF_Database_Models_Field extends NF_Abstracts_Model
         parent::__construct( $db, $id, $parent_id );
     }
 
+	/**
+	 * Delete
+	 *
+	 * Delete the object, its children, and its relationships.
+	 *
+	 * Also deletes data associated with field
+	 *
+	 * @return bool
+	 */
     public function delete() {
-    	parent::delete();
+    	$parent_results = parent::delete();
 
-    	// delete data for field if it exists
-    	$this->deleteData();
+    	// if parent returns false(no errors) delete data and return false
+    	if( false == $parent_results ) {
+		    // delete data for field if it exists
+		    $this->deleteData();
+		    return false;
+	    } else {
+    		// else return true for errors
+    		return true;
+	    }
     }
 
+	/**
+	 * Delete data for the field
+	 *
+	 * @return bool
+	 */
     private function deleteData() {
 
     	// check for numeric ids only
