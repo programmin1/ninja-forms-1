@@ -57,13 +57,13 @@ final class NF_Database_Models_Field extends NF_Abstracts_Model
 
     	// check for numeric ids only
     	if( is_numeric( $this->_id ) ) {
+
+    		$query = "DELETE m FROM `" . $this->_db->prefix . "postmeta` m"
+			    . " JOIN `" . $this->_db->prefix . "posts` p ON m.post_id = p.ID"
+			    . " WHERE p.post_type='nf_sub' AND m.meta_key='_field_" .
+		             $this->_id . "'";
     		// delete submitted values for deleted field
-		    $this->_db->delete(
-			    $this->_db->prefix . 'postmeta',
-			    array(
-				    'meta_key' => '_field_' . $this->_id
-			    )
-		    );
+		    $this->_db->query( $query );
 	    }
     }
 
