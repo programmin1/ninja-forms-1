@@ -505,7 +505,8 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             if ( apply_filters( 'ninja_forms_disable_marketing', $disable_marketing ) ) {
                 unset(
                     $items[ 'apps' ],
-                    $items[ 'memberships' ]
+                    $items[ 'memberships' ],
+                    $items[ 'services' ]
                 );
             }
             return $items;

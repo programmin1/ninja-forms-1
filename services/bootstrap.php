@@ -45,6 +45,7 @@ add_action( 'wp_ajax_nf_services', function(){
       'installPath' => 'ninja-mail/ninja-mail.php',
       'description' => 'Increase Email Deliverability with a dedicated email service by Ninja Forms for only $5/month/site.',
       'enabled' => null,
+      'setupButtonText' => 'Signup',
       'learnMoreTitle' => 'Improve Ninja Forms Email Reliability!',
       'learnMore' => '
       <div style="padding:20px;">
