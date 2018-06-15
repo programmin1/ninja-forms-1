@@ -250,8 +250,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  */
                 self::$instance->controllers[ 'form' ]          = new NF_AJAX_Controllers_Form();
                 self::$instance->controllers[ 'fields' ]    = new NF_AJAX_Controllers_Fields();
-                self::$instance->controllers[ 'batch_process' ]          = new
-                NF_AJAX_REST_BatchProcess();
+                self::$instance->controllers[ 'batch_process' ] = new NF_AJAX_REST_BatchProcess();
                 self::$instance->controllers[ 'preview' ]       = new NF_AJAX_Controllers_Preview();
                 self::$instance->controllers[ 'submission' ]    = new NF_AJAX_Controllers_Submission();
                 self::$instance->controllers[ 'savedfields' ]   = new NF_AJAX_Controllers_SavedFields();
