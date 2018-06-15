@@ -77,5 +77,8 @@ return apply_filters( 'ninja_forms_i18n_builder', array(
 	'delete'    => __( 'Delete' ),
 	'cancel'    => __( 'Cancel' ),
     'valueChars' => __( 'In order to prevent errors, values may only contain'
-		. ' a specific subset of characters ( a-z, 0-9, -, _, @, space ).', 'ninja-forms' ),
+		. ' a specific subset of characters ( a-z, 0-9, -, _, @, space ). You'
+		. ' can use the option label in your success message(s) or email action(s) by adding'
+		. ' the :label attribute to your list field merge tags. For example:'
+		. ' {field:key:label}', 'ninja-forms' ),
 ));
