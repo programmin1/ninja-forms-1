@@ -88,16 +88,17 @@ final class NF_Database_SubmissionExpirationCron
      * Helper method that removes our expired subs.
      *
      * @param $expired_subs - array of sub ids that need to be deleted.
+     * @param $cap - The cap of the amount of subs you want deleted at 1 time.
      *
      * @return void
      */
-    public function delete_expired_subs( $expired_subs )
+    public function delete_expired_subs( $expired_subs, $cap = 100 )
     {
         $i = 0;
         // Loop over our subs
         foreach( $expired_subs as $subs ) {
             foreach( $subs as $sub ) {
-                if( $i >= 100 ) break;
+                if( $i >= $cap ) break;
                 wp_delete_post( $sub );
                 $i++;
             }

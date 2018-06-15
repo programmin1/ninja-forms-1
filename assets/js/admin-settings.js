@@ -216,5 +216,36 @@ jQuery(document).ready(function($) {
             $( '#nfTelSpinner' ).css( 'display', 'none' );
         } );  
     } );
-    
+
+    jQuery( '#nfDeleteExpiredSubmissions' ).click( function( e ) {
+    	var data = {
+            closeOnEsc: true,
+            content: '<p>Are you sure want to delete this?</p>',
+            btnPrimary: {
+				text: 'Delete',
+				callback: function( e ) {
+					jQuery.post({
+                        url: nf_settings.ajax_url,
+						data: {
+                        	action: 'nf_batch_process',
+                            batch_type: 'expired_submission_cleanup',
+							security: nf_settings.nonce,
+						},
+						success: function( response ){
+							console.log( 'I dont care' );
+						},
+                    })
+				}
+			},
+            btnSecondary: {
+            	text: 'Cancel',
+				callback: function( e ) {
+            		deleteModal.toggleModal( false );
+				}
+			},
+            useProgressBar: true,
+		};
+
+    	var deleteModal = new NinjaModal( data );
+	});
 });
