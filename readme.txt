@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, kbjohnson90, klhall1987, krmoorho
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 3.3.2
+Stable tag: 3.3.4
 License: GPLv2 or later
 
 Drag and drop fields in an intuitive UI to create contact forms, email subscription forms, order forms, payment forms, send emails and more!
@@ -111,25 +111,37 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.3.2 (4 June 2018) =
+= 3.3.4 (11 June 2018) =
 
 *Bugs:*
 
-* Fields that do not actually save data should no longer appear in the include/exclude fields list for the store submission action.
-* Improved performance of our Add Form modal in the post editor.
-* Resolved an issue that sometimes caused the Submissions page to display as a white screen.
+* Resolved an issue that was preventing placeholder text from appearing in paragraph text fields.
 
-*Changes:*
+*Chnages:*
 
-* (GDPR) Fields excluded by the store submission action will now show their values as (redacted) in the edit submission screen, rather than displaying nothing.
-* (GDPR) The delete data request action now includes a setting to specify anonimization of Ninja Forms data, rather than full deletion.
-* (GDPR) Fields now have a setting to specify if they are personally identifiable data.
-* Registered a cleanup process to take care of some outdated and unnecessary data we have been storing in various data records.
-* Added several ARIA attributes to the fields that were missing them.
-* The Delete All Data button now cleans up several additional options that we'd recently added.
-* The list of actions in the form builder has been updated, and non-enabled actions now include a short blurb describing their usage.
+* Unlocked the services tab.
+* (Beta) Ninja Forms Add-on Manager is now available.
+* Ninja Mail - Transactional Email is now available.
 
 == Changelog ==
+
+= 3.3.4 (11 June 2018) =
+
+*Bugs:*
+
+* Resolved an issue that was preventing placeholder text from appearing in paragraph text fields.
+
+*Chnages:*
+
+* Unlocked the services tab.
+* (Beta) Ninja Forms Add-on Manager is now available.
+* Ninja Mail - Transactional Email is now available.
+
+= 3.3.3 (5 June 2018) =
+
+*Bugs:*
+
+* Resolved an issue that sometimes caused our opt-in modal to become undismissable.
 
 = 3.3.2 (4 June 2018) =
 
