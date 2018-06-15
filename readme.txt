@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, kbjohnson90, klhall1987, krmoorho
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 3.3.4
+Stable tag: 3.3.5
 License: GPLv2 or later
 
 Drag and drop fields in an intuitive UI to create contact forms, email subscription forms, order forms, payment forms, send emails and more!
@@ -111,19 +111,37 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.3.4 (11 June 2018) =
+= 3.3.5 (18 June 2018) =
 
 *Bugs:*
 
-* Resolved an issue that was preventing placeholder text from appearing in paragraph text fields.
+* Made some performance updates to several of our popup modals.
+* The agency remove marketing hook should now properly hide the new services tab.
 
-*Chnages:*
+*Changes:*
 
-* Unlocked the services tab.
-* (Beta) Ninja Forms Add-on Manager is now available.
-* Ninja Mail - Transactional Email is now available.
+* Fields now display admin labels (if they exist) instead of labels in the store submission action settings.
+* Added a tooltip to the value section of list fields, giving details about allowed characters.
+* List field merge tags can now be configured to show labels instead of values by appending ":label" to the merge tag.
+* The store submissions action can now be configured to remove submissions that exceed a defined timeframe.
+* Added a confirm modal to field deletion to prevent accidental removal of data.
 
 == Changelog ==
+
+= 3.3.5 (18 June 2018) =
+
+*Bugs:*
+
+* Made some performance updates to several of our popup modals.
+* The agency remove marketing hook should now properly hide the new services tab.
+
+*Changes:*
+
+* Fields now display admin labels (if they exist) instead of labels in the store submission action settings.
+* Added a tooltip to the value section of list fields, giving details about allowed characters.
+* List field merge tags can now be configured to show labels instead of values by appending ":label" to the merge tag.
+* The store submissions action can now be configured to remove submissions that exceed a defined timeframe.
+* Added a confirm modal to field deletion to prevent accidental removal of data.
 
 = 3.3.4 (11 June 2018) =
 
