@@ -249,8 +249,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  * AJAX Controllers
                  */
                 self::$instance->controllers[ 'form' ]          = new NF_AJAX_Controllers_Form();
-                self::$instance->controllers[ 'batch_process' ]          = new
-                NF_AJAX_REST_BatchProcess();
+                self::$instance->controllers[ 'batch_process' ] = new NF_AJAX_REST_BatchProcess();
                 self::$instance->controllers[ 'preview' ]       = new NF_AJAX_Controllers_Preview();
                 self::$instance->controllers[ 'submission' ]    = new NF_AJAX_Controllers_Submission();
                 self::$instance->controllers[ 'savedfields' ]   = new NF_AJAX_Controllers_SavedFields();
@@ -275,6 +274,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  */
                 require_once Ninja_Forms::$dir . 'includes/Libraries/BackgroundProcessing/wp-background-processing.php';
                 self::$instance->requests[ 'update-fields' ] = new NF_AJAX_Processes_UpdateFields();
+
 
                 /*
                  * WP-CLI Commands
@@ -362,6 +362,9 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  */
                 self::$instance->tracking = new NF_Tracking();
 
+
+                self::$instance->submission_expiration_cron = new NF_Database_SubmissionExpirationCron();
+
                 /*
                  * JS Exception Handler
                  *
@@ -447,6 +450,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
 		        wp_kses_post( wpautop( $content, false) ) );
 
         }
+
 
 	    /**
 	     * Return the default suggested privacy policy content.
