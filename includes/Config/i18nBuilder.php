@@ -76,5 +76,6 @@ return apply_filters( 'ninja_forms_i18n_builder', array(
 	                       ' retrieve data for this field!' ),
 	'delete'    => __( 'Delete' ),
 	'cancel'    => __( 'Cancel' ),
-    'valueChars'                => __( 'In order to prevent errors, values may only contain a specific subset of characters.', 'ninja-forms' ),
+    'valueChars' => __( 'In order to prevent errors, values may only contain'
+		. ' a specific subset of characters ( a-z, 0-9, -, _, @, space ).', 'ninja-forms' ),
 ));
