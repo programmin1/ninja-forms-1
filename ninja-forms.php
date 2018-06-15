@@ -276,6 +276,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 require_once Ninja_Forms::$dir . 'includes/Libraries/BackgroundProcessing/wp-background-processing.php';
                 self::$instance->requests[ 'update-fields' ] = new NF_AJAX_Processes_UpdateFields();
 
+
                 /*
                  * WP-CLI Commands
                  */
@@ -362,6 +363,9 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  */
                 self::$instance->tracking = new NF_Tracking();
 
+
+                self::$instance->submission_expiration_cron = new NF_Database_SubmissionExpirationCron();
+
                 /*
                  * JS Exception Handler
                  *
@@ -447,6 +451,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
 		        wp_kses_post( wpautop( $content, false) ) );
 
         }
+
 
 	    /**
 	     * Return the default suggested privacy policy content.
