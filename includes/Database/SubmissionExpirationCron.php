@@ -92,13 +92,13 @@ final class NF_Database_SubmissionExpirationCron
      *
      * @return void
      */
-    public function delete_expired_subs( $expired_subs, $cap = 100 )
+    public function delete_expired_subs( $expired_subs )
     {
         $i = 0;
         // Loop over our subs
         foreach( $expired_subs as $subs ) {
             foreach( $subs as $sub ) {
-                if( $i >= $cap ) break;
+                if( $i >= 100 ) break;
                 wp_delete_post( $sub );
                 $i++;
             }

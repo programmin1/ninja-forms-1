@@ -16,10 +16,10 @@ class NF_AJAX_REST_BatchProcess extends NF_AJAX_REST_Controller
     public function post( $request_data )
     {
         $data = array();
-        
+
         // If we don't have a nonce...
         // OR if the nonce is invalid...
-        if ( ! isset( $request_data[ 'security' ] ) || ! wp_verify_nonce( $request_data[ 'security' ] ) ) {
+        if ( ! isset( $request_data[ 'security' ] ) || ! wp_verify_nonce( $request_data[ 'security' ], 'ninja_forms_batch_nonce' ) ) {
             // Kick the request out now.
             $data[ 'error' ] = __( 'Request forbidden.', 'ninja-forms' );
         }
