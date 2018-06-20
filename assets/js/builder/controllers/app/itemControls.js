@@ -72,7 +72,7 @@ define( [], function() {
 				* If the field has been saved, then we need to check for
 				 * submission data for this field
 				 */
-				if( 'tmp' === modelID.substring( 0, 3 )
+				if( 'tmp' === modelID.toString().substring( 0, 3 )
 					|| -1 != jQuery.inArray( dataModel.get( 'type' ), nonSaveFields ) ) {
 					// not a saved field so proceed as normal
 					this.clickDelete( e, dataModel );
