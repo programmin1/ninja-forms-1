@@ -98,7 +98,7 @@ final class NF_Database_SubmissionExpirationCron
         foreach( $expired_subs as $subs ) {
             foreach( $subs as $sub ) {
                 if( $i >= 100 ) break;
-                wp_delete_post( $sub );
+                wp_trash_post( $sub );
                 $i++;
             }
         }
