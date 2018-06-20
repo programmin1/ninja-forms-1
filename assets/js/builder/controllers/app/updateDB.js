@@ -301,7 +301,7 @@ define( [], function() {
 					chunk: chunks[ currentChunk ],
 					form_id: formId
 				},
-				security: nfAdmin.ajaxNonce
+				security: nfAdmin.batchNonce
 			};
 
 			var that = this;

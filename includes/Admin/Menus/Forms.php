@@ -141,6 +141,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             wp_localize_script( 'nf-dashboard', 'nfPromotions', array_values( Ninja_Forms::config( 'DashboardPromotions' ) ) );
             wp_localize_script( 'nf-dashboard', 'nfAdmin', array(
                 'ajaxNonce'         => wp_create_nonce( 'ninja_forms_dashboard_nonce' ),
+                'batchNonce'        => wp_create_nonce( 'ninja_forms_batch_nonce' ),
                 'formTelemetry'     => ( get_option( 'nf_form_tel_sent' ) ) ? 0 : 1,
                 'showOptin'         => ( get_option( 'ninja_forms_do_not_allow_tracking' ) ||
                                          get_option( 'ninja_forms_allow_tracking' ) ) ? 0 : 1,
@@ -244,6 +245,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
         wp_localize_script( 'nf-builder', 'nfAdmin', array(
             'ajaxNonce'         => wp_create_nonce( 'ninja_forms_builder_nonce' ),
+            'batchNonce'        => wp_create_nonce( 'ninja_forms_batch_nonce' ),
             'requireBaseUrl'    => Ninja_Forms::$url . 'assets/js/',
             'previewurl'        => home_url() . '/?nf_preview_form=',
             'wp_locale'         => $wp_locale->number_format,
