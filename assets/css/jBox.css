@@ -3,6 +3,7 @@
 
 .jBox-wrapper {
 	text-align: left;
+    z-index: 100000000 !important;
 }
 
 .jBox-wrapper,
@@ -139,6 +140,11 @@
 
 .jBox-Modal .jBox-content {
 	padding: 12px 15px;
+}
+
+.ninja-forms-settings #jBox-overlay .jBox-closeButton,
+.ninja-forms-app #jBox-overlay .jBox-closeButton {
+    display: none;
 }
 
 /* jBox Confirm */
@@ -474,6 +480,7 @@
 	height: 100%;
 	background: #000;
 	background-color: rgba(0, 0, 0, .6);
+    z-index: 99999999 !important;
 }
 
 /* Block scrolling */

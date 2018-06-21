@@ -24,7 +24,6 @@ function NinjaModal ( data ) {
     this.settings = {
         width: ( 'undefined' != typeof data.width ? data.width : 400 ),
         class: ( 'undefined' != typeof data.class ? data.class : 'dashboard-modal' ),
-        closeButton: false,
         closeOnClick: ( 'undefined' != typeof data.closeOnClick ? data.closeOnClick : 'body' ),
         closeOnEsc: ( 'undefined' != typeof data.closeOnEsc ? data.closeOnEsc : true )
     }
