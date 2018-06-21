@@ -24,6 +24,7 @@ function NinjaModal ( data ) {
     this.settings = {
         width: ( 'undefined' != typeof data.width ? data.width : 400 ),
         class: ( 'undefined' != typeof data.class ? data.class : 'dashboard-modal' ),
+        closeButton: false,
         closeOnClick: ( 'undefined' != typeof data.closeOnClick ? data.closeOnClick : 'body' ),
         closeOnEsc: ( 'undefined' != typeof data.closeOnEsc ? data.closeOnEsc : true )
     }
@@ -52,6 +53,14 @@ function NinjaModal ( data ) {
     this.initModal();
     // Show the popup.
     this.toggleModal( true );
+}
+
+
+/**
+ * Function to destory the modal.
+ */
+NinjaModal.prototype.destroy = function () {
+    this.popup.destroy();
 }
 
 
