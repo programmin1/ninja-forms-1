@@ -74,7 +74,7 @@ final class NF_Actions_Save extends NF_Abstracts_Action
 
         // If option doesn't exist we know that we can just create the option.
         if( ! $option ){
-            update_option( 'nf_sub_expiration', array( $expiration_value ) );
+            update_option( 'nf_sub_expiration', '' );
             return;
         }
 
