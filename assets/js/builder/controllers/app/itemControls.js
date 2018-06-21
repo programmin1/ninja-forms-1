@@ -114,8 +114,32 @@ define( [], function() {
 		 */
 		doDeleteFieldModal: function( e, dataModel ) {
 			// Build warning modal to warn user a losing all data related to field
+            var that = this;
             var modalData = {
-                
+                width: 450,
+                closeOnClick: false,
+                closeOnEsc: true,
+                content: nfi18n.fieldDataDeleteMsg,
+                btnPrimary: {
+                    text: nfi18n.delete,
+                    callback: function() {
+                        // close and destory modal.
+                        deleteModal.toggleModal( false );
+                        deleteModal.destroy();
+                        // proceed as normal, data will be deleted in backend on publish
+                        that.clickDelete( e, dataModel );
+                    }
+                },
+                btnSecondary: {
+                    text: nfi18n.cancel,
+                    callback: function() {
+                        // close and destory modal
+                        deleteModal.toggleModal( false );
+                        deleteModal.destroy();
+                        // set deleting to false so edit can work as normal
+                        that.deleting = false;
+                    }
+                }
             };
             var deleteModal = new NinjaModal( modalData );
 //			var message, container, messageBox, deleteMsgs, buttons, confirm, cancel, lineBreak;
