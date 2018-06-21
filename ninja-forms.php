@@ -213,6 +213,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 // If we have a recorded version...
                 // AND that version is less than our current version...
                 if ( $saved_version && version_compare( $saved_version, self::VERSION, '<' ) ) {
+                    // *IMPORTANT: Filter to delete old bad data.
+                    // Leave this here until at least 3.4.0.
+                    if ( version_compare( $saved_version, '3.3.7', '<' ) && version_compare( $saved_version, '3.3.4', '>' ) ) {
+                        delete_option( 'nf_sub_expiration' );
+                    }
                     // We just upgraded the plugin.
                     $plugin_upgrade = true;
                 } else {
