@@ -471,6 +471,7 @@ Label Three, value-three, 3
         <input type="number" class="setting" id="{{{ data.name }}}"
                value="{{{ data.value }}}" {{{ data.renderMinMax() }}}
                placeholder="{{{ ('undefined' != typeof data.placeholder ) ? data.placeholder : '' }}}" />
+	    <em>{{{ data.renderMinMaxHelper() }}}</em>
     </label>
 </script>
 
