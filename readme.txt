@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, kbjohnson90, klhall1987, krmoorho
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 3.3.6
+Stable tag: 3.3.7
 License: GPLv2 or later
 
 Drag and drop fields in an intuitive UI to create contact forms, email subscription forms, order forms, payment forms, send emails and more!
@@ -111,23 +111,20 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.3.6 (20 June 2018) =
+= 3.3.7 (21 June 2018) =
 
 *Bugs:*
 
-* Made some performance updates to several of our popup modals.
-* The agency remove marketing hook should now properly hide the new services tab.
 * Resolved an issue that sometimes caused the form builder to crash when deleting a field.
-
-*Changes:*
-
-* Fields now display admin labels (if they exist) instead of labels in the store submission action settings.
-* Added a tooltip to the value section of list fields, giving details about allowed characters.
-* List field merge tags can now be configured to show labels instead of values by appending ":label" to the merge tag.
-* The store submissions action can now be configured to remove submissions that exceed a defined timeframe.
-* Added a confirm modal to field deletion to prevent accidental removal of data.
+* Submissions removed by the expired submissions feature should now be moved to the trash instead of completely removed.
 
 == Changelog ==
+
+= 3.3.7 (21 June 2018) =
+
+*Bugs:*
+
+* Submissions removed by the expired submissions feature should now be moved to the trash instead of completely removed.
 
 = 3.3.6 (20 June 2018) =
 
