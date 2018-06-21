@@ -35,6 +35,7 @@ define(
 		'controllers/app/fieldset',
 		'controllers/app/toggleSetting',
 		'controllers/app/buttonToggleSetting',
+		'controllers/app/numberSetting',
 		'controllers/app/radioSetting',
 		'controllers/app/itemControls',
 		'controllers/app/mergeTags',
@@ -141,6 +142,7 @@ define(
 		Fieldset,
 		ToggleSetting,
 		ButtonToggleSetting,
+		NumberSetting,
 		RadioSetting,
 		ItemControls,
 		MergeTags,
@@ -278,6 +280,7 @@ define(
 				new ChangeSettingDefault();
 				new ToggleSetting();
 				new ButtonToggleSetting();
+				new NumberSetting();
 				new RadioSetting();
 				new DrawerSettingChildView();
 				new FieldsEditActive();

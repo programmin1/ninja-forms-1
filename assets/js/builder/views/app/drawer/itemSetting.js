@@ -361,7 +361,20 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 					} else {
 						return '';
 					}
-				}
+				},
+
+			    renderMinMax: function() {
+					var minMaxStr = '';
+					if( 'undefined' != typeof this.min_val && null != this.min_val && jQuery.isNumeric( this.min_val ) ) {
+						minMaxStr = minMaxStr + "min='" + this.min_val + "'";
+					}
+
+				    if( 'undefined' != typeof this.max_val && '' != this.max_val && jQuery.isNumeric( this.max_val ) ) {
+					    minMaxStr = minMaxStr + " max='" + this.max_val + "'";
+				    }
+
+				    return minMaxStr;
+			    }
 			}
 		},
 
