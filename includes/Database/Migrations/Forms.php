@@ -29,5 +29,25 @@ class NF_Database_Migrations_Forms extends NF_Abstracts_Migration
 
         dbDelta( $query );
     }
+    
+    /**
+     * Function to run our stage one upgrades.
+     */
+    public function do_stage_one()
+    {
+        $query = "ALTER TABLE {$this->table_name()}
+            DROP `key`,
+            DROP `views`,
+            DROP `subs`,
+            ADD `form_title` longtext {$this->collate()},
+            ADD `label_pos` varchar(15) {$this->collate()},
+            ADD `show_title` bit,
+            ADD `clear_complete` bit,
+            ADD `hide_complete` bit,
+            ADD `logged_in` bit,
+            ADD `seq_num` int";
+        global $wpdb;
+        $wpdb->query( $query );
+    }
 
 }

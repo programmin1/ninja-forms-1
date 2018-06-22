@@ -26,6 +26,16 @@ class NF_Database_Migrations
             $migration->_run();
         }
     }
+    
+    /**
+     * Function to run all our stage one changes.
+     */
+    public function do_stage_one()
+    {
+        foreach( $this->migrations as $migration ) {
+            $migration->_stage_one();
+        }
+    }
 
     public function nuke( $areYouSure = FALSE, $areYouReallySure = FALSE )
     {
