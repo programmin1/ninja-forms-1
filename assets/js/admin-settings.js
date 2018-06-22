@@ -217,14 +217,14 @@ jQuery(document).ready(function($) {
         } );  
     } );
 
-    jQuery( '#nfDeleteExpiredSubmissions' ).click( function( e ) {
+    jQuery( '#nfTrashExpiredSubmissions' ).click( function( e ) {
     	var that = this;
     	var data = {
     		closeOnClick: false,
             closeOnEsc: true,
-            content: '<p>Are you sure want to delete this?</p>',
+            content: '<p>' + nf_settings.i18n.trashExpiredSubsMessage + '<p>',
             btnPrimary: {
-				text: 'Delete',
+				text: nf_settings.i18n.trashExpiredSubsButtonPrimary,
 				callback: function( e ) {
                     // Hide the buttons.
                     deleteModal.maybeShowActions( false );
@@ -236,7 +236,7 @@ jQuery(document).ready(function($) {
 				}
 			},
             btnSecondary: {
-            	text: 'Cancel',
+            	text: nf_settings.i18n.trashExpiredSubsButtonSecondary,
 				callback: function( e ) {
             		deleteModal.toggleModal( false );
 				}

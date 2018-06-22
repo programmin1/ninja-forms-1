@@ -105,12 +105,12 @@ return apply_filters( 'ninja_forms_plugin_settings_advanced', array(
         'desc'  => __( 'Rollback to the most recent 2.9.x release.', 'ninja-forms' ) . '<br /><div style="color: red">' . __( 'IMPORTANT: All 3.0 data will be removed.', 'ninja-forms' ) . '<br />' . __( 'Please export any forms or submissions you do not want to be lost during this process.', 'ninja-forms' ) . '</div>',
     ),
 
-    'delete_expired_submissions' => array(
-        'id' => 'delete_expired_submissions',
+    'trash_expired_submissions' => array(
+        'id' => 'trash_expired_submissions',
         'type' => 'html',
-        'html' => '<div id="nfDeleteExpiredSubmissions" class="button">' . __( 'Delete', 'ninja-forms' ) . '</div>',
-        'label' => __( 'Delete Expired Submissions', 'ninja-forms' ),
-        'desc' => __( 'Delete all submissions that are marked as expired.', 'ninja-forms' ),
+        'html' => '<div id="nfTrashExpiredSubmissions" class="button">' . __( 'Move To Trash', 'ninja-forms' ) . '</div>',
+        'label' => __( 'Trash Expired Submissions', 'ninja-forms' ),
+        'desc' => __( 'This setting maybe helpful if your WordPress installation is not moving expired submissions to the trash properly.', 'ninja-forms' ),
     ),
 
 ));

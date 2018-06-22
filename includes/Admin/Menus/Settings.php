@@ -163,7 +163,10 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
             'nonce'         => wp_create_nonce( "ninja_forms_settings_nonce" ),
             'batch_nonce'   => wp_create_nonce( 'ninja_forms_batch_nonce' ),
             'i18n'          => array(
-                'rollbackConfirm' => __( 'Are you sure you want to rollback?', 'ninja-forms' )
+                'rollbackConfirm'                  => __( 'Are you sure you want to rollback?', 'ninja-forms' ),
+                'trashExpiredSubsMessage'          => __( 'Are you sure you want to trash all expired submissions?', 'ninja-forms' ),
+                'trashExpiredSubsButtonPrimary'    => __( 'Trash', 'ninja-forms' ),
+                'trashExpiredSubsButtonSecondary'  => __( 'Cancel', 'ninja-forms' ),
             ),
             'allow_telemetry' => $allow_tel,
         ));
