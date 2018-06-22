@@ -10,7 +10,7 @@ final class NF_Database_SubmissionExpirationCron
     public function __construct()
     {
         // Retrieves the option that contains all of our expiration data.
-        $options = get_option( 'nf_sub_expiration' );
+        $options = get_option( 'nf_sub_expiration', false );
 
         // Schedules our CRON job.
         if( ! wp_next_scheduled( 'nf_submission_expiration_cron' ) &&  ! empty( $options ) ) {
@@ -29,10 +29,10 @@ final class NF_Database_SubmissionExpirationCron
      */
     public function expired_submission_cron()
     {
-        $options = get_option( 'nf_sub_expiration' );
+        $options = get_option( 'nf_sub_expiration', false );
 
         // If options are empty bail..
-        if( ! $options ) return;
+        if( ! $options || ! is_array( $options ) ) return;
 
         // Loop over our options and ...
         foreach( $options as $option ) {
@@ -98,7 +98,7 @@ final class NF_Database_SubmissionExpirationCron
         foreach( $expired_subs as $subs ) {
             foreach( $subs as $sub ) {
                 if( $i >= 100 ) break;
-                wp_delete_post( $sub );
+                wp_trash_post( $sub );
                 $i++;
             }
         }

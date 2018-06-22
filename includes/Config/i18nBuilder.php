@@ -71,9 +71,7 @@ return apply_filters( 'ninja_forms_i18n_builder', array(
                                                 __( 'Fr', 'ninja-forms' ),
                                                 __( 'Sa', 'ninja-forms' )
                                             ),
-	'fieldDataDeleteMsg'   => __( 'This will DELETE all data' .
-	                       ' associated with this field. You will not be able to' .
-	                       ' retrieve data for this field!' ),
+	'fieldDataDeleteMsg'   => sprintf( __( '%sThis will also DELETE all submission data associated with this field.%sYou will not be able to retrieve this data later!%s' ), '<p>', '</p><p>', '</p><br />' ),
 	'delete'    => __( 'Delete' ),
 	'cancel'    => __( 'Cancel' ),
     'minVal'    => __( 'Min Value' ),
