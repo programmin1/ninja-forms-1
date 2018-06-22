@@ -76,7 +76,7 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 					nfRadio.channel( 'option-repeater' ).request( 'update:optionSortable', ui, this, that );
 				}
 			} );
-            
+
             that.setupTooltip();
             that.maybeHideNew( that.collection );
 
@@ -119,7 +119,7 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
          */
         setupTooltip: function() {
             // For each .nf-help in the option repeater...
-            jQuery( this.el ).find('.nf-list-options').find( '.nf-help' ).each(function() {
+            jQuery( this.el ).find( '.nf-list-options' ).find( '.nf-help' ).each(function() {
                 // Get the content.
                 var content = jQuery(this).next('.nf-help-text');
                 // Declare the modal.
@@ -135,11 +135,12 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 
 		templateHelpers: function () {
 			var that = this;
+
 	    	return {
 	    		renderHeaders: function() {
                     // If this is a Field...
                     // AND If the type includes 'list'...
-                    if ( 'Field' == that.dataModel.get( 'objectType' ) && -1 !== that.dataModel.get( 'type' ).indexOf( 'list' )  ) {
+                    if ( 'Field' == that.dataModel.get( 'objectType' ) && -1 !== that.dataModel.get( 'type' ).indexOf( 'list' ) ) {
                         // Declare help text.
                         var helpText, helpTextContainer, helpIcon, helpIconLink, helpTextWrapper;
 
@@ -161,7 +162,9 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
                         helpTextWrapper.appendChild( helpTextContainer );
 
                         // Append the help text to the 'value' header.
-                        that.model.get('columns').value.header += helpTextWrapper.innerHTML;
+	                    if ( -1 == that.model.get('columns').value.header.indexOf( helpTextWrapper.innerHTML ) ) {
+		                    that.model.get('columns').value.header += helpTextWrapper.innerHTML;
+	                    }
                     }
 	    			var columns, beforeColumns, afterColumns;
 
