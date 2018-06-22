@@ -116,7 +116,7 @@ define( [], function() {
 			// Build warning modal to warn user a losing all data related to field
             var that = this;
             var modalData = {
-                width: 450,
+                width: 400,
                 closeOnClick: false,
                 closeOnEsc: true,
                 content: nfi18n.fieldDataDeleteMsg,
