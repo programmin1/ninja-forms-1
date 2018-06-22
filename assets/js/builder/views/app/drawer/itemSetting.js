@@ -397,7 +397,7 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				    	if( 0 == minMaxHelperStr.length ) {
 				    		minMaxHelperStr = "(";
 					    }
-					    minMaxHelperStr = minMaxHelperStr +  "Min. Value: " + this.min_val;
+					    minMaxHelperStr = minMaxHelperStr +  nfi18n.minVal + ": " + this.min_val;
 				    }
 
 				    // if we have a max value output it to the helper text
@@ -409,12 +409,12 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 					    	// else, we know we have a min so add a comma
 					    	minMaxHelperStr = minMaxHelperStr + ", ";
 					    }
-					    minMaxHelperStr = minMaxHelperStr + " Max Value: " + this.max_val;
+					    minMaxHelperStr = minMaxHelperStr + nfi18n.maxVal + ": " + this.max_val;
 				    }
 
 				    // if not an empty string, then add ')'
 				    if( 0 < minMaxHelperStr.length ) {
-					    minMaxHelperStr = minMaxHelperStr + " )";
+					    minMaxHelperStr = minMaxHelperStr + ")";
 				    }
 
 				    return minMaxHelperStr;
