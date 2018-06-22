@@ -1,12 +1,12 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-class NF_Database_Migrations_FormMeta extends NF_Abstracts_Migration
+class NF_Database_Migrations_Chunks extends NF_Abstracts_Migration
 {
     public function __construct()
     {
         parent::__construct(
-            'nf3_form_meta',
-            'nf_migration_create_table_form_meta'
+            'nf3_chunks',
+            'nf_migration_create_table_chunks'
         );
     }
 
@@ -14,11 +14,8 @@ class NF_Database_Migrations_FormMeta extends NF_Abstracts_Migration
     {
         $query = "CREATE TABLE IF NOT EXISTS {$this->table_name()} (
             `id` int NOT NULL AUTO_INCREMENT,
-            `parent_id` int NOT NULL,
-            `key` longtext NOT NULL,
+            `name` varchar(200),
             `value` longtext,
-            `meta_key` longtext,
-            `meta_value` longtext,
             UNIQUE KEY (`id`)
         ) {$this->charset_collate()};";
 

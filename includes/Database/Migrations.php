@@ -17,6 +17,7 @@ class NF_Database_Migrations
         $this->migrations[ 'relationships' ] = new NF_Database_Migrations_Relationships();
         $this->migrations[ 'settings' ]      = new NF_Database_Migrations_Settings();
         $this->migrations[ 'upgrades' ]      = new NF_Database_Migrations_Upgrades();
+        $this->migrations[ 'chunks' ]        = new NF_Database_Migrations_Chunks();
     }
 
     public function migrate()
