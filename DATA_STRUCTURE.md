@@ -17,9 +17,6 @@ _**nf3_forms**_ (Table of individual Forms)
 * title (The displayable title of the Form)
   * longtext
   * COLLATE DATABASE_DEFAULT
-* key (The administrative key of the Form)
-  * longtext
-  * COLLATE DATABASE_DEFAULT
 * created_at (The date/time the Form was created)
   * timestamp
   * NOT NULL
@@ -27,9 +24,20 @@ _**nf3_forms**_ (Table of individual Forms)
   * ON UPDATE CURRENT_TIMESTAMP
 * updated_at (The date/time the Form was last updated)
   * datetime
-* views (The number of times the Form has been viewed)
-  * int(11)
-* subs (The Form's number of lifetime Submissions)
+* form_title (The displayable title of the Form)
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+* label_pos (The default label position of fields on the Form)
+  * varchar(15)
+* show_title (Whether or not to show the Form title)
+  * bit(1)
+* clear_complete (Whether or not to clear the Form after submission)
+  * bit(1)
+* hide_complete (Whether or not to hide the Form after submission)
+  * bit(1)
+* logged_in (Whether or not the user must be logged in to view the Form)
+  * bit(1)
+* seq_num (The number of the next submission to the Form)
   * int(11)
 
 
@@ -50,6 +58,12 @@ _**nf3_form_meta**_ (Table of Settings assoicated with each Form)
 * value (The value of the Setting)
   * longtext
   * COLLATE DATABASE_DEFAULT
+* meta_key (The administrative key of the Setting)
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+* meta_value (The value of the Setting)
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
 
 ### Fields
 
@@ -543,3 +557,59 @@ _**nf3_upgrades**_ (Table of Forms as they exist in the current structure and th
   * int(11)
   * NOT NULL
   * DEFAULT 0
+
+Defined chunks table for ensuring collate of chunked publish.
+
+### Chunks
+
+_**nf3_chunks**_ (Table of Chunks created on publish to be reconstructed into a Ninja Forms cache)
+* id (The unique ID of the Chunk)
+  * int(11)
+  * NOT NULL
+  * AUTO_INCREMENT
+  * Primary Key
+* name (The name of the Chunk)
+  * varchar(200)
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+* value (The value of the Chunk)
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+
+Updated forms tables
+
+### Forms
+
+_**nf3_forms**_ (Table of individual Forms)
+REMOVED:
+* key (The administrative key of the Form)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
+* views (The number of times the Form has been viewed)
+  * int(11)
+* subs (The Form's number of lifetime Submissions)
+  * int(11)
+ADDED:
+* form_title (The displayable title of the Form)
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+* label_pos (The default label position of fields on the Form)
+  * varchar(15)
+* show_title (Whether or not to show the Form title)
+  * bit(1)
+* clear_complete (Whether or not to clear the Form after submission)
+  * bit(1)
+* hide_complete (Whether or not to hide the Form after submission)
+  * bit(1)
+* logged_in (Whether or not the user must be logged in to view the Form)
+  * bit(1)
+* seq_num (The number of the next submission to the Form)
+  * int(11)
+
+_**nf3_form_meta**_ (Table of Settings assoicated with each Form)
+ADDED:
+* meta_key (The administrative key of the Setting)
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+* meta_value (The value of the Setting)
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
