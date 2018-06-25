@@ -67,7 +67,7 @@ Want access to everything we offer, or perhaps just our form building toolkit "B
 
 = For Developers =
 
-The Ninja Forms framework is on [GitHub](https://github.com/wpninjas/ninja-forms)! If you're a developer and want to help make Ninja Forms better, check it out. It's also a great resource for developers who are interested in creating add-ons for our online store.
+The Ninja Forms framework is on [GitLab](https://git.saturdaydrive.io/ninja-forms/ninja-forms)! If you're a developer and want to help make Ninja Forms better, check it out. It's also a great resource for developers who are interested in creating add-ons for our online store.
 
 If you're a developer and would like to talk about creating some premium extensions for Ninja Forms, send us an email: info@wpninjas.com.
 
@@ -93,7 +93,7 @@ Documentation for Ninja Forms can be found at <a href="https://ninjaforms.com/do
 
 = Where can I report a bug? =
 
-Report bugs, suggest ideas, and participate in development at <a href="https://github.com/wpninjas/ninja-forms">https://github.com/wpninjas/ninja-forms</a>.
+Report bugs, suggest ideas, and participate in development at <a href="https://git.saturdaydrive.io/ninja-forms/ninja-forms">https://git.saturdaydrive.io/ninja-forms/ninja-forms</a>.
 
 == Installation ==
 
