@@ -93,7 +93,7 @@ Documentation for Ninja Forms can be found at <a href="https://ninjaforms.com/do
 
 = Where can I report a bug? =
 
-Report bugs, suggest ideas, and participate in development at <a href="https://github.com/wpninjas/ninja-forms">https://github.com/wpninjas/ninja-forms</a>.
+Report bugs, suggest ideas, and participate in development at <a href="https://git.saturdaydrive.io/ninja-forms/ninja-forms">https://git.saturdaydrive.io/ninja-forms/ninja-forms</a>.
 
 == Installation ==
 
