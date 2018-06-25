@@ -13,8 +13,14 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
     protected $_columns = array(
         'title',
-        'key',
-        'created_at'
+        'created_at',
+        'form_title',
+        'label_pos',
+        'show_title',
+        'clear_complete',
+        'hide_complete',
+        'logged_in',
+        'seq_num'
     );
 
     protected $_fields;

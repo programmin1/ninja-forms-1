@@ -309,7 +309,12 @@ class NF_Abstracts_Model
 
             // Assign settings to the settings property.
             foreach ($meta_results as $meta) {
-                $this->_settings[ $meta->key ] = $meta->value;
+                // If we don't already have a value from the main table...
+                // OR If that value was NULL...
+                if ( ! isset( $this->_settings[ $meta->key ] ) || NULL == $this->_settings[ $meta->key ] ) {
+                    // Set the value from meta.
+                    $this->_settings[ $meta->key ] = $meta->value;
+                }
             }
         }
 
