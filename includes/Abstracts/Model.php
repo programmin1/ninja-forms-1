@@ -301,7 +301,7 @@ class NF_Abstracts_Model
             // Query settings from the meta table.
             $meta_results = $this->_db->get_results(
                 "
-                SELECT `key`, `value`
+                SELECT `key`, `value`, `meta_key`, `meta_value`
                 FROM   `$this->_meta_table_name`
                 WHERE  `parent_id` = $this->_id
                 "
@@ -312,8 +312,14 @@ class NF_Abstracts_Model
                 // If we don't already have a value from the main table...
                 // OR If that value was NULL...
                 if ( ! isset( $this->_settings[ $meta->key ] ) || NULL == $this->_settings[ $meta->key ] ) {
+                    // TODO: Update this logic after removal of original meta columns.
                     // Set the value from meta.
                     $this->_settings[ $meta->key ] = $meta->value;
+                    // If we have new settings...
+                    if ( NULL !== $meta->meta_key ) {
+                        // Use those instead.
+                        $this->_settings[ $meta->meta_key ] = $meta->meta_value;
+                    }
                 }
             }
         }
