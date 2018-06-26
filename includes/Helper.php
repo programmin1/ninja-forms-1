@@ -265,6 +265,8 @@ final class WPN_Helper
      * Function to fetch our cache from the upgrades table (if it exists there).
      * 
      * @param $id (int) The form ID.
+     * 
+     * @since 3.3.7
      */
     public static function get_nf_cache( $id ) {
         // See if we have the data in our table already.
@@ -289,6 +291,8 @@ final class WPN_Helper
      * 
      * @param $id (int) The form ID.
      * @param $data (string) The form cache.
+     * 
+     * @since 3.3.7
      */
     public static function update_nf_cache( $id, $data ) {
         // Define our current stage here for use as we run various upgrades.
@@ -309,6 +313,20 @@ final class WPN_Helper
             $sql = "UPDATE `{$wpdb->prefix}nf3_upgrades` SET cache = '{$cache}' WHERE id = " . intval( $id );
         }
         $wpdb->query( $sql );
+    }
+    
+    /**
+     * Function to delete our cache.
+     * 
+     * @param $id (int) The form ID.
+     * 
+     * @since 3.3.7
+     */
+    public static function delete_nf_cache( $id ) {
+        global $wpdb;
+        $sql = "DELETE FROM `{$wpdb->prefix}nf3_upgrades WHERE id = " . intval( $id );
+        $wpdb->query( $sql );
+        delete_option( 'nf_form_' . intval( $id ) );
     }
 
     private static function parse_utf8_serialized( $matches )
