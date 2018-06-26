@@ -263,17 +263,52 @@ final class WPN_Helper
     
     /**
      * Function to fetch our cache from the upgrades table (if it exists there).
+     * 
+     * @param $id (int) The form ID.
      */
     public static function get_nf_cache( $id ) {
+        // See if we have the data in our table already.
         global $wpdb;
         $sql = "SELECT cache FROM `{$wpdb->prefix}nf3_upgrades` WHERE id = " . intval( $id );
         $result = $wpdb->get_results( $sql, 'ARRAY_A' );
+        // If so...
         if ( ! empty( $result ) ) {
-            return $result[ 0 ][ 'cache' ];
-        }
+            // Unserialize the result.
+            $value = WPN_Helper::maybe_unserialize( $result[ 0 ][ 'cache' ] );
+            // Return it.
+            return $value;
+        } // Otherwise... (We don't have the data.)
         else {
+            // Get it from the options table.
             return get_option( 'nf_form_' . $id );
         }
+    }
+    
+    /**
+     * Function to insert or update our cache in the upgrades table (if it exists).
+     * 
+     * @param $id (int) The form ID.
+     * @param $data (string) The form cache.
+     */
+    public static function update_nf_cache( $id, $data ) {
+        // Define our current stage here for use as we run various upgrades.
+        $CURRENT_STAGE = 0;
+        // Serialize our data.
+        $cache = serialize( $data );
+        global $wpdb;
+        // See if we've already got a record.
+        $sql = "SELECT id FROM `{$wpdb->prefix}nf3_upgrades` WHERE id = " . intval( $id );
+        $result = $wpdb->get_results( $sql, 'ARRAY_A' );
+        // If we don't already have the data...
+        if ( empty( $result ) ) {
+            // Insert it.
+            $sql = "INSERT INTO `{$wpdb->prefix}nf3_upgrades` (id, cache, stage) VALUES (" . intval( $id ) . ", '{$cache}', {$CURRENT_STAGE})";
+        } // Otherwise... (We do have the data.)
+        else {
+            // Update the existing record.
+            $sql = "UPDATE `{$wpdb->prefix}nf3_upgrades` SET cache = '{$cache}' WHERE id = " . intval( $id );
+        }
+        $wpdb->query( $sql );
     }
 
     private static function parse_utf8_serialized( $matches )

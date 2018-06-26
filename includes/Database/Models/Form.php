@@ -195,7 +195,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             ));
         }
 
-        update_option( 'nf_form_' . $form_id, $form_cache );
+        WPN_Helper::update_nf_cache( $form_id, $form_cache );
 
         add_action( 'admin_notices', array( 'NF_Database_Models_Form', 'import_admin_notice' ) );
 
