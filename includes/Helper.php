@@ -260,6 +260,21 @@ final class WPN_Helper
         }
         return $original;
     }
+    
+    /**
+     * Function to fetch our cache from the upgrades table (if it exists there).
+     */
+    public static function get_nf_cache( $id ) {
+        global $wpdb;
+        $sql = "SELECT cache FROM `{$wpdb->prefix}nf3_upgrades` WHERE id = " . intval( $id );
+        $result = $wpdb->get_results( $sql, 'ARRAY_A' );
+        if ( ! empty( $result ) ) {
+            return $result[ 0 ][ 'cache' ];
+        }
+        else {
+            return get_option( 'nf_form_' . $id );
+        }
+    }
 
     private static function parse_utf8_serialized( $matches )
     {
