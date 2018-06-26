@@ -361,7 +361,64 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 					} else {
 						return '';
 					}
-				}
+				},
+
+			    /**
+			     * Renders min and/or max attributes for the number input
+			     *
+			     * @returns {string}
+			     */
+			    renderMinMax: function() {
+					var minMaxStr = '';
+					// if we have a min value set, then output it
+					if( 'undefined' != typeof this.min_val && null != this.min_val && jQuery.isNumeric( this.min_val ) ) {
+						minMaxStr = minMaxStr + "min='" + this.min_val + "'";
+					}
+
+					// if we have a max value set, then output it
+				    if( 'undefined' != typeof this.max_val && '' != this.max_val && jQuery.isNumeric( this.max_val ) ) {
+					    minMaxStr = minMaxStr + " max='" + this.max_val + "'";
+				    }
+
+				    return minMaxStr;
+			    },
+
+			    /**
+			     * Returns a string to let the user know the min and/or max
+			     * value for the field
+			     *
+			     * @returns {string}
+			     */
+			    renderMinMaxHelper: function() {
+				    var minMaxHelperStr = '';
+				    // if we have a min value output it to the helper text
+				    if( 'undefined' != typeof this.min_val && null != this.min_val && jQuery.isNumeric( this.min_val ) ) {
+				    	// empty string? then add '('
+				    	if( 0 == minMaxHelperStr.length ) {
+				    		minMaxHelperStr = "(";
+					    }
+					    minMaxHelperStr = minMaxHelperStr +  nfi18n.minVal + ": " + this.min_val;
+				    }
+
+				    // if we have a max value output it to the helper text
+				    if( 'undefined' != typeof this.max_val && '' != this.max_val && jQuery.isNumeric( this.max_val ) ) {
+					    // empty string? then add '('
+					    if( 0 == minMaxHelperStr.length ) {
+						    minMaxHelperStr = "(";
+					    } else {
+					    	// else, we know we have a min so add a comma
+					    	minMaxHelperStr = minMaxHelperStr + ", ";
+					    }
+					    minMaxHelperStr = minMaxHelperStr + nfi18n.maxVal + ": " + this.max_val;
+				    }
+
+				    // if not an empty string, then add ')'
+				    if( 0 < minMaxHelperStr.length ) {
+					    minMaxHelperStr = minMaxHelperStr + ")";
+				    }
+
+				    return minMaxHelperStr;
+			    }
 			}
 		},
 
