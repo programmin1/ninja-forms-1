@@ -307,9 +307,6 @@ final class WPN_Helper
         if ( empty( $result ) ) {
             // Insert it.
 	        $sql = $wpdb->prepare( "INSERT INTO `{$wpdb->prefix}nf3_upgrades` (id, cache, stage) VALUES (%d, %s, %s)", intval( $id ), $cache, $CURRENT_STAGE);
-//	        $result = $wpdb->query( $wpdb->prepare( "INSERT INTO `$wpdb->prefix` (`option_name`, `option_value`, `autoload`) VALUES
-// (%s, %s, %s) ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)", $option, $serialized_value, $autoload ) );
-
         } // Otherwise... (We do have the data.)
         else {
             // Update the existing record.
