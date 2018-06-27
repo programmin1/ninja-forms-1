@@ -287,7 +287,7 @@ class NF_Admin_Processes_ChunkPublish extends NF_Abstracts_BatchProcess
         // If our form_id was a temp id...
         if ( ! is_numeric( $this->form_id ) ) {
             // Remove all of our chunk options.
-            $sql = "DELETE FROM `" . $wpdb->prefix . "nf3_chunks` WHERE name LIKE 'nf_form_" . $this->form_id . "_publishing_%'";
+            $sql = $wpdb->prepare( "DELETE FROM `" . $wpdb->prefix . "nf3_chunks` WHERE name LIKE %s", 'nf_form_' . $this->form_id . '_publishing_%' );
             $wpdb->query( $sql );
         }
         $this->data[ 'new_publish' ] = 'false';
