@@ -17,7 +17,6 @@ class NF_Admin_Processes_ExpiredSubmissionCleanup extends NF_Abstracts_BatchProc
      */
     public function __construct( $data = array() )
     {
-        delete_option( 'nf_doing_expired_submission_cleanup' );
         //Bail if we aren't in the admin.
         if ( ! is_admin() )
             return false;
@@ -74,7 +73,7 @@ class NF_Admin_Processes_ExpiredSubmissionCleanup extends NF_Abstracts_BatchProc
     public function startup()
     {
         // Retrieves the option that contains all of our expiration data.
-        $expired_sub_option = get_option( 'nf_sub_expiration' );
+        $expired_sub_option = get_option( 'nf_sub_expiration', array() );
 
         // Loop over our options and ...
         foreach( $expired_sub_option as $sub ) {
