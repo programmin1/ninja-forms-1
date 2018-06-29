@@ -267,7 +267,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
         if( ! $form->get_tmp_id() ) {
 
-            if( $form_cache = get_option( 'nf_form_' . $form_id, false ) ) {
+            if( $form_cache = WPN_Helper::get_nf_cache( $form_id ) ) {
                 $fields = $form_cache[ 'fields' ];
             } else {
                 $fields = ($form_id) ? Ninja_Forms()->form($form_id)->get_fields() : array();
