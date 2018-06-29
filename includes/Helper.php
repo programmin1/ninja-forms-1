@@ -324,7 +324,7 @@ final class WPN_Helper
      */
     public static function delete_nf_cache( $id ) {
         global $wpdb;
-        $sql = $wpdb->prepare( "DELETE FROM `{$wpdb->prefix}nf3_upgrades` WHERE id = %d", intval( $id ) );
+        $sql = "DELETE FROM `{$wpdb->prefix}nf3_upgrades` WHERE id = " . intval( $id );
         $wpdb->query( $sql );
         delete_option( 'nf_form_' . intval( $id ) );
     }
