@@ -240,7 +240,7 @@ class NF_Admin_Processes_ChunkPublish extends NF_Abstracts_BatchProcess
     public function get_chunk( $slug ) {
         global $wpdb;
         // Get our option from our chunks table.
-        $sql = "SELECT `value` FROM `{$wpdb->prefix}nf3_chunks` WHERE `name` = '{$slug}'";
+        $sql = $wpdb->prepare ( "SELECT `value` FROM `{$wpdb->prefix}nf3_chunks` WHERE `name` = %s", $slug );
         $data = $wpdb->get_results( $sql, 'ARRAY_A' );
         // If it exists there...
         if ( ! empty( $data ) ) {
