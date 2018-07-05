@@ -3,6 +3,8 @@
 add_action( 'wp_ajax_ninja_forms_ajax_migrate_database', 'ninja_forms_ajax_migrate_database' );
 function ninja_forms_ajax_migrate_database(){
     if( ! current_user_can( apply_filters( 'ninja_forms_admin_upgrade_migrate_database_capabilities', 'manage_options' ) ) ) return;
+    if ( ! isset( $_POST[ 'security' ] ) ) return;
+    if ( ! wp_verify_nonce( $_POST[ 'security' ], 'ninja_forms_upgrade_nonce' ) ) return;
     $migrations = new NF_Database_Migrations();
     $migrations->nuke( true, true );
     $migrations->migrate();
