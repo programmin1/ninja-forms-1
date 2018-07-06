@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, kbjohnson90, klhall1987, krmoorho
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 3.3.8
+Stable tag: 3.3.9
 License: GPLv2 or later
 
 Drag and drop fields in an intuitive UI to create contact forms, email subscription forms, order forms, payment forms, send emails and more!
@@ -111,21 +111,29 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.3.8 (2 July 2018) =
+= 3.3.9 (6 July 2018) =
+
+*Security:*
+
+* Patched a vulnerability that allowed certain Export Personal Data requests to retrieve unrelated submission data.
 
 *Bugs:*
 
-* The styling of the Ninja Forms settings page has been corrected.
-* Forms can once again be previewed before they have been published.
-* Resolved an issue that was sometimes causing submission expiration to not register properly on publish.
-* The submission expiration setting will no longer accept a negative number as valid input.
-
-*Changes:*
-
-* Ninja Forms has migrated to GitLab! All repository links should now be updated.
-* Added an expired submissions cleanup button to our settings page to supplement cleanup on sites with a large number of submissions.
+* Fixed a broken image link in the Edit User Profile template.
+* Resolved an issue that was very rarely causing the conversion process to run again after upgrade, removing all forms but the default Contact Me.
 
 == Changelog ==
+
+= 3.3.9 (6 July 2018) =
+
+*Security:*
+
+* Patched a vulnerability that allowed certain Export Personal Data requests to retrieve unrelated submission data.
+
+*Bugs:*
+
+* Fixed a broken image link in the Edit User Profile template.
+* Resolved an issue that was very rarely causing the conversion process to run again after upgrade, removing all forms but the default Contact Me.
 
 = 3.3.8 (2 July 2018) =
 
