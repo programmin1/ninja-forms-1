@@ -115,7 +115,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Security:*
 
-* Patched a vulnerability that allowed certain Export Personal Data requests to retrieve unrelated submission data.
+* Patched a vulnerability that could allow certain Export Personal Data requests to retrieve unrelated submission data.
 
 *Bugs:*
 
@@ -128,7 +128,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Security:*
 
-* Patched a vulnerability that allowed certain Export Personal Data requests to retrieve unrelated submission data.
+* Patched a vulnerability that could allow certain Export Personal Data requests to retrieve unrelated submission data.
 
 *Bugs:*
 
