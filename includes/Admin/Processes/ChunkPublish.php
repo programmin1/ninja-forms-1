@@ -209,7 +209,7 @@ class NF_Admin_Processes_ChunkPublish extends NF_Abstracts_BatchProcess
         }
 
         delete_user_option( get_current_user_id(), 'nf_form_preview_' . $form_data['id'] );
-        update_option( 'nf_form_' . $form_data[ 'id' ], $form_data );
+        WPN_Helper::update_nf_cache( $form_data[ 'id' ], $form_data );
 
         do_action( 'ninja_forms_save_form', $form->get_id() );
 
@@ -240,7 +240,7 @@ class NF_Admin_Processes_ChunkPublish extends NF_Abstracts_BatchProcess
     public function get_chunk( $slug ) {
         global $wpdb;
         // Get our option from our chunks table.
-        $sql = "SELECT `value` FROM `{$wpdb->prefix}nf3_chunks` WHERE `name` = '{$slug}'";
+        $sql = $wpdb->prepare( "SELECT `value` FROM `{$wpdb->prefix}nf3_chunks` WHERE `name` = %s", $slug );
         $data = $wpdb->get_results( $sql, 'ARRAY_A' );
         // If it exists there...
         if ( ! empty( $data ) ) {
@@ -267,11 +267,11 @@ class NF_Admin_Processes_ChunkPublish extends NF_Abstracts_BatchProcess
         // If we don't have one...
         if ( empty ( $result ) ) {
             // Insert it.
-            $sql = "INSERT INTO `{$wpdb->prefix}nf3_chunks` (name, value) VALUES ('{$slug}', '" . addslashes( $content ) . "')";
+            $sql = $wpdb->prepare( "INSERT INTO `{$wpdb->prefix}nf3_chunks` (name, value) VALUES ( %s, %s )", $slug,  $content );
         } // Otherwise... (We do have one.)
         else {
             // Update the existing one.
-            $sql = "UPDATE `{$wpdb->prefix}nf3_chunks` SET value = '" . addslashes( $content ) . "' WHERE name = '{$slug}'";
+            $sql = $wpdb->prepare( "UPDATE `{$wpdb->prefix}nf3_chunks` SET value = %s WHERE name = %s", $content, $slug );
         }
         $wpdb->query( $sql );
     }
@@ -282,12 +282,12 @@ class NF_Admin_Processes_ChunkPublish extends NF_Abstracts_BatchProcess
     public function remove_option() {
         // Remove our option to manage the process.
         global $wpdb;
-        $sql = "DELETE FROM `{$wpdb->prefix}nf3_chunks` WHERE name = 'nf_chunk_publish_" . $this->form_id . "'";
+        $sql = $wpdb->prepare( "DELETE FROM `{$wpdb->prefix}nf3_chunks` WHERE name = %s", 'nf_chunk_publish_' . $this->form_id );
         $wpdb->query( $sql );
         // If our form_id was a temp id...
         if ( ! is_numeric( $this->form_id ) ) {
             // Remove all of our chunk options.
-            $sql = "DELETE FROM `" . $wpdb->prefix . "nf3_chunks` WHERE name LIKE 'nf_form_" . $this->form_id . "_publishing_%'";
+            $sql = $wpdb->prepare( "DELETE FROM `" . $wpdb->prefix . "nf3_chunks` WHERE name LIKE %s", 'nf_form_' . $this->form_id . '_publishing_%' );
             $wpdb->query( $sql );
         }
         $this->data[ 'new_publish' ] = 'false';
