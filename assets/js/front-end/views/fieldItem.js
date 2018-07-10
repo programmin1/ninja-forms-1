@@ -250,7 +250,13 @@ define( [], function() {
 					if ( 'undefined' == typeof this.desc_text ) {
 						return '';
 					}
-					var check, checkText;
+
+					// Creates an element so we can check to see if the text is empty.
+					var text = document.createElement( 'p' );
+					text.innerHTML = this.desc_text;
+					if( 0 == jQuery.trim( text.innerText ).length ) return '';
+
+                    var check, checkText;
 					checkText = document.createTextNode( this.desc_text );
 					check = document.createElement( 'p' );
 					check.appendChild( checkText );
