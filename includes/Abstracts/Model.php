@@ -593,7 +593,7 @@ class NF_Abstracts_Model
         if( in_array( $key, $this->_columns ) ){
 
         	$format = null;
-        	if( in_array($key, array( 'show_title', 'clear_complete', 'hide_complete', 'logged_in' ) ) ) {
+        	if( in_array( $key, array( 'show_title', 'clear_complete', 'hide_complete', 'logged_in' ) ) ) {
         		// gotta set the format for the columns that use bit type
         		$format = '%d';
 	        }
