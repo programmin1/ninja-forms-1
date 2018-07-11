@@ -632,7 +632,7 @@ class NF_Abstracts_Model
 	         * settings for forms in the form_meta table
 	         */
         	if( 'form' != $this->_type
-	            || ( 'form' == $this->_type && $key == 'title' ) ) {
+	            || ( 'form' == $this->_type && 'title' == $key ) ) {
         		return $update_model;
 	        }
         }
