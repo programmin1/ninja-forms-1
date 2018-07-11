@@ -27,7 +27,7 @@ _**nf3_forms**_ (Table of individual Forms)
 * form_title (The displayable title of the Form)
   * longtext
   * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
-* label_pos (The default label position of fields on the Form)
+* default_label_pos (The default label position of fields on the Form)
   * varchar(15)
 * show_title (Whether or not to show the Form title)
   * bit(1)
