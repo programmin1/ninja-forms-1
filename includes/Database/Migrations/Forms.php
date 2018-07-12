@@ -15,8 +15,11 @@ class NF_Database_Migrations_Forms extends NF_Abstracts_Migration
         $query = "CREATE TABLE IF NOT EXISTS {$this->table_name()} (
             `id` int NOT NULL AUTO_INCREMENT,
             `title` longtext,
+			`key` longtext,
             `created_at` TIMESTAMP,
             `updated_at` DATETIME,
+			`views` int(11),
+			`subs` int(11),
             `form_title` longtext,
             `default_label_pos` varchar(15),
             `show_title` bit,
@@ -35,10 +38,15 @@ class NF_Database_Migrations_Forms extends NF_Abstracts_Migration
      */
     public function do_stage_one()
     {
-        $query = "ALTER TABLE {$this->table_name()}
+		/**
+		 * TODO:
+		 * 
             DROP `key`,
             DROP `views`,
             DROP `subs`,
+		 * 
+		 */
+        $query = "ALTER TABLE {$this->table_name()}
             ADD `form_title` longtext {$this->collate()},
             ADD `default_label_pos` varchar(15) {$this->collate()},
             ADD `show_title` bit,

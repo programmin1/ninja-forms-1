@@ -17,6 +17,9 @@ _**nf3_forms**_ (Table of individual Forms)
 * title (The displayable title of the Form)
   * longtext
   * COLLATE DATABASE_DEFAULT
+* key (The administrative key of the Form)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
 * created_at (The date/time the Form was created)
   * timestamp
   * NOT NULL
@@ -24,6 +27,10 @@ _**nf3_forms**_ (Table of individual Forms)
   * ON UPDATE CURRENT_TIMESTAMP
 * updated_at (The date/time the Form was last updated)
   * datetime
+* views (The number of times the Form has been viewed)
+  * int(11)
+* subs (The Form's number of lifetime Submissions)
+  * int(11)
 * form_title (The displayable title of the Form)
   * longtext
   * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
@@ -610,14 +617,6 @@ Updated forms tables
 ### Forms
 
 _**nf3_forms**_ (Table of individual Forms)
-REMOVED:
-* key (The administrative key of the Form)
-  * longtext
-  * COLLATE DATABASE_DEFAULT
-* views (The number of times the Form has been viewed)
-  * int(11)
-* subs (The Form's number of lifetime Submissions)
-  * int(11)
 ADDED:
 * form_title (The displayable title of the Form)
   * longtext
