@@ -24,10 +24,8 @@ define( [], function() {
 		 * @return int              1 or 0
 		 */
 		updateSetting: function( e, fieldModel, name, settingTypeModel ) {
-			var minVal = parseInt( settingTypeModel.get( 'min_val' ) );
-			var maxVal = parseInt( settingTypeModel.get( 'max_val' ) );
-
-			e.target.value = parseInt( e.target.value );
+			var minVal = settingTypeModel.get( 'min_val' );
+			var maxVal = settingTypeModel.get( 'max_val' );
 
 			/*
 			 * if we gave a min value set, revert to that if the user enters
@@ -35,7 +33,6 @@ define( [], function() {
 			*/
 			if( 'undefined' != typeof minVal && null !== minVal ){
 				if ( e.target.value < minVal ) {
-
 					fieldModel.set('value', minVal);
 					e.target.value = minVal;
 				}
