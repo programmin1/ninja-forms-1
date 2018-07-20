@@ -110,20 +110,14 @@ _**nf3_fields**_ (Table of individual Fields)
   * int(11)
 * required
   * bit(1)
-  * NOT NULL
-  * DEFAULT 0
 * default_value
   * longtext
   * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
 * label_pos
   * varchar(15)
-  * NOT NULL
-  * DEFAULT 'default'
   * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
 * personally_identifiable
   * bit(1)
-  * NOT NULL
-  * DEFAULT 0
 
 _**nf3_field_meta**_ (Table of Settings associated with each Field)
 * id (The unique ID of the Setting)
@@ -145,7 +139,6 @@ _**nf3_field_meta**_ (Table of Settings associated with each Field)
 * meta_key (The administrative key of the Setting)
   * longtext
   * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
-  * NOT NULL
 * meta_value (The value of the Setting)
   * longtext
   * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
