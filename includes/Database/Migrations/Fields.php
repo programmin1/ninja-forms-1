@@ -23,10 +23,10 @@ class NF_Database_Migrations_Fields extends NF_Abstracts_Migration
             `field_label` longtext,
             `field_key` longtext,
             `order` int(11),
-            `required` bit,
+            `required` bit NOT NULL DEFAULT 0,
             `default_value` longtext,
-            `label_pos` varchar(15),
-            `personally_identifiable` bit,
+            `label_pos` varchar(15) NOT NULL DEFAULT 'default',
+            `personally_identifiable` bit NOT NULL DEFAULT 0,
             UNIQUE KEY (`id`)
         ) {$this->charset_collate()};";
 
@@ -42,10 +42,10 @@ class NF_Database_Migrations_Fields extends NF_Abstracts_Migration
             ADD `field_label` longtext {$this->charset_collate()},
             ADD `field_key` longtext {$this->collate()},
             ADD `order` int(11),
-            ADD `required` bit,
+            ADD `required` bit NOT NULL DEFAULT 0,
             ADD `default_value` longtext {$this->collate()},
-            ADD `label_pos` varchar(15) {$this->collate()},
-            ADD `personally_identifiable` bit";
+            ADD `label_pos` varchar(15) NOT NULL DEFAULT 'default' {$this->collate()},
+            ADD `personally_identifiable` bit NOT NULL DEFAULT 0";
 		global $wpdb;
 		$wpdb->query( $query );
 	}
