@@ -27,6 +27,8 @@ class NF_Database_Migrations_FieldMeta extends NF_Abstracts_Migration
 
 	/**
 	 * Function to run our stage two upgrades.
+     *
+     * @since 3.3.12
 	 */
 	public function do_stage_two()
 	{
