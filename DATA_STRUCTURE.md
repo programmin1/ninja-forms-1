@@ -100,7 +100,24 @@ _**nf3_fields**_ (Table of individual Fields)
   * ON UPDATE CURRENT_TIMESTAMP
 * updated_at (The date/time the Field was last updated)
   * datetime
-
+* field_label
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+* field_key
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+* order
+  * int(11)
+* required
+  * bit(1)
+* default_value
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+* label_pos
+  * varchar(15)
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+* personally_identifiable
+  * bit(1)
 
 _**nf3_field_meta**_ (Table of Settings associated with each Field)
 * id (The unique ID of the Setting)
@@ -119,6 +136,12 @@ _**nf3_field_meta**_ (Table of Settings associated with each Field)
 * value (The value of the Setting)
   * longtext
   * COLLATE DATABASE_DEFAULT
+* meta_key (The administrative key of the Setting)
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+* meta_value (The value of the Setting)
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
   
 ### Actions
 
@@ -654,7 +677,37 @@ ADDED:
 
 ## Version 1.2
 
-_**nf3_action**_ (Updated the actions table to have a column for the label)
+_**nf3_fields**_ (Updated the fields table to have several new columns)
+ADDED:
+* field_label
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+* field_key
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+* order
+  * int(11)
+* required
+  * bit(1)
+* default_value
+  * longtext
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+* label_pos
+  * varchar(15)
+  * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
+* personally_identifiable
+  * bit(1)
+
+_**nf3_field_meta**_ (Updated to include meta key and meta value)
+ADDED: 
+* meta_key (A properly collated meta_key)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
+* meta_value (A properly collated meta_value)
+  * longtext
+  * COLLATE DATABASE_DEFAULT
+  
+_**nf3_actions**_ (Updated the actions table to have a column for the label)
 ADDED:
 * label (The label of the action)
   * longtext
