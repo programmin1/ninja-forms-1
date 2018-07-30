@@ -422,8 +422,6 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
 						// Fetch the form_title column from the fields table.
 						$sql = "SHOW FULL COLUMNS FROM `{$wpdb->prefix}nf3_forms` WHERE Field = 'form_title'";
 						$result = $wpdb->get_results( $sql, 'ARRAY_A' );
-						var_dump($result);
-						die();
 						// If we didn't get a result...
 						if ( empty( $result ) ) {
 							// Do our stage 1 updates, even though they should have already run.
