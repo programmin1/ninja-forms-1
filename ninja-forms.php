@@ -58,7 +58,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         /**
          * @since 3.0
          */
-        const VERSION = '3.3.12';
+        const VERSION = '3.3.13';
 
         const WP_MIN_VERSION = '4.7';
 
