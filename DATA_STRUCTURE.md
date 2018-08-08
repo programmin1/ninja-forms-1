@@ -140,9 +140,6 @@ _**nf3_actions**_ (Table of individual Actions)
 * active (Whether or not the Action is active)
   * tinyint(1)
   * DEFAULT 1
-* label (The label of the action)
-  * longtext
-  * COLLATE DATABASE_DEFAULT
 * parent_id (The Form ID this Action is associated with)
   * int(11)
   * NOT NULL
@@ -171,12 +168,6 @@ _**nf3_action_meta**_ (Table of Settings associated with each Action)
   * COLLATE DATABASE_DEFAULT
   * NOT NULL
 * value (The value of the Setting)
-  * longtext
-  * COLLATE DATABASE_DEFAULT
-* meta_key (A properly collated meta_key)
-  * longtext
-  * COLLATE DATABASE_DEFAULT
-* meta_value (A properly collated meta_value)
   * longtext
   * COLLATE DATABASE_DEFAULT
 
@@ -651,21 +642,3 @@ ADDED:
 * meta_value (The value of the Setting)
   * longtext
   * COLLATE utf8mb4_general_ci (fallback to utf8_general_ci)
-
-## Version 1.2
-
-_**nf3_action**_ (Updated the actions table to have a column for the label)
-ADDED:
-* label (The label of the action)
-  * longtext
-  * COLLATE DATABASE_DEFAULT
-  
-_**nf3_action_meta**_ (Updated to include meta key and meta value)
-ADDED: 
-* meta_key (A properly collated meta_key)
-  * longtext
-  * COLLATE DATABASE_DEFAULT
-* meta_value (A properly collated meta_value)
-  * longtext
-  * COLLATE DATABASE_DEFAULT
-
