@@ -799,7 +799,7 @@ function ninja_forms_three_admin_notice(){
     wp_enqueue_style( 'nf-admin-notices', NINJA_FORMS_URL .'assets/css/admin-notices.css?nf_ver=' . NF_PLUGIN_VERSION );
 
     if( ! isset( $_GET[ 'nf-rollback' ] ) ){
-        if( ninja_forms_three_addons_version_check() && ( ninja_forms_three_addons_check() || ninja_forms_three_throttle() ) ){
+        if( ninja_forms_three_addons_version_check() && ninja_forms_three_addons_check() ){
             ?>
             <div id="nf-admin-notice-upgrade" class="update-nag nf-admin-notice">
                 <div class="nf-notice-logo"></div>
