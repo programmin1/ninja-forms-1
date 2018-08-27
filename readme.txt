@@ -115,7 +115,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Security:*
 
-* Patched an XSS vulnerability that allowed javascript injection into the form import function.
+* Patched an XSS vulnerability that allowed javascript injection into the form import function. Many thanks to Adam Roberts for practicing responsible disclosure.
 * Patched a CSV injection vulnerability that allowed user values to run some scripts when opening exported CSV files with Excel.
 
 *Bugs:*
