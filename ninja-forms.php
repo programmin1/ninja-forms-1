@@ -584,11 +584,6 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 unset( self::$instance->fields[ 'creditcardzip' ] );
             }
 
-            if( ! apply_filters( 'ninja_forms_enable_password_fields', false ) ){
-                unset( self::$instance->fields[ 'password' ] );
-                unset( self::$instance->fields[ 'passwordconfirm' ] );
-            }
-
             /*
              * Form Action Registration
              */
