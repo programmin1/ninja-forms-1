@@ -45,7 +45,7 @@ class NF_Database_Migrations
      * @param $nuke_multisite
      * 
      * @since 2.9.34
-     * @updated UPDATE_VERSION
+     * @updated 3.3.16
      */
     public function nuke( $areYouSure = FALSE, $areYouReallySure = FALSE, $nuke_multisite = TRUE )
     {
