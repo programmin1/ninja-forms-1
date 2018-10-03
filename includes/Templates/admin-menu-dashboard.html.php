@@ -119,6 +119,10 @@
 
 <!-- Section: Memberships -->
 <script id="tmpl-nf-memberships" type="text/template">
+    <?php
+        $saved = get_option( 'ninja_forms_memberships_feed', false );
+        if ( ! $saved ) {
+    ?>
     <div class="widget widget-memberships">
         <div class="pricing-container">
             <div class="pricing-block widget">
@@ -222,6 +226,11 @@
         <div><em><?php _e( 'All plans include a 14 day money back guarantee.', 'ninja-forms' ); ?></em></div>
         <div><?php _e( 'Requires a current active license and subject to our', 'ninja-forms' ); ?> <a target="_blank" href="https://ninjaforms.com/terms-conditions/?utm_medium=plugin&utm_source=plugin-dashboard&utm_campaign=Ninja+Forms+Memberships&utm_content=Terms+Conditions"><?php _e( 'Terms & Conditions', 'ninja-forms' ); ?></a>.</div>
     </div>
+    <?php
+    } else {
+        echo( $saved );
+    }
+    ?>
 </script>
 
 <!-- Widget: Forms -->
